@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Intelligent Resume Screening</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ModeChange.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="name-logo">
+                <div class="logo"><img src="/Documents/Logo.png" alt="AI Resume Screening"></div>
+                <h2 class="name">AI Resume Screening</h2>
+            </div>
+
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+            </label>
+
+            <div class="nav-menu">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#upload">Upload</a>
+                <a href="#About">About</a>
+                <a href="#team">Team</a>
+                <a href="#contact">Contact</a>
+                <div class="Mode">
+                    <button id="toggle">
+                        <span class="icon">🌙</span>
+                        <span class="Mode_text">Dark Mode</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Intelligent Resume Screening & Shortlisting</h1>
+        <p>Experience an AI-driven recruitment system that analyzes, ranks, and explains resume-job matches with
+            precision.</p>
+        <button onclick="document.getElementById('upload').scrollIntoView({behavior:'smooth'})">Get Started</button>
+    </section>
+
+    <div class="container">
+        <section id="features">
+            <h2>Key Features</h2>
+            <p class="sub">Built for accuracy, transparency, and fairness.</p>
+            <div class="features">
+                <div class="feature">
+                    <h3>AI-Powered Matching</h3>
+                    <p>Smart skill matching using keyword and context analysis.</p>
+                </div>
+                <div class="feature">
+                    <h3>Bias Mitigation</h3>
+                    <p>Removes personal data to ensure fair evaluation.</p>
+                </div>
+                <div class="feature">
+                    <h3>Explainable Results</h3>
+                    <p>Shows matched keywords and reasoning clearly.</p>
+                </div>
+                <div class="feature">
+                    <h3>Visual Reports</h3>
+                    <p>Provides graphical representation of match percentage.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upload Section -->
+        <section id="upload" class="scroll-item" style="margin-top:60px;">
+            <h2>Upload Resume</h2>
+            <p class="sub">Drag & Drop your file or click to upload — see live analysis results below.</p>
+
+            <div class="upload-area" id="uploadArea">
+                <i><i class="fa-solid fa-arrow-up-from-bracket upload-logo"></i></i>
+                <p><strong>Drag & Drop Resume</strong> or Click to Browse</p>
+                <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt" style="display:none">
+                <div class="file-list" id="fileList"></div>
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+            </div>
+
+            <!-- Job Description -->
+            <form style="margin-top:40px;" onsubmit="event.preventDefault(); analyze();">
+                <label>Job Description:</label>
+                <textarea id="jobDesc" placeholder="Enter job description here..."></textarea>
+                <label>Resume Text:</label>
+                <textarea id="resumeText" placeholder="Paste or upload resume text here..."></textarea>
+                <button class="submit-btn" type="submit">Analyze Resume</button>
+                <div class="result-box" id="result">Results will appear here...</div>
+                <!-- <canvas id="chart" width="400" height="250"></canvas> -->
+
+                <div class="container scroll-item">
+                    <div class="main-grid">
+                        <!-- Left Side: Results Card -->
+                        <div class="results-card">
+                            <p class="card-intro">
+                                We've run over twenty checks on your resume. They can be grouped into these four
+                                categories &ndash; here's how you did in each.
+                            </p>
+                            <div class="scores-grid">
+                                <!-- Impact Score -->
+                                <div class="score-item">
+                                    <div class="score-header">
+                                        <h3 class="score-title">IMPACT</h3>
+                                        <!-- <a href="#" class="info-link">?</a> -->
+                                    </div>
+                                    <div class="progress-container">
+                                        <svg class="progress-svg" viewBox="0 0 36 36">
+                                            <path class="progress-circle-bg"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path class="progress-circle" id="impact-circle"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        </svg>
+                                        <span class="score-value">0</span>
+                                    </div>
+                                    <span class="score-badge"></span>
+                                </div>
+
+                                <!-- Brevity Score -->
+                                <div class="score-item">
+                                    <div class="score-header">
+                                        <h3 class="score-title">BREVITY</h3>
+                                        <!-- <a href="#" class="info-link">?</a> -->
+                                    </div>
+                                    <div class="progress-container">
+                                        <svg class="progress-svg" viewBox="0 0 36 36">
+                                            <path class="progress-circle-bg"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path class="progress-circle" id="brevity-circle"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        </svg>
+                                        <span class="score-value">0</span>
+                                    </div>
+                                    <span class="score-badge"></span>
+                                </div>
+
+                                <!-- Style Score -->
+                                <div class="score-item">
+                                    <div class="score-header">
+                                        <h3 class="score-title">STYLE</h3>
+                                        <!-- <a href="#" class="info-link">?</a> -->
+                                    </div>
+                                    <div class="progress-container">
+                                        <svg class="progress-svg" viewBox="0 0 36 36">
+                                            <path class="progress-circle-bg"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path class="progress-circle" id="style-circle"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        </svg>
+                                        <span class="score-value">0</span>
+                                    </div>
+                                    <span class="score-badge"></span>
+                                </div>
+
+                                <!-- Soft Skills Score -->
+                                <div class="score-item">
+                                    <div class="score-header">
+                                        <h3 class="score-title">SOFT SKILLS</h3>
+                                        <!-- <a href="#" class="info-link">?</a> -->
+                                    </div>
+                                    <div class="progress-container">
+                                        <svg class="progress-svg" viewBox="0 0 36 36">
+                                            <path class="progress-circle-bg"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path class="progress-circle" id="soft-skills-circle"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        </svg>
+                                        <span class="score-value">0</span>
+                                    </div>
+                                    <span class="score-badge"></span>
+                                </div>
+                            </div>
+
+                            <div class="details-grid">
+                                <!-- Impact Details -->
+                                <div class="details-column">
+                                    <div class="detail-item"><span class="detail-label">Quantifying impact</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Repetition</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Weak action verbs</span><span
+                                            class="detail-value-low">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Tenses</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">No responsibilities</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Spelling</span><span
+                                            class="detail-value">0</span></div>
+                                </div>
+                                <!-- Brevity Details -->
+                                <div class="details-column">
+                                    <div class="detail-item"><span class="detail-label">Resume length</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Total bullet points</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Use of bullets</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Bullet point length</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Filler words</span><span
+                                            class="detail-value">0</span></div>
+                                </div>
+                                <!-- Style Details -->
+                                <div class="details-column">
+                                    <div class="detail-item"><span class="detail-label">Sections</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Buzzwords & cliches</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Dates</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Personal pronouns</span><span
+                                            class="detail-value"></span></div>
+                                    <div class="detail-item"><span class="detail-label">Active voice</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Consistency</span><span
+                                            class="detail-value">0</span></div>
+                                </div>
+                                <!-- Soft Skills Details -->
+                                <div class="details-column">
+                                    <div class="detail-item"><span class="detail-label">Communication</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Analytical</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Teamwork</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Leadership</span><span
+                                            class="detail-value">0</span></div>
+                                    <div class="detail-item"><span class="detail-label">Drive and initiative</span><span
+                                            class="detail-value">0</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Side: Text Content -->
+                        <div class="text-content">
+                            <h1>What tests does our Web-App ?</h1>
+                            <p>
+                                We'll scan your resume in 30 seconds and evaluate it against a range of criteria that
+                                recruiters and hiring managers consider important.
+                            </p>
+                            <p>
+                                Our resume test goes even deeper than an NLP scan, and gives you feedback on many other
+                                areas of your resume such as impact, soft skills and brevity. This enables you to
+                                identify gaps on your resume so you can fix them.
+                            </p>
+                            <!-- <a href="#" class="cta-button">
+                                Test your resume through an SBERT &raquo;
+                            </a> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Extra Details -->
+
+        <section id="About" class="resume-features">
+            <div class="Ex_feature scroll-item">
+                <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Customization.svg"
+                    alt="Customization icon for tailoring resume content" width="46" height="52">
+                <div class="feature-text">
+                    <h3>Customization</h3>
+                    <p>Our SBERT resume score checker scans for missing details to ensure you include qualifications and
+                        <a href="#">skills on your
+                            resume</a> that highlight your fit for the job.
+                    </p>
+                </div>
+            </div>
+
+            <div class="Ex_feature scroll-item">
+                <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Spelling-and-grammar.svg"
+                    alt="Icon representing spelling and grammar tools" width="46" height="52">
+                <div class="feature-text">
+                    <h3>Spelling and grammar</h3>
+                    <p>Your resume must be free of spelling and grammar errors to impress hiring managers. Catch and fix
+                        mistakes to ensure a professional appearance.</p>
+                </div>
+            </div>
+
+            <div class="Ex_feature scroll-item">
+                <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Summary-statement.svg"
+                    alt="Visual labeled “Summary Statement” used in resume creation" width="46" height="52">
+                <div class="feature-text">
+                    <h3>Professional summary</h3>
+                    <p>A professional summary at the top of your resume grabs the hiring manager’s attention with a
+                        brief snapshot of your top skills and qualifications.</p>
+                </div>
+            </div>
+
+            <div class="Ex_feature scroll-item">
+                <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Measurable-results.svg"
+                    alt="Measurable results icon representing resume achievements" width="46" height="52">
+                <div class="feature-text">
+                    <h3>Measurable results</h3>
+                    <p>Our resume scanner checks your work history section for measurable accomplishments that
+                        demonstrate impressive achievements in past roles.</p>
+                </div>
+            </div>
+
+            <div class="Ex_feature scroll-item">
+                <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Word-choice.svg"
+                    alt="Visual representing strong or weak word choice" width="46" height="52">
+                <div class="feature-text">
+                    <h3>Word choice</h3>
+                    <p>Effective resumes use action verbs to make a powerful impact. Omit personal pronouns, filler
+                        words, and colloquial language for a professional tone.</p>
+                </div>
+            </div>
+
+            <div class="Ex_feature scroll-item">
+                <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Formatting.svg"
+                    alt="Formatting icon for resume layout customization" width="46" height="52">
+                <div class="feature-text">
+                    <h3>Formatting</h3>
+                    <p>Our resume scanner verifies if your
+                        <a href="#">resume format</a>
+                        is optimized for SBERT parsing by extracting and organizing key details from each section.
+                    </p>
+                </div>
+            </div>
+
+            <div class="Ex_feature scroll-item">
+                <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Optimal-length.svg"
+                    alt="Optimal length icon for resume content guidelines" width="54" height="54">
+                <div class="feature-text">
+                    <h3>Optimal length</h3>
+                    <p>Aim for a concise, one-page resume. This length allows employers to review essential information
+                        without potential distractions.</p>
+                </div>
+            </div>
+
+            <div class="Ex_feature scroll-item">
+                <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Contact-information.svg"
+                    alt="Contact information section for resume formatting" width="46" height="52">
+                <div class="feature-text">
+                    <h3>Contact information</h3>
+                    <p>Display your phone number and email so employers can get in touch. Explore
+                        <a href="#">resume examples</a>
+                        to see how to list your contact information.
+                    </p>
+                </div>
+            </div>
+
+            <div class="Ex_feature scroll-item">
+                <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Comprehensiveness.svg"
+                    alt="Illustration symbolizing resume comprehensiveness" width="46" height="52">
+                <div class="feature-text">
+                    <h3>Comprehensiveness</h3>
+                    <p>A comprehensive resume includes contact information, a professional summary, industry-relevant
+                        skills, work experience, and education.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- More Details -->
+
+        <div class="container2">
+            <h2>How MyPerfectResume’s SBERT Checker Works</h2>
+            <p style="text-align:center;">Our free SBERT Resume Checker analyzes your resume’s structure and wording to
+                provide actionable steps for improvement.</p>
+
+            <div class="steps">
+
+                <div class="step scroll-item">
+                    <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Upload-your-resume-.svg"
+                        alt="Upload Your Resume">
+                    <h3>1. Upload Your Resume</h3>
+                    <p>Upload your resume from any device. The SBERT Checker scans it for potential issues.</p>
+                </div>
+
+                <div class="step scroll-item">
+                    <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Review-checker-report.svg"
+                        alt="Review Your Report">
+                    <h3>2. Review Your Report</h3>
+                    <p>Receive a personalized report and resume strength score. Click “Fix my resume” for detailed
+                        improvement suggestions.</p>
+                </div>
+
+                <div class="step scroll-item">
+                    <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Optimize-using-our-builder.svg"
+                        alt="Optimize with Builder">
+                    <h3>3. Optimize with Our Builder</h3>
+                    <p>Use the online Resume Builder to implement the recommended changes and boost your resume strength
+                        score.</p>
+                </div>
+
+                <div class="step scroll-item">
+                    <img src="https://www.myperfectresume.com/wp-content/uploads/2024/08/Download-and-send.svg"
+                        alt="Download and Apply">
+                    <h3>4. Download and Apply</h3>
+                    <p>Download your SBERT-friendly resume in your preferred format and start applying with confidence.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Team -->
+        <section id="team" class="scroll-item" style="margin-top:60px;">
+            <h2>Our Team</h2>
+            <p class="sub">The creative minds behind this system.</p>
+            <div class="features">
+                <div class="feature scroll-item">
+                    <h3>Govind Dangi</h3>
+                    <p>Frontend & UI Design</p>
+                </div>
+                <div class="feature scroll-item">
+                    <h3>Akshat Chouhan</h3>
+                    <p>Backend & Data Flow</p>
+                </div>
+                <div class="feature scroll-item">
+                    <h3>Amrita Priya</h3>
+                    <p>NLP & AI Development</p>
+                </div>
+                <div class="feature scroll-item">
+                    <h3>Ayush Kumar</h3>
+                    <p>Testing & Documentation</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+
+        <section id="contact" class="scroll-item" style="margin-top: 60px;">
+            <h2>Contact Us</h2>
+            <p class="sub">Have a question or collaboration idea? Reach out!</p>
+
+            <form onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                <label>Name:</label>
+                <input type="text" placeholder="Your name" required>
+
+                <label>Email:</label>
+                <input type="email" placeholder="Your email" required>
+
+                <label>Message:</label>
+                <textarea placeholder="Your message..." style="height: 100px;" required></textarea>
+
+                <button class="submit-btn" type="submit">Send Message</button>
+            </form>
+        </section>
+
+    </div>
+
+    <!-- Footer Contact us -->
+
+    <div class="footer_main">
+        <div class="footer_contact">
+            <div class="footer_container">
+
+                <!-- About Section -->
+                <!-- <div class="C_about">
+                <a href="./about.html"><h3>About</h3></a>
+                
+                <p>
+                   An Intelligent Resume Screening & Shortlisting system using NLP and SBERT is an advanced application of artificial intelligence designed to automate and enhance the initial stages of recruitment. It goes beyond simple keyword matching to understand the contextual meaning of the text in both resumes and job descriptions, providing a more accurate and efficient way to identify top candidates.
+                </p>
+            </div> -->
+
+                <!-- Customer Service -->
+                <div class="C_customer">
+                    <h3>Customer Support</h3>
+                    <ul>
+                        <li><a href="./help-centre.html">Help Center</a></li>
+                        <li><a href="./user-guid.html">User Guide</a></li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="C_QuickLinks">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="./about-us.html">About Us</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="./companies-hiring.html">Companies Hiring</a></li>
+                        <li><a href="./privacy.html">Privacy Policy</a></li>
+                        <li><a href="./terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Connect With Us -->
+                <div class="C_connect">
+                    <h3>Connect With Us</h3>
+                    <ul class="footer_contact">
+                        <li>
+                            <span>📧</span>
+                            <a href="">resumesupport@gmail.com</a>
+                        </li>
+                        <li>
+                            <span>📞</span>
+                            <a href="">+91 123 456 7890</a>
+                        </li>
+                        <li>
+                            <span>📍</span>
+                            <span>Indore, Madhya Pradesh</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="Social-Media-main">
+            <div class="Social-Media">
+                <h3>Social-Media Connections</h3>
+
+                <div class="social-media-container">
+                    <div class="social-media-tag">
+                        <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" fill="#FF4500" />
+                                <circle cx="8.5" cy="12" r="1.5" fill="#FFFFFF" />
+                                <circle cx="15.5" cy="12" r="1.5" fill="#FFFFFF" />
+                                <path d="M8 15c1.5 1 6.5 1 8 0" stroke="#FFFFFF" stroke-width="1.5" fill="none"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span>Reddit</span>
+                        </a>
+                    </div>
+                    <div class="social-media-tag">
+                        <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <rect width="24" height="24" fill="#000000" />
+                                <path fill="#FFFFFF" d="M6 6h2l4 5 4-5h2l-5 6 5 6h-2l-4-5-4 5H6l5-6z" />
+                            </svg>
+                            <span>X</span>
+                        </a>
+                    </div>
+
+                    <div class="social-media-tag">
+                        <a href="https://in.linkedin.com/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <rect width="24" height="24" rx="4" fill="#0A66C2" />
+                                <rect x="5" y="9" width="2.5" height="8" fill="#FFFFFF" />
+                                <circle cx="6.25" cy="6.5" r="1.25" fill="#FFFFFF" />
+                                <path fill="#FFFFFF"
+                                    d="M10 9h2.4v1.1c.34-.7 1.2-1.2 2.3-1.2 2 0 3.3 1.3 3.3 3.8V17h-2.5v-3.6c0-1-.4-1.7-1.3-1.7-.9 0-1.4.6-1.4 1.7V17H10z" />
+                            </svg>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+
+                    <div class="social-media-tag">
+                        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <rect x="1" y="5" width="22" height="14" rx="4" ry="4" fill="#FF0000" />
+                                <polygon points="10,8 16,12 10,16" fill="#FFFFFF" />
+                            </svg>
+                            <span>YouTube</span>
+                        </a>
+                    </div>
+
+                    <div class="social-media-tag">
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <rect width="24" height="24" rx="4" fill="#1877F2" />
+                                <path fill="#FFFFFF" d="M13 8h2V5h-2c-1.7 0-3 1.3-3 3v2H8v3h2v6h3v-6h2.2l.3-3H13V8z" />
+                            </svg>
+                            <span>Facebook</span>
+                        </a>
+                    </div>
+
+                    <div class="social-media-tag">
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <defs>
+                                    <radialGradient id="igGradient" cx="33%" cy="100%" r="100%" fx="33%" fy="100%">
+                                        <stop offset="0%" stop-color="#fdf497" />
+                                        <stop offset="25%" stop-color="#fdf497" />
+                                        <stop offset="50%" stop-color="#fd5949" />
+                                        <stop offset="75%" stop-color="#d6249f" />
+                                        <stop offset="100%" stop-color="#285AEB" />
+                                    </radialGradient>
+                                </defs>
+                                <rect width="512" height="512" rx="120" fill="url(#igGradient)" />
+                                <path fill="none" stroke="#fff" stroke-width="40"
+                                    d="M256 160c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96z" />
+                                <circle cx="370" cy="142" r="30" fill="#fff" />
+                                <rect x="92" y="92" width="328" height="328" rx="100" fill="none" stroke="#fff"
+                                    stroke-width="40" />
+                            </svg>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <footer>© 2025 Intelligent Resume Screening | Guided by Prof. Atul Barve</footer>
+
+    <script src="./Script.js"></script>
+</body>
+
+</html>

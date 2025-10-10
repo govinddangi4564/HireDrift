@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Privacy Policy — Intelligent Resume Screening (SBERT)</title>
+    <style>
+        :root {
+            --bg: #000000;
+            --card: #050505;
+            --muted: #656c70;
+            --accent: #004aad;
+            --glass: rgba(232, 49, 49, 0.03);
+            --radius: 14px;
+            --pad: 22px;
+            --maxw: 950px;
+        }
+
+        /* ===== General Page Layout ===== */
+        body {
+            margin: 0;
+            font-family: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
+            background: #e2ede1;
+            color: rgb(26, 49, 59);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== Fixed Header ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #603a17;
+            color: #fff;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .name-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .name {
+            margin: 0;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .Mode button {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .Mode button:hover {
+            background: #0066ff;
+        }
+
+        /* ===== Main Content ===== */
+        main.container {
+            background: #fbf8f0;
+            width: 100%;
+            max-width: var(--maxw);
+            flex: 1;
+            padding: 120px 40px 80px;
+            /* top padding for header, bottom for footer */
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+            border-radius: var(--radius);
+            padding: var(--pad);
+            box-shadow: 0 6px 30px rgba(2, 6, 23, 0.6);
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 900;
+            margin: 0;
+        }
+
+        p.lead {
+            margin: 6px 0 18px;
+            color: var(--muted);
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 18px;
+            margin-top: 22px;
+        }
+
+        p,
+        ul {
+            color: #4d5354;
+            line-height: 1.7;
+        }
+
+        ul {
+            margin-left: 25px;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Fixed Footer ===== */
+        footer {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #004aad;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        footer p {
+            color: white;
+            font-size: 0.9em;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 20px;
+            }
+
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            main.container {
+                padding: 140px 20px 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 🔹 Fixed Header -->
+    <header>
+        <nav>
+            <div class="name-logo">
+                <div class="logo"><img src="/Documents/Logo.png" alt="AI Resume Screening"></div>
+                <h2 class="name">AI Resume Screening</h2>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#upload">Upload</a>
+                <a href="#About">About</a>
+                <a href="#team">Team</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="Mode">
+                <button id="toggle">
+                    <span class="icon">🌙</span>
+                    <span class="Mode_text">Dark Mode</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 🔹 Scrollable Main Content -->
+    <main class="container">
+        <div class="card">
+            <h1>Privacy Policy — Intelligent Resume Screening & Shortlisting using SBERT</h1>
+            <p class="lead">
+                This Privacy Policy describes how our AI-powered system handles, processes, and safeguards personal data
+                used
+                in intelligent resume screening, matching, and shortlisting.
+            </p>
+
+            <p>Our platform leverages <strong>Natural Language Processing (NLP)</strong> and
+                <strong>Sentence-BERT (SBERT)</strong> to semantically analyze resumes and job descriptions. The system
+                converts
+                textual content into embeddings for efficient, bias-aware shortlisting — ensuring a fair, transparent,
+                and
+                intelligent recruitment process.
+            </p>
+
+            <h2>1. Data Collection and Purpose</h2>
+            <p>We collect minimal and relevant data for model processing and improvement. The types of data collected
+                include:</p>
+            <ul>
+                <li><strong>Resume Content:</strong> Information extracted from uploaded resumes (skills, education,
+                    experience, etc.).</li>
+                <li><strong>Job Descriptions:</strong> Data provided by recruiters or HR teams for role matching.</li>
+                <li><strong>User Information:</strong> Names, emails, and company details necessary for authentication
+                    and
+                    communication.</li>
+                <li><strong>System Metadata:</strong> Browser information, IP address, and timestamps for security and
+                    performance analytics.</li>
+            </ul>
+            <p>All data is collected to improve the accuracy, transparency, and ethical behavior of our SBERT-based
+                recommendation engine.</p>
+
+            <h2>2. Use of Data in NLP Model Processing</h2>
+            <p>Our system uses SBERT to transform text into dense vector representations, enabling deep semantic
+                understanding of resumes and job requirements. This allows the platform to:</p>
+            <ul>
+                <li>Identify candidates most semantically aligned with job requirements.</li>
+                <li>Reduce bias compared to keyword-based systems.</li>
+                <li>Continuously learn from anonymized performance data to improve fairness and accuracy.</li>
+            </ul>
+            <p>Processing occurs automatically via our secured NLP pipeline. We do not use data for unrelated commercial
+                purposes or unauthorized training.</p>
+
+            <h2>3. Data Storage and Retention</h2>
+            <p>Uploaded resumes and job data are stored securely in encrypted databases. Retention periods depend on
+                user activity and legal requirements:</p>
+            <ul>
+                <li>Active data is retained only while your account remains active or until deletion is requested.</li>
+                <li>Backup data may persist for up to 90 days after deletion to ensure system reliability.</li>
+                <li>All backups are encrypted and inaccessible to unauthorized parties.</li>
+            </ul>
+
+            <h2>4. Data Security Measures</h2>
+            <p>We adopt industry-standard practices to protect personal data:</p>
+            <ul>
+                <li>End-to-end encryption (AES-256) during data transmission and storage.</li>
+                <li>Strict access control and multi-factor authentication for internal users.</li>
+                <li>Regular audits and penetration testing to identify vulnerabilities.</li>
+                <li>Secure data destruction protocols upon request or expiration.</li>
+            </ul>
+
+            <h2>5. Ethical Use of AI & Bias Mitigation</h2>
+            <p>As an AI-powered platform, we understand the risks of algorithmic bias. Our system incorporates fairness
+                evaluation metrics and bias detection layers to ensure diversity in candidate selection. The SBERT
+                embeddings
+                are regularly retrained using balanced datasets to minimize bias toward gender, ethnicity, or
+                institution.</p>
+            <p>We also maintain human oversight — AI suggestions are designed to assist, not replace, human hiring
+                decisions.</p>
+
+            <h2>6. Cookies and Analytics</h2>
+            <p>We use cookies only for authentication, personalization, and analytics. They help track system usage,
+                detect performance issues, and optimize user experience. You may disable cookies via browser settings
+                without affecting basic functionality.</p>
+
+            <h2>7. Third-Party Integrations</h2>
+            <p>Our infrastructure is hosted on secure cloud providers compliant with ISO/IEC 27001 and GDPR standards.
+                Third-party analytics tools (if used) collect only anonymized data for performance optimization. No
+                personal data is shared or sold to advertisers.</p>
+
+            <h2>8. User Rights and Controls</h2>
+            <p>Users have the right to:</p>
+            <ul>
+                <li>Access and download their stored data.</li>
+                <li>Request correction or deletion of personal data.</li>
+                <li>Withdraw consent for processing and request anonymization.</li>
+                <li>Complain to a data protection authority if rights are violated.</li>
+            </ul>
+            <p>All requests are processed within 30 days via
+                <a href="mailto:privacy@example.com">privacy@example.com</a>.
+            </p>
+
+            <h2>9. Research and Model Improvement</h2>
+            <p>For research and algorithmic improvement, anonymized datasets may be used to enhance the semantic
+                understanding and fairness of SBERT models. These datasets do not contain identifiable user information
+                and are handled under strict research ethics guidelines.</p>
+
+            <h2>10. Policy Updates</h2>
+            <p>This policy may be revised periodically to reflect updates in technology, data regulations, or system
+                features. We notify users of significant changes via email or dashboard alerts. The latest version is
+                always available on our website.</p>
+
+            <h2>11. Contact Information</h2>
+            <p>For questions or privacy-related concerns, please contact our Data Protection Team:</p>
+            <p><strong>Email:</strong> <a href="mailto:privacy@example.com">privacy@example.com</a><br>
+                <strong>Support:</strong> <a href="mailto:support@example.com">support@example.com</a><br>
+                <strong>Address:</strong> Replace with your institutional or organization address.
+            </p>
+        </div>
+    </main>
+
+    <!-- 🔹 Fixed Footer -->
+    <footer>
+        <p>Last Updated: <strong>October 9, 2025</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+            © 2025 Intelligent Resume Screening | Guided by Prof. Atul Barve</p>
+    </footer>
+</body>
+
+</html>

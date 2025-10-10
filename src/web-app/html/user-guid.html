@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>User Guide — Intelligent Resume Screening (SBERT)</title>
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --muted: #656c70;
+            --accent: #004aad;
+            --glass: rgba(255, 255, 255, 0.03);
+            --radius: 14px;
+            --pad: 22px;
+            --maxw: 950px;
+        }
+
+        /* === Base layout === */
+        body {
+            margin: 0;
+            font-family: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
+            background:#e2ede1;
+            color: rgb(26, 49, 59);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 90px;
+        }
+
+        main.container {
+            width: 100%;
+            background: #fbf8f0;
+            max-width: var(--maxw);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* === Fixed Header === */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #603a17;
+            color: #fff;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .name-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 46px;
+            height: 46px;
+            border-radius: 8px;
+            background: var(--glass);
+        }
+
+        .name {
+            font-size: 30px;
+            font-weight: 600;
+            /* color: var(--accent); */
+            color: white;
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .Mode button {
+            background: var(--accent);
+            border: none;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .Mode button:hover {
+            background: #5b21b6;
+        }
+
+        /* === Card === */
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+            border-radius: var(--radius);
+            padding: var(--pad);
+            box-shadow: 0 6px 30px rgba(2, 6, 23, 0.6);
+        }
+
+        h1 {
+            font-size: 22px;
+            margin: 0;
+        }
+
+        p.lead {
+            margin: 6px 0 18px;
+            color: var(--muted);
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 18px;
+            margin-top: 22px;
+        }
+
+        p {
+            color: #4d5354;
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        ul,
+        ol {
+            color: #4d5354;
+            margin-left: 25px;
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* === Fixed Footer === */
+        footer {
+            position: static;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #004aad;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        footer p {
+            color: white;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 14px 18px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .Mode button {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== Fixed Header ===== -->
+    <header>
+        <nav>
+            <div class="name-logo">
+                <div class="logo"><img src="/Documents/Logo.png" alt="AI Resume Screening"></div>
+                <h2 class="name">AI Resume Screening</h2>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#upload">Upload</a>
+                <a href="#about">About</a>
+                <a href="#team">Team</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="Mode">
+                <button id="toggle">
+                    <span class="icon">🌙</span>
+                    <span class="Mode_text">Dark Mode</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <main class="container">
+        <div class="card">
+            <h1>User Guide — Intelligent Resume Screening using NLP (SBERT)</h1>
+            <p class="lead">
+                A step-by-step guide for using the AI-powered resume screening system built on
+                <strong>Sentence-BERT (SBERT)</strong> and advanced NLP techniques.
+            </p>
+
+            <p>Welcome to the <strong>Intelligent Resume Screening and Shortlisting System</strong>. This guide helps
+                recruiters, administrators, and students understand how to use our platform effectively for candidate
+                shortlisting using AI and NLP.</p>
+
+            <h2>1. Overview</h2>
+            <p>The system is designed to automatically analyze, rank, and shortlist resumes based on their semantic
+                similarity to job descriptions using <strong>SBERT</strong> (Sentence-BERT) embeddings. Unlike
+                traditional keyword searches, SBERT understands the context and meaning of words, improving fairness and
+                efficiency in hiring.</p>
+
+            <h2>2. System Features</h2>
+            <ul>
+                <li>Upload and manage job descriptions and candidate resumes.</li>
+                <li>Automatic similarity scoring using SBERT-based NLP models.</li>
+                <li>Visual ranking dashboard for top-matching candidates.</li>
+                <li>Bias-aware model evaluation and fairness analysis.</li>
+                <li>Secure user authentication and encrypted data handling.</li>
+            </ul>
+
+            <h2>3. Getting Started</h2>
+            <ol>
+                <li><strong>Step 1:</strong> Sign up or log in to your recruiter or admin account.</li>
+                <li><strong>Step 2:</strong> Navigate to the <em>Job Description Upload</em> section and upload the role
+                    details (title, skills, experience level, etc.).</li>
+                <li><strong>Step 3:</strong> Upload multiple candidate resumes (PDF or DOCX format).</li>
+                <li><strong>Step 4:</strong> Click <em>“Analyze & Shortlist”</em> to process the data through the NLP
+                    pipeline.</li>
+                <li><strong>Step 5:</strong> View the generated similarity scores and download the top-matched resumes.
+                </li>
+            </ol>
+
+            <h2>4. How the System Works</h2>
+            <p>The backend uses <strong>Sentence-BERT</strong> to encode resumes and job descriptions into numerical
+                embeddings. These embeddings are then compared using cosine similarity to determine semantic closeness.
+                The workflow includes:</p>
+            <ul>
+                <li>Text preprocessing (tokenization, cleaning, normalization).</li>
+                <li>SBERT model encoding (transforming text to vector form).</li>
+                <li>Similarity computation and ranking.</li>
+                <li>Optional bias correction and normalization for fair results.</li>
+            </ul>
+
+            <h2>5. Tips for Recruiters</h2>
+            <ul>
+                <li>Use clear, detailed job descriptions — the more context, the better the model performs.</li>
+                <li>Ensure resumes are well-formatted and readable (avoid image-based resumes).</li>
+                <li>Review AI results manually before making final decisions.</li>
+                <li>Regularly update the SBERT model to maintain fairness and accuracy.</li>
+            </ul>
+
+            <h2>6. Administrator Functions</h2>
+            <ul>
+                <li>Manage user access and authentication credentials.</li>
+                <li>Monitor system logs and data storage for performance.</li>
+                <li>Oversee retraining of the NLP model with anonymized datasets.</li>
+                <li>Export statistical reports for audit and compliance.</li>
+            </ul>
+
+            <h2>7. Security & Data Handling</h2>
+            <p>All data is encrypted using AES standards and stored in secure cloud environments. The system
+                automatically deletes temporary resume data after analysis to maintain confidentiality. Admins can
+                configure retention periods as per institutional policy.</p>
+
+            <h2>8. Troubleshooting</h2>
+            <ul>
+                <li>If resume upload fails, ensure file size is under 5MB and in PDF or DOCX format.</li>
+                <li>If similarity scores are missing, check internet connectivity or server status.</li>
+                <li>For login issues, reset your password via the <em>Forgot Password</em> option.</li>
+            </ul>
+
+            <h2>9. Ethical Use Guidelines</h2>
+            <p>This AI system is designed to <strong>assist</strong> recruitment, not replace human judgment. Always
+                validate model outputs and avoid discriminatory decisions based solely on algorithmic results. The
+                platform follows fairness and transparency principles aligned with responsible AI practices.</p>
+
+            <h2>10. Support and Feedback</h2>
+            <p>For assistance, contact the technical team via email or chat support. User feedback helps us enhance the
+                SBERT model and improve interface usability.</p>
+            <p><strong>Email:</strong> <a href="mailto:support@example.com">support@example.com</a><br>
+                <strong>Feedback Portal:</strong> <a href="#">www.example.com/feedback</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- ===== Fixed Footer ===== -->
+    <footer>
+        <p>Last Updated: <strong>October 9, 2025</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+            © 2025 Intelligent Resume Screening System — All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

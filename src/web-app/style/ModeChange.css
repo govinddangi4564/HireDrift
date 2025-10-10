@@ -1,0 +1,144 @@
+/* Light Mode (Default) */
+body {
+  background-color: #e2ede1;
+  color: #111111;
+
+  .hero {
+    background-color: #c2bd8f;
+    color: black;
+  }
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: #161b1b;
+  color: white;
+  transition: background-color 1s, color 0.3s;
+
+  .hero {
+    background-color: #7a604096;
+    color: #fff;
+  }
+
+  .hero button {
+    background-color: white;
+    color: #007bff;
+  }
+
+  .feature h3 {
+    color: #ffd500;
+  }
+
+  section h2 {
+    color: #ffd500;
+  }
+
+  .feature {
+    background: rgb(47, 47, 42);
+    transition: transform 0.3s;
+  }
+
+  section p.sub {
+    color: white;
+  }
+
+  .upload-area {
+    background: rgb(47, 47, 42);
+    box-shadow: 0 0.2px 15px white;
+  }
+
+  .upload-logo {
+    color: white;
+  }
+
+  .file-list {
+    color: #fff;
+  }
+
+  textarea,
+  input[type="text"],
+  input[type="email"] {
+    background: rgb(47, 47, 42);
+  }
+  button.submit-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  button.submit-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .result-box {
+    background: rgb(47, 47, 42);
+    border: 1px solid white;
+    box-shadow: 0 2px 10px rgba(109, 102, 102, 0.626);
+  }
+  .results-card {
+    background-color: rgb(47, 47, 42);
+    color: #fff;
+    box-shadow: 0 10px 15px -3px rgba(159, 150, 150, 0.1),
+      0 4px 6px -2px rgba(245, 176, 176, 0.05);
+    padding: 1.5rem;
+  }
+  .detail-label {
+    color: #fff;
+  }
+  .card-intro {
+    color: #fff;
+    font-size: 0.875rem;
+  }
+  .score-header h3 {
+    color: #fff;
+  }
+  .score-value {
+    color: #fff;
+  }
+  .detail-value {
+    font-weight: 700;
+    color: #a5dcde;
+  }
+
+  .Ex_feature {
+    background: rgb(47, 47, 42);
+    box-shadow: 0 2px 6px rgba(208, 186, 186, 0.15);
+  }
+  .feature-text h3 {
+    color: #ffd500;
+  }
+  .feature-text p {
+    color: #fff;
+  }
+
+  .step {
+    background: rgb(47, 47, 42);
+    box-shadow: 0 4px 10px rgba(213, 168, 168, 0.197);
+  }
+
+  .step h3 {
+    color: #ffd500;
+  }
+}
+
+.Mode button {
+  margin-top: 0px;
+  padding: 7px 7px;
+  /* border: none; */
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 13px;
+  background-color: #e0e0e0;
+  transition: background-color 1s;
+}
+
+body.dark button {
+  background-color: #333333;
+  color: #ffffff;
+  transition: background-color 1s, color 0.3s;
+}
+
+.icon {
+  font-size: 17px;
+}
+#toggle {
+  height: 35px;
+}

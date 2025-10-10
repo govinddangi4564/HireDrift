@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Terms & Conditions — Intelligent Resume Screening (SBERT)</title>
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --muted: #94a3b8;
+            --accent: #7c3aed;
+            --glass: rgba(255, 255, 255, 0.03);
+            --maxw: 900px;
+            --radius: 12px;
+            --pad: 22px;
+            --mono: system-ui;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, #071129 0%, #071226 100%);
+            color: #e6eef8;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--maxw);
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            background: var(--glass);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--accent)
+        }
+
+        h1 {
+            font-size: 20px;
+            margin: 0
+        }
+
+        p.lead {
+            margin: 6px 0 18px;
+            color: var(--muted)
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            border-radius: var(--radius);
+            padding: var(--pad);
+            box-shadow: 0 6px 30px rgba(2, 6, 23, 0.6);
+        }
+
+        nav.toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px
+        }
+
+        nav.toc a {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        nav.toc a:hover {
+            color: #fff;
+            background: rgba(124, 58, 237, 0.09)
+        }
+
+        details {
+            background: transparent;
+            border-left: 3px solid rgba(255, 255, 255, 0.03);
+            padding: 12px 14px;
+            border-radius: 10px;
+            margin: 12px 0
+        }
+
+        summary {
+            cursor: pointer;
+            outline: none;
+            font-weight: 600
+        }
+
+        details[open] {
+            border-left-color: var(--accent);
+            background: linear-gradient(90deg, rgba(124, 58, 237, 0.03), transparent)
+        }
+
+        .section-meta {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 6px
+        }
+
+        .small {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        footer {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        /* Responsive */
+        @media (max-width:600px) {
+            body {
+                padding: 20px
+            }
+
+            .logo {
+                width: 44px;
+                height: 44px
+            }
+        }
+
+        /* print-friendly */
+        @media print {
+            body {
+                background: white;
+                color: black
+            }
+
+            .card {
+                box-shadow: none;
+                background: white
+            }
+
+            nav.toc {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <div class="card">
+            <header>
+                <div class="logo">SB</div>
+                <div>
+                    <h1>Terms &amp; Conditions — Intelligent Resume Screening &amp; Shortlisting</h1>
+                    <p class="lead">These Terms govern the use of the <strong>Intelligent Resume Screening</strong>
+                        service (the "Service") which uses NLP models (including SBERT) to assist with candidate
+                        matching and shortlisting.</p>
+                </div>
+            </header>
+
+            <nav class="toc" aria-label="Contents">
+                <a href="#scope">Scope</a>
+                <a href="#data">Data &amp; Privacy</a>
+                <a href="#model">Model &amp; Accuracy</a>
+                <a href="#fairness">Fairness &amp; Bias</a>
+                <a href="#liability">Liability</a>
+                <a href="#user-rights">User Rights</a>
+                <a href="#updates">Updates</a>
+            </nav>
+
+            <section id="scope">
+                <details open>
+                    <summary>1. Scope of Service</summary>
+                    <div class="section-meta">Applies to all visitors, recruiters, and candidates who interact with the
+                        Service.</div>
+                    <p class="small">The Service provides automated screening and ranking suggestions for resumes and
+                        candidate profiles using natural language processing (NLP). It produces similarity scores,
+                        relevance rankings, and shortlists to help human reviewers. The Service relies on Sentence-BERT
+                        (SBERT) embeddings and additional algorithms to encode resume and job description text.</p>
+                </details>
+            </section>
+
+            <section id="data">
+                <details>
+                    <summary>2. Data Collection, Use &amp; Storage</summary>
+                    <div class="section-meta">What we collect, why, and how long we retain it.</div>
+                    <p class="small"><strong>Data collected:</strong> resumes, CV text, cover letters, job descriptions,
+                        metadata (timestamps, uploader identity, annotations), and usage logs. Where provided, candidate
+                        contact details and attachments may be stored to support recruitment workflows.</p>
+                    <p class="small"><strong>Purpose:</strong> to compute SBERT embeddings, perform semantic matching,
+                        rank candidates, and generate shortlists for human review. We may also use anonymized/aggregated
+                        data to improve the Service and for research and analytics.</p>
+                    <p class="small"><strong>Retention:</strong> We retain personal data only as long as necessary for
+                        the purposes described or to comply with legal obligations. You may request deletion; see
+                        Section 7.</p>
+                    <p class="small"><strong>Security:</strong> We apply industry-standard technical and organizational
+                        measures (encryption in transit and at rest, access controls, logging) to protect data. However,
+                        no system is perfectly secure — see Section 6 for limits on liability.</p>
+                </details>
+            </section>
+
+            <section id="model">
+                <details>
+                    <summary>3. Model, Explainability &amp; Accuracy</summary>
+                    <div class="section-meta">How SBERT is used and limitations of automated outputs.</div>
+                    <p class="small">The Service encodes text (resumes, job descriptions) into dense vector
+                        representations using SBERT (Sentence-BERT) or compatible embedding models. Similarity and
+                        ranking are computed over those vectors and combined with configurable business rules (keywords,
+                        thresholds, custom weights).</p>
+                    <p class="small">Automated scores are probabilistic signals — they are not definitive measures of
+                        candidate quality. Absolute accuracy depends on the quality of input data, model version, and
+                        configuration. We recommend human review of all shortlists before interview or hiring decisions.
+                    </p>
+                    <p class="small"><strong>Versioning:</strong> We may update or replace the embedding model (SBERT
+                        variant) over time. Model version and training data (where applicable) may affect results.
+                        Changes will be documented in our release notes and through the admin dashboard.</p>
+                </details>
+            </section>
+
+            <section id="fairness">
+                <details>
+                    <summary>4. Fairness, Bias &amp; Non-Discrimination</summary>
+                    <div class="section-meta">Our commitment and candidate protections.</div>
+                    <p class="small">Automated NLP models can reflect or amplify biases present in training data. We
+                        strive to detect and mitigate biased behaviors (through preprocessing, balanced datasets,
+                        calibration, and manual audits). Nevertheless, the Service cannot guarantee bias-free outputs.
+                    </p>
+                    <p class="small">Users must ensure compliance with applicable non-discrimination laws and internal
+                        policies when using the Service. The Service provides tools and settings (e.g., anonymization,
+                        attribute filtering) to reduce bias risk, but final responsibility for fair hiring decisions
+                        rests with the human users and the organization using the Service.</p>
+                </details>
+            </section>
+
+            <section id="liability">
+                <details>
+                    <summary>5. Limitation of Liability &amp; Disclaimers</summary>
+                    <div class="section-meta">Important legal limits.</div>
+                    <p class="small">THE SERVICE IS PROVIDED "AS IS" AND FOR ASSISTIVE PURPOSES ONLY. WE DO NOT
+                        GUARANTEE THAT THE SERVICE WILL IDENTIFY EVERY QUALIFIED CANDIDATE OR THAT RESULTS ARE FREE FROM
+                        ERROR OR BIAS.</p>
+                    <p class="small">To the fullest extent permitted by law, our company and its affiliates shall not be
+                        liable for indirect, incidental, special, or consequential damages arising out of your use of
+                        the Service, including hiring decisions, lost opportunities, or claims by candidates. Some
+                        jurisdictions do not allow the exclusion of certain warranties or limitations of liability —
+                        where prohibited, these limitations will not apply.</p>
+                </details>
+            </section>
+
+            <section id="user-rights">
+                <details>
+                    <summary>6. Candidate &amp; User Rights</summary>
+                    <div class="section-meta">How to access, correct, delete, or object to processing.</div>
+                    <p class="small"><strong>Access &amp; correction:</strong> Candidates have the right to request
+                        access to personal data that we hold and to request corrections if data is inaccurate.</p>
+                    <p class="small"><strong>Deletion/Right to be forgotten:</strong> Candidates or account admins may
+                        request deletion of personal data. We will respond to legitimate requests within a reasonable
+                        time and remove data unless retention is required by law.</p>
+                    <p class="small"><strong>Automated decision-making:</strong> If a final decision is made solely by
+                        automated means that produces legal or similarly significant effects, eligible individuals may
+                        have rights to obtain human intervention, express their point of view, and contest the decision.
+                        We design the Service to support human-in-the-loop review to avoid solely automated adverse
+                        decisions.</p>
+                </details>
+            </section>
+
+            <section id="compliance">
+                <details>
+                    <summary>7. Compliance with Laws &amp; Export Controls</summary>
+                    <div class="section-meta">Users must comply with applicable laws.</div>
+                    <p class="small">You are responsible for ensuring that your use of the Service, including storage
+                        and transfer of candidate data, complies with local data protection laws (e.g., GDPR, CCPA) and
+                        employment regulations. Export controls and ML model use restrictions may apply depending on
+                        your jurisdiction.</p>
+                </details>
+            </section>
+
+            <section id="security">
+                <details>
+                    <summary>8. Security Practices</summary>
+                    <div class="section-meta">Measures we take and recommended customer practices.</div>
+                    <p class="small">We use encryption, network segmentation, and role-based access controls. Customers
+                        should use strong passwords, enable multi-factor authentication for admin accounts, and follow
+                        secure data handling procedures (least privilege, regular audits).</p>
+                </details>
+            </section>
+
+            <section id="updates">
+                <details>
+                    <summary>9. Updates, Termination &amp; Contact</summary>
+                    <div class="section-meta">How we update terms and how to contact us.</div>
+                    <p class="small">We may update these Terms from time to time. Material changes will be communicated
+                        via email and posted on our website. Continued use after notice constitutes acceptance of the
+                        updated Terms.</p>
+                    <p class="small">To request data access, deletion, or to report concerns about bias or model
+                        behavior, contact: <strong>privacy@example.com</strong>. For general questions:
+                        <strong>support@example.com</strong>.</p>
+                </details>
+            </section>
+
+            <footer>
+                <p class="small">Last updated: <strong>October 9, 2025</strong>. <br>Company name: <em>Replace with your
+                        organization</em>. These Terms form a binding agreement between you and the Company concerning
+                    the Service.</p>
+            </footer>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us Form</title>
+    <!-- Google Fonts for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Container for the contact section */
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* Contact Section Styling */
+        #contact {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #contact:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Header and Sub-header Styling */
+        h2 {
+            text-align: center;
+            color: #1a202c;
+            font-weight: 600;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .sub {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Form Element Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.875rem;
+            margin-bottom: 1rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+        }
+        
+        textarea {
+             resize: vertical;
+        }
+
+        /* Submit Button Styling */
+        .submit-btn {
+            background: linear-gradient(90deg, #4299e1, #3182ce);
+            color: #ffffff;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Custom Notification Box */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(150%);
+            background-color: #2d3748;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0.4s;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Contact Section -->
+        <section id="contact" class="scroll-item">
+            <h2>Contact Us</h2>
+            <p class="sub">Have a question or collaboration idea? Reach out!</p>
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input id="name" type="text" placeholder="Your name" required>
+                
+                <label for="email">Email:</label>
+                <input id="email" type="email" placeholder="Your email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" placeholder="Your message..." style="height:120px;" required></textarea>
+                
+                <button class="submit-btn" type="submit">Send Message</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Notification element -->
+    <div id="notification" class="notification">
+        Message sent successfully!
+    </div>
+
+    <script>
+        // Get the form and notification elements from the DOM
+        const contactForm = document.getElementById('contactForm');
+        const notification = document.getElementById('notification');
+
+        // Add a submit event listener to the form
+        contactForm.addEventListener('submit', function(event) {
+            // Prevent the default form submission behavior (which reloads the page)
+            event.preventDefault();
+
+            // Show the custom notification
+            notification.classList.add('show');
+            
+            // Reset the form fields after a brief delay to allow the user to see their input
+            setTimeout(() => {
+                 contactForm.reset();
+            }, 100);
+
+            // Hide the notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        });
+    </script>
+
+</body>
+</html>
