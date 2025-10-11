@@ -4,6 +4,16 @@
   padding: 0;
 }
 
+:root {
+  --bg: #ecfdf5;
+  --cardbg: #e6ffeb;
+  --box: #e1f0ffb4;
+  --btn: #007bff;
+  --text: #165ab2;
+  --color: #ffff;
+  --bs: 0 1px 3px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -11,6 +21,8 @@ html {
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   scroll-behavior: smooth;
+  background-color: var(--bg);
+  transition: background-color 1s, color 0.3s;
 }
 
 /* --- scroll animation styles --- */
@@ -40,11 +52,11 @@ body {
 /* --- Base Header Styles --- */
 header {
   background-color: #603a17;
-  color: white;
+  color: var(--color);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--bs);
 }
 
 nav {
@@ -81,7 +93,7 @@ h2.name {
 }
 
 .nav-menu a {
-  color: white;
+  color: var(--color);
   text-decoration: none;
   font-weight: 500;
   padding: 5px;
@@ -92,19 +104,10 @@ h2.name {
   color: #ffd500;
 }
 
-/* You can add styles for your .Mode button here if needed */
-.Mode button {
-  padding: 8px 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
 
 /* --- Hamburger Menu Icon Styles (Hidden on Desktop) --- */
 .nav-toggle {
-  display: none; /* Hide the checkbox */
+  display: none;
 }
 
 .nav-toggle-label {
@@ -164,7 +167,7 @@ h2.name {
     flex-direction: column; /* Stack items vertically */
     align-items: center;
     padding: 20px 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--bs);
   }
 
   /* Show the menu when the checkbox is checked */
@@ -210,7 +213,7 @@ h2.name {
 }
 .hero button {
   background-color: white;
-  color: #007bff;
+  color: var(--btn);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -243,7 +246,7 @@ h2.name {
 
 section h2 {
   text-align: center;
-  color: #004aad;
+  color: var(--text);
   margin-bottom: 10px;
   font-size: 1.8em;
 }
@@ -260,30 +263,30 @@ section p.sub {
   gap: 20px;
 }
 .feature {
-  background: rgb(236, 232, 221);
+  background-color: var(--cardbg);
   border-radius: 10px;
   padding: 25px;
   text-align: center;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--bs);
   transition: transform 0.3s;
 }
 .feature:hover {
   transform: translateY(-6px);
 }
 .feature h3 {
-  color: #007bff;
+  color: var(--text);
   margin-bottom: 10px;
 }
 
 /* Upload Zone */
 .upload-area {
-  border: 2px dashed #007bff;
+  border: 2px dashed #0073e6;
   border-radius: 15px;
-  background: rgba(255, 255, 255, 0.7);
+  background-color: var(--box);
   padding: 40px;
   text-align: center;
   transition: all 0.3s;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--bs);
   cursor: pointer;
 }
 .upload-area.dragover {
@@ -291,12 +294,6 @@ section p.sub {
   border-color: #00a8ff;
   transform: scale(1.02);
 }
-/* .upload-area i {
-  font-size: 50px;
-  color: #007bff;
-  margin-bottom: 10px;
-  display: block;
-} */
 
 .upload-logo {
   font-size: 100px;
@@ -316,6 +313,8 @@ section p.sub {
 .progress-bar {
   height: 10px;
   background: #e0e0e0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
   border-radius: 5px;
   overflow: hidden;
   margin-top: 10px;
@@ -336,11 +335,11 @@ input[type="email"] {
   margin-top: 6px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  background: #f9fbfd;
+  background-color: var(--box);
 }
 button.submit-btn {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--btn);
+  color: var(--color);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -355,22 +354,14 @@ button.submit-btn:hover {
 
 /* Result Section */
 .result-box {
-  background: #f1f8ff;
+  background-color: var(--box);
   border-radius: 8px;
   padding: 20px;
   margin-top: 20px;
   font-size: 1em;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--bs);
   animation: fadeIn 1s;
 }
-
-/* canvas {
-  display: block;
-  margin: 20px auto;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
-} */
 
 .container {
   margin-left: auto;
@@ -387,11 +378,10 @@ button.submit-btn:hover {
 
 /* Left Side: Results Card Styles */
 .results-card {
-  background-color: #fef7e0;
+  background-color: var(--cardbg);
   color: #1f2937;
   border-radius: 1rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--bs);
   padding: 1.5rem;
 }
 .card-intro {
@@ -493,7 +483,7 @@ button.submit-btn:hover {
 }
 .badge-average {
   background-color: #ffedd5;
-  color: #783014;
+  color: #571f08;
 }
 .badge-good,
 .badge-excellent {
@@ -542,21 +532,6 @@ button.submit-btn:hover {
   font-size: 1.125rem;
   color: #738394;
 }
-.cta-button {
-  margin-top: 2rem;
-  display: inline-block;
-  background-color: #14b8a6;
-  color: white;
-  font-weight: 700;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  font-size: 1.125rem;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-.cta-button:hover {
-  background-color: #0d9488;
-}
 
 /* Extra Details */
 .resume-features {
@@ -568,10 +543,10 @@ button.submit-btn:hover {
 }
 
 .Ex_feature {
-  background: #fafaf2;
+  background-color: var(--cardbg);
   border-radius: 12px;
   padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--bs);
   transition: transform 0.3s;
 }
 
@@ -588,7 +563,7 @@ button.submit-btn:hover {
 .feature-text h3 {
   margin: 0 0 1rem;
   font-size: 1.3rem;
-  color: #004aad;
+  color: var(--text);
 }
 
 .feature-text p {
@@ -623,12 +598,11 @@ p {
 }
 
 .step {
-  background: #fbf8f0;
+  background-color: var(--cardbg);
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--bs);
   text-align: center;
   padding: 20px;
-  /* width: 300px; */
   transition: transform 0.3s;
 }
 
@@ -695,7 +669,6 @@ p {
 .footer_main {
   display: flex;
   flex-direction: column;
-  background-color: #e2ede1;
   padding: 40px 20px;
   gap: 2rem;
 }
@@ -710,7 +683,7 @@ p {
 .footer_container h3 {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #818cf8;
+  color: var(--text);
   margin-bottom: 1rem;
 }
 
@@ -749,7 +722,7 @@ p {
 .Social-Media h3 {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #818cf8;
+  color: var(--text);
   margin-bottom: 1rem;
 }
 
@@ -819,8 +792,8 @@ p {
 
 /* Footer */
 footer {
-  background: #004aad;
-  color: white;
+  background: #2e66b0;
+  color: var(--color);
   text-align: center;
   padding: 15px;
   margin-top: 40px;

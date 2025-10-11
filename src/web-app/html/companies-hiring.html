@@ -8,71 +8,133 @@
     <style>
         /* Global style */
         body {
-            font-family: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
-            background: linear-gradient(180deg, #071129 0%, #071226 100%);
-            color: #e6eef8;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             margin: 0;
-            padding: 40px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Header and nav */
+        main {
+            flex: 1;
+            padding: 120px 20px 80px;
+            box-sizing: border-box;
+        }
+
+        /* ===== Header ===== */
         header {
-            margin-bottom: 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: #603a17;
+            color: #fff;
+            z-index: 1000;
         }
 
         nav {
+            margin: auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0px 20px;
+            margin: 0 auto;
+            position: relative;
         }
 
-        .logo {
-            font-weight: 700;
-            font-size: 22px;
-            color: #7c3aed;
+        .name-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: -10px;
+        }
+
+        .name {
+            font-size: 30px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .logo img {
+            border-radius: 50%;
+            width: 40px;
+        }
+
+        .nav-links {
+            display: flex;
         }
 
         .nav-links a {
-            color: #e6eef8;
+            color: white;
             text-decoration: none;
-            margin-left: 18px;
+            font-weight: 500;
+            padding: 10px;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: #7c3aed;
+            color: #ffd500;
         }
 
-        /* Card layout */
+        .Mode button {
+            margin-top: 0px;
+            padding: 7px 7px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+            background-color: #e0e0e0;
+            transition: background-color 1s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+
+        #toggle {
+            background-color: #000000;
+            color: #ffffff;
+            transition: background-color 1s, color 0.3s;
+        }
+
+        .icon {
+            font-size: 17px;
+        }
+
+        #toggle {
+            height: 35px;
+        }
+
+        /* ===== Content ===== */
         .content-container {
             max-width: 950px;
             margin: 0 auto;
         }
 
         .card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+            padding: 30px;
             border-radius: 14px;
-            padding: 24px;
-            box-shadow: 0 6px 30px rgba(2, 6, 23, 0.6);
+            box-shadow: 0 1px 12px rgba(2, 6, 23, 0.188);
         }
 
-        /* Text and structure */
+        h1,
+        h2 {
+            color: #231e2c;
+        }
+
         h1 {
-            color: #7c3aed;
-            font-size: 24px;
-            margin-bottom: 10px;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         h2 {
-            color: #7c3aed;
-            margin-top: 24px;
+            margin-top: 28px;
             font-size: 18px;
         }
 
-        p,
+        .card p,
         li {
-            color: #cbd5e1;
-            line-height: 1.7;
+            color: #4d5354;
         }
 
         ul {
@@ -80,7 +142,6 @@
         }
 
         a {
-            color: #7c3aed;
             text-decoration: none;
         }
 
@@ -88,24 +149,38 @@
             text-decoration: underline;
         }
 
-        /* Footer */
+        /* ===== Footer ===== */
         footer {
-            margin-top: 30px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #004aad;
+            color: #ffff;
             font-size: 13px;
-            color: #94a3b8;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 10px;
             text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 999;
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            body {
-                padding: 20px;
+        /* ===== Responsive ===== */
+        @media (max-width: 700px) {
+            header nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                margin-top: 10px;
             }
 
             .nav-links a {
-                margin-left: 12px;
+                margin: 6px 10px 0 0;
+                display: inline-block;
+            }
+
+            main {
+                padding: 140px 15px 100px;
             }
         }
     </style>
@@ -113,14 +188,27 @@
 
 <body>
 
+    <!-- ===== Fixed Header ===== -->
     <header>
         <nav>
-            <div class="logo">AI Resume Screening</div>
+            <div class="name-logo">
+                <div class="logo"><img src="/Minor-Project-A08/src/web-app/images/Logo.png" alt="AI Resume Screening">
+                </div>
+                <h2 class="name">AI Resume Screening</h2>
+            </div>
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="support.html">Support</a>
-                <a href="privacy.html">Privacy</a>
-                <a href="userguide.html">User Guide</a>
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#upload">Upload</a>
+                <a href="#About">About</a>
+                <a href="#team">Team</a>
+                <a href="#contact">Contact</a>
+                <div class="Mode">
+                    <button id="toggle">
+                        <span class="icon">🌙</span>
+                        <span class="Mode_text">Dark Mode</span>
+                    </button>
+                </div>
             </div>
         </nav>
     </header>
@@ -161,10 +249,10 @@
             <p>Stay updated with the latest hiring opportunities by visiting our <a href="support.html">Support
                     Center</a> or subscribing to hiring alerts.</p>
 
-            <footer>© 2025 Intelligent Resume Screening | Guided by Prof. Atul Barve</footer>
+
         </div>
     </main>
-
+    <footer>© 2025 Intelligent Resume Screening | Guided by Prof. Atul Barve</footer>
 </body>
 
 </html>
