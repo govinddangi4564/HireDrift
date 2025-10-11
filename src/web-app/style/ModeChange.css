@@ -1,36 +1,18 @@
-/* Light Mode (Default) */
-body {
-  background-color: #e2ede1;
-  color: #111111;
-
-  .hero {
-    background-color: #c2bd8f;
-    color: black;
-  }
-}
-
 /* Dark Mode */
 body.dark {
   background-color: #161b1b;
   color: white;
   transition: background-color 1s, color 0.3s;
 
+  #toggle {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 1s, color 0.3s;
+  }
+
   .hero {
     background-color: #7a604096;
     color: #fff;
-  }
-
-  .hero button {
-    background-color: white;
-    color: #007bff;
-  }
-
-  .feature h3 {
-    color: #ffd500;
-  }
-
-  section h2 {
-    color: #ffd500;
   }
 
   .feature {
@@ -38,36 +20,23 @@ body.dark {
     transition: transform 0.3s;
   }
 
-  section p.sub {
-    color: white;
-  }
-
   .upload-area {
     background: rgb(47, 47, 42);
     box-shadow: 0 0.2px 15px white;
-  }
-
-  .upload-logo {
-    color: white;
-  }
-
-  .file-list {
-    color: #fff;
   }
 
   textarea,
   input[type="text"],
   input[type="email"] {
     background: rgb(47, 47, 42);
+    color: #fff;
   }
-  button.submit-btn {
+  button.submit-btn,
+  .hero button,
+  button.submit-btn:hover {
     background-color: #007bff;
     color: white;
   }
-  button.submit-btn:hover {
-    background-color: #0056b3;
-  }
-
   .result-box {
     background: rgb(47, 47, 42);
     border: 1px solid white;
@@ -80,19 +49,20 @@ body.dark {
       0 4px 6px -2px rgba(245, 176, 176, 0.05);
     padding: 1.5rem;
   }
-  .detail-label {
+
+  .score-header h3,
+  .score-value,
+  .detail-label,
+  .card-intro,
+  .footer_container a,
+  .social-media-tag a,
+  .upload-logo,
+  .feature-text p,
+  section p.sub,
+  .file-list {
     color: #fff;
   }
-  .card-intro {
-    color: #fff;
-    font-size: 0.875rem;
-  }
-  .score-header h3 {
-    color: #fff;
-  }
-  .score-value {
-    color: #fff;
-  }
+
   .detail-value {
     font-weight: 700;
     color: #a5dcde;
@@ -102,36 +72,43 @@ body.dark {
     background: rgb(47, 47, 42);
     box-shadow: 0 2px 6px rgba(208, 186, 186, 0.15);
   }
-  .feature-text h3 {
-    color: #ffd500;
-  }
-  .feature-text p {
-    color: #fff;
-  }
 
   .step {
     background: rgb(47, 47, 42);
     box-shadow: 0 4px 10px rgba(213, 168, 168, 0.197);
   }
 
-  .step h3 {
+  .step h3,
+  .Social-Media h3,
+  .feature-text h3,
+  .footer_container h3,
+  .feature h3,
+  section h2 {
     color: #ffd500;
+  }
+
+  .footer_container a:hover,
+  .social-media-tag a:hover {
+    color: #706eb1;
   }
 }
 
 .Mode button {
   margin-top: 0px;
   padding: 7px 7px;
-  /* border: none; */
   border-radius: 25px;
   cursor: pointer;
   font-size: 13px;
   background-color: #e0e0e0;
   transition: background-color 1s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-body.dark button {
-  background-color: #333333;
+
+#toggle {
+  background-color: #000000;
   color: #ffffff;
   transition: background-color 1s, color 0.3s;
 }
