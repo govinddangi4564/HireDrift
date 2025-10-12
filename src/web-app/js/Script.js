@@ -21,24 +21,33 @@ function handleFiles(files) {
 }
 
 // Auto open popup after 5 seconds
-        setTimeout(() => {
-            openPopup();
-        }, 5000);
+setTimeout(() => {
+    openPopup();
+}, 5000);
 
-        function openPopup() {
-            document.getElementById('overlay').classList.add('active');
-        }
+// Function to open popup
+function openPopup() {
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden'; // prevent scroll when popup is open
+}
 
-        function closePopup() {
-            document.getElementById('overlay').classList.remove('active');
-        }
+// Function to close popup (only via × button)
+function closePopup() {
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = 'auto';
+    history.replaceState(null, null, ' '); // remove #sign-in from URL
+}
 
-        // Close popup when clicking outside the form
-        document.getElementById('overlay').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePopup();
-            }
-        });
+// Automatically open popup when URL contains #sign-in
+window.addEventListener('load', () => {
+    if (window.location.hash === '#sign-in') {
+        openPopup();
+    }
+});
+
+// ✅ Removed the overlay click listener
+// Now the popup closes only when the close button is clicked
+
 
 /*
   Behavior:
