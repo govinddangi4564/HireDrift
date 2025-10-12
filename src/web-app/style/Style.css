@@ -670,7 +670,8 @@ button.submit-btn {
   background-color: var(--btn);
   color: var(--color);
   border: none;
-  padding: 10px 20px;
+  width: 170px;
+  padding: 8px 15px;
   border-radius: 5px;
   margin-top: 15px;
   cursor: pointer;
@@ -678,7 +679,7 @@ button.submit-btn {
   transition: background 0.3s;
 }
 button.submit-btn:hover {
-  background-color: #0056b3;
+  background-color: #0056b1;
 }
 
 /* Result Section */
