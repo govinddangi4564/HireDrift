@@ -20,6 +20,26 @@ function handleFiles(files) {
     simulateUpload(file);
 }
 
+// Auto open popup after 5 seconds
+        setTimeout(() => {
+            openPopup();
+        }, 5000);
+
+        function openPopup() {
+            document.getElementById('overlay').classList.add('active');
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // Close popup when clicking outside the form
+        document.getElementById('overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+
 /*
   Behavior:
   - Wait for a user interaction (scroll / wheel / touch / key) before starting to observe.

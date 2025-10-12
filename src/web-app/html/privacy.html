@@ -5,593 +5,339 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Privacy Policy — Intelligent Resume Screening (SBERT)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    main {
-      flex: 1;
-      padding: 120px 20px 80px;
-      box-sizing: border-box;
-    }
-
-    /* ===== Header ===== */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 70px;
-      background: #603a17;
-      color: #fff;
-      z-index: 1000;
-    }
-
-    nav {
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0px 20px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .name-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: -10px;
-    }
-
-    .name {
-      font-size: 30px;
-      font-weight: bold;
-      color: #fff;
-    }
-
-    .logo img {
-      border-radius: 50%;
-      width: 40px;
-    }
-
-    .nav-links {
-      display: flex;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 10px;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: #ffd500;
-    }
-
-    .Mode button {
-      margin-top: 0px;
-      padding: 7px 7px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 13px;
-      background-color: #e0e0e0;
-      transition: background-color 1s;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-
-    #toggle {
-      background-color: #000000;
-      color: #ffffff;
-      transition: background-color 1s, color 0.3s;
-    }
-
-    .icon {
-      font-size: 17px;
-    }
-
-    #toggle {
-      height: 35px;
-    }
-
-    /* ===== Content ===== */
-    .container {
-      max-width: 950px;
-      margin: 0 auto;
-    }
-
-    .card {
-      padding: 50px;
-      border-radius: 14px;
-      box-shadow: 0 1px 12px rgba(2, 6, 23, 0.188);
-    }
-
-    h1,
-    h2 {
-      color: #231e2c;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      margin-top: 28px;
-      font-size: 18px;
-    }
-
-    .card p,
-    li {
-      color: #4d5354;
-    }
-
-    ul {
-      margin-left: 20px;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* Contact us */
-
-    /* ===========================
-   FOOTER BASE STYLING
-=========================== */
-    .footer_main {
-      display: flex;
-      flex-direction: column;
-      padding: 40px 20px;
-      gap: 2rem;
-    }
-
-    /* Inner Container */
-    .footer_container {
-      display: grid;
-      gap: 2rem;
-    }
-
-    /* Headings */
-    .footer_container h3 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-
-    /* Links */
-    .footer_container ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .footer_container a {
-      color: #5b6779;
-      text-decoration: none;
-      transition: color 0.3s;
-      display: block;
-      margin-bottom: 0.6rem;
-      font-weight: 500;
-    }
-
-    .footer_container a:hover {
-      color: #4f46e5;
-    }
-
-    /* Contact Info */
-    .footer_contact li {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    /* ===========================
-   SOCIAL MEDIA
-=========================== */
-
-    .Social-Media h3 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-
-    .social-media-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .social-media-tag a {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: #444b4c;
-      font-weight: 600;
-      font-family: Arial, sans-serif;
-      transition: transform 0.2s ease, color 0.2s ease;
-    }
-
-    .social-media-tag a:hover {
-      transform: scale(1.08);
-      color: #1f3137;
-    }
-
-    .social-media-tag svg {
-      flex-shrink: 0;
-      width: 30px;
-    }
-
-    /* ===========================
-   RESPONSIVE LAYOUTS
-=========================== */
-
-    /* Tablet and larger */
-    @media (min-width: 768px) {
-      .footer_main {
-        padding: 50px 60px;
-      }
-
-      .footer_container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .social-media-container {
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
-    }
-
-    /* Desktop and larger */
-    @media (min-width: 1024px) {
-      .footer_main {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 60px 120px;
-      }
-
-      .footer_container {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .social-media-container {
-        flex-direction: column;
-      }
-    }
-
-    /* ===== Footer ===== */
-    footer {
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #004aad;
-      color: #ffff;
-      font-size: 13px;
-      text-align: center;
-      padding: 10px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      z-index: 999;
-    }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 700px) {
-      header nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-links {
-        margin-top: 10px;
-      }
-
-      .nav-links a {
-        margin: 6px 10px 0 0;
-        display: inline-block;
-      }
-
-      main {
-        padding: 140px 15px 100px;
-      }
     }
   </style>
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
 
-  <!-- ===== Fixed Header ===== -->
-  <header>
-    <nav>
-      <div class="name-logo">
-        <div class="logo"><img src="/src/web-app/images/Logo.png" alt="AI Resume Screening">
+  <!-- Fixed Header -->
+  <header class="fixed top-0 left-0 w-full h-[70px] bg-[#603a17] text-white z-[1000]">
+    <nav class="max-w-full mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center px-5 py-0">
+      <div class="flex items-center gap-2.5 -mt-2.5">
+        <div class="logo">
+          <img src="/src/web-app/images/Logo.png" alt="AI Resume Screening" class="rounded-full w-10">
         </div>
-        <h2 class="name">AI Resume Screening</h2>
+        <h2 class="text-[30px] font-bold text-white">AI Resume Screening</h2>
       </div>
-      <div class="nav-links">
-        <a href="/src/web-app/Index.html">Home</a>
-        <a href="#features">Features</a>
-        <a href="#upload">Upload</a>
-        <a href="#About">About</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
-        <div class="Mode">
-          <button id="toggle">
-            <span class="icon">🌙</span>
-            <span class="Mode_text">Dark Mode</span>
-          </button>
-        </div>
+      <div class="flex items-center gap-2 mt-2 lg:mt-0">
+        <a href="/src/web-app/Index.html"
+          class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Home</a>
+        <a href="#features"
+          class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Features</a>
+        <a href="#upload"
+          class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Upload</a>
+        <a href="#About"
+          class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">About</a>
+        <a href="#team"
+          class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Team</a>
+        <a href="#contact"
+          class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Contact</a>
+        <button id="toggle"
+          class="h-[35px] px-[7px] py-[7px] rounded-[25px] cursor-pointer text-[13px] bg-black text-white transition-all flex items-center gap-1.5">
+          <span class="text-[17px]">🌙</span>
+          <span>Dark Mode</span>
+        </button>
       </div>
     </nav>
   </header>
-  <div class="container card">
-    <h1>Privacy Policy</h1>
 
-    <p>This Privacy Policy describes how our platform, <strong>Intelligent Resume Screening and Shortlisting using NLP
-        (SBERT)</strong> (the “Service”), collects, uses, and protects personal data of users, recruiters, and
-      candidates. By accessing or using the Service, you agree to the terms of this Privacy Policy.</p>
+  <!-- Main Content -->
+  <main class="flex-1 pt-[120px] pb-20 px-5 box-border">
+    <div class="max-w-[950px] mx-auto p-[50px] rounded-[14px] shadow-[0_1px_12px_rgba(2,6,23,0.188)] bg-white">
+      <h1 class="text-[#231e2c] text-center mb-5 text-3xl font-bold">Privacy Policy</h1>
 
-    <h2>1. Information We Collect</h2>
-    <p>We collect both personal and non-personal information necessary to operate and improve our intelligent resume
-      screening system. The types of data collected include:</p>
-    <ul>
-      <li><strong>Candidate Data:</strong> Resumes, cover letters, job descriptions, skill lists, and career summaries.
-      </li>
-      <li><strong>Contact Information:</strong> Email addresses, names, organization details, and account credentials
-        when applicable.</li>
-      <li><strong>System Data:</strong> Log files, browser type, device identifiers, IP addresses, and timestamps for
-        auditing and security purposes.</li>
-      <li><strong>Usage Analytics:</strong> Interaction history, search queries, and feedback related to the performance
-        of the NLP model.</li>
-    </ul>
+      <p class="text-[#4d5354] mb-4">
+        This Privacy Policy describes how our platform, <strong>Intelligent Resume Screening and Shortlisting using NLP
+          (SBERT)</strong> (the "Service"), collects, uses, and protects personal data of users, recruiters, and
+        candidates. By accessing or using the Service, you agree to the terms of this Privacy Policy.
+      </p>
 
-    <h2>2. Purpose of Data Collection</h2>
-    <p>We use collected data for the following purposes:</p>
-    <ul>
-      <li>To perform NLP-based analysis and generate embeddings using <strong>Sentence-BERT (SBERT)</strong> for
-        resume–job matching.</li>
-      <li>To improve our algorithms, performance accuracy, and model fairness through anonymous data aggregation.</li>
-      <li>To provide customer support, account management, and technical updates.</li>
-      <li>To maintain security, prevent fraud, and comply with legal or contractual obligations.</li>
-    </ul>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">1. Information We Collect</h2>
+      <p class="text-[#4d5354] mb-4">
+        We collect both personal and non-personal information necessary to operate and improve our intelligent resume
+        screening system. The types of data collected include:
+      </p>
+      <ul class="ml-5 list-disc text-[#4d5354] mb-4 space-y-2">
+        <li><strong>Candidate Data:</strong> Resumes, cover letters, job descriptions, skill lists, and career
+          summaries.</li>
+        <li><strong>Contact Information:</strong> Email addresses, names, organization details, and account credentials
+          when applicable.</li>
+        <li><strong>System Data:</strong> Log files, browser type, device identifiers, IP addresses, and timestamps for
+          auditing and security purposes.</li>
+        <li><strong>Usage Analytics:</strong> Interaction history, search queries, and feedback related to the
+          performance of the NLP model.</li>
+      </ul>
 
-    <h2>3. How We Use SBERT and NLP Models</h2>
-    <p>Our Service uses <strong>Sentence-BERT (SBERT)</strong> to convert textual data (resumes, job descriptions) into
-      vector embeddings. These embeddings are compared to identify the semantic similarity between candidate profiles
-      and job requirements. All processing is automated but designed to assist human recruiters — not to replace them.
-      The final hiring decisions should always involve human review to ensure fairness.</p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">2. Purpose of Data Collection</h2>
+      <p class="text-[#4d5354] mb-4">We use collected data for the following purposes:</p>
+      <ul class="ml-5 list-disc text-[#4d5354] mb-4 space-y-2">
+        <li>To perform NLP-based analysis and generate embeddings using <strong>Sentence-BERT (SBERT)</strong> for
+          resume–job matching.</li>
+        <li>To improve our algorithms, performance accuracy, and model fairness through anonymous data aggregation.</li>
+        <li>To provide customer support, account management, and technical updates.</li>
+        <li>To maintain security, prevent fraud, and comply with legal or contractual obligations.</li>
+      </ul>
 
-    <h2>4. Legal Basis for Processing</h2>
-    <p>Depending on your jurisdiction, we process personal data under one or more of the following legal bases:</p>
-    <ul>
-      <li>Consent provided by the user or candidate.</li>
-      <li>Legitimate interests pursued by recruiters or employers using our platform.</li>
-      <li>Compliance with applicable laws and regulations (e.g., employment, data protection).</li>
-      <li>Performance of a contract between the user and our organization.</li>
-    </ul>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">3. How We Use SBERT and NLP Models</h2>
+      <p class="text-[#4d5354] mb-4">
+        Our Service uses <strong>Sentence-BERT (SBERT)</strong> to convert textual data (resumes, job descriptions) into
+        vector embeddings. These embeddings are compared to identify the semantic similarity between candidate profiles
+        and job requirements. All processing is automated but designed to assist human recruiters — not to replace them.
+        The final hiring decisions should always involve human review to ensure fairness.
+      </p>
 
-    <h2>5. Data Retention</h2>
-    <p>We retain data only for as long as necessary to fulfill the purposes outlined in this Privacy Policy. When data
-      is no longer required, it will be deleted or anonymized. Backup data may persist for up to 90 days before being
-      permanently erased.</p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">4. Legal Basis for Processing</h2>
+      <p class="text-[#4d5354] mb-4">Depending on your jurisdiction, we process personal data under one or more of the
+        following legal bases:</p>
+      <ul class="ml-5 list-disc text-[#4d5354] mb-4 space-y-2">
+        <li>Consent provided by the user or candidate.</li>
+        <li>Legitimate interests pursued by recruiters or employers using our platform.</li>
+        <li>Compliance with applicable laws and regulations (e.g., employment, data protection).</li>
+        <li>Performance of a contract between the user and our organization.</li>
+      </ul>
 
-    <h2>6. Cookies and Tracking Technologies</h2>
-    <p>Our website may use cookies and similar tracking technologies to enhance user experience and gather analytics.
-      Cookies help us remember preferences, measure performance, and personalize content. You can modify your browser
-      settings to reject cookies, but some features of the Service may not function properly if cookies are disabled.
-    </p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">5. Data Retention</h2>
+      <p class="text-[#4d5354] mb-4">
+        We retain data only for as long as necessary to fulfill the purposes outlined in this Privacy Policy. When data
+        is no longer required, it will be deleted or anonymized. Backup data may persist for up to 90 days before being
+        permanently erased.
+      </p>
 
-    <h2>7. Data Security</h2>
-    <p>We implement advanced technical and organizational measures, including:</p>
-    <ul>
-      <li>Encryption of data during transmission and storage.</li>
-      <li>Role-based access control for sensitive data.</li>
-      <li>Regular system audits and vulnerability assessments.</li>
-      <li>Secure cloud infrastructure compliant with global standards (e.g., ISO 27001, GDPR).</li>
-    </ul>
-    <p>Despite these measures, no system can guarantee absolute security. Users are encouraged to use strong passwords
-      and avoid sharing credentials.</p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">6. Cookies and Tracking Technologies</h2>
+      <p class="text-[#4d5354] mb-4">
+        Our website may use cookies and similar tracking technologies to enhance user experience and gather analytics.
+        Cookies help us remember preferences, measure performance, and personalize content. You can modify your browser
+        settings to reject cookies, but some features of the Service may not function properly if cookies are disabled.
+      </p>
 
-    <h2>8. Third-Party Services and Data Sharing</h2>
-    <p>We may partner with trusted third parties for hosting, analytics, and email delivery. These providers are bound
-      by confidentiality and data protection agreements. We do not sell or rent personal data to advertisers or other
-      unrelated entities.</p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">7. Data Security</h2>
+      <p class="text-[#4d5354] mb-4">We implement advanced technical and organizational measures, including:</p>
+      <ul class="ml-5 list-disc text-[#4d5354] mb-4 space-y-2">
+        <li>Encryption of data during transmission and storage.</li>
+        <li>Role-based access control for sensitive data.</li>
+        <li>Regular system audits and vulnerability assessments.</li>
+        <li>Secure cloud infrastructure compliant with global standards (e.g., ISO 27001, GDPR).</li>
+      </ul>
+      <p class="text-[#4d5354] mb-4">
+        Despite these measures, no system can guarantee absolute security. Users are encouraged to use strong passwords
+        and avoid sharing credentials.
+      </p>
 
-    <h2>9. Fairness, Bias, and Ethical AI</h2>
-    <p>We are committed to ensuring that our SBERT-based algorithms operate fairly and without discrimination. Our
-      models undergo regular bias testing and validation to reduce unintended bias. Nonetheless, automated predictions
-      should be reviewed by human recruiters before final decisions are made.</p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">8. Third-Party Services and Data Sharing</h2>
+      <p class="text-[#4d5354] mb-4">
+        We may partner with trusted third parties for hosting, analytics, and email delivery. These providers are bound
+        by confidentiality and data protection agreements. We do not sell or rent personal data to advertisers or other
+        unrelated entities.
+      </p>
 
-    <h2>10. User Rights</h2>
-    <p>Depending on your jurisdiction, you may have the right to:</p>
-    <ul>
-      <li>Access a copy of the personal data we hold about you.</li>
-      <li>Request correction or deletion of your personal data.</li>
-      <li>Withdraw consent at any time.</li>
-      <li>Request a portable copy of your data (data portability).</li>
-      <li>File a complaint with your local data protection authority.</li>
-    </ul>
-    <p>Requests can be submitted via <a href="mailto:privacy@example.com">privacy@example.com</a>. We aim to respond
-      within 30 days.</p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">9. Fairness, Bias, and Ethical AI</h2>
+      <p class="text-[#4d5354] mb-4">
+        We are committed to ensuring that our SBERT-based algorithms operate fairly and without discrimination. Our
+        models undergo regular bias testing and validation to reduce unintended bias. Nonetheless, automated predictions
+        should be reviewed by human recruiters before final decisions are made.
+      </p>
 
-    <h2>11. Children’s Privacy</h2>
-    <p>Our Service is not intended for use by individuals under 18 years of age. We do not knowingly collect data from
-      minors. If such data is discovered, it will be deleted immediately upon verification.</p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">10. User Rights</h2>
+      <p class="text-[#4d5354] mb-4">Depending on your jurisdiction, you may have the right to:</p>
+      <ul class="ml-5 list-disc text-[#4d5354] mb-4 space-y-2">
+        <li>Access a copy of the personal data we hold about you.</li>
+        <li>Request correction or deletion of your personal data.</li>
+        <li>Withdraw consent at any time.</li>
+        <li>Request a portable copy of your data (data portability).</li>
+        <li>File a complaint with your local data protection authority.</li>
+      </ul>
+      <p class="text-[#4d5354] mb-4">
+        Requests can be submitted via <a href="mailto:privacy@example.com"
+          class="text-[#004aad] hover:underline">privacy@example.com</a>. We aim to respond within 30 days.
+      </p>
 
-    <h2>12. International Data Transfers</h2>
-    <p>Your data may be processed on servers located outside your country of residence. We ensure adequate protection
-      measures in compliance with international data transfer regulations (e.g., GDPR, Standard Contractual Clauses).
-    </p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">11. Children's Privacy</h2>
+      <p class="text-[#4d5354] mb-4">
+        Our Service is not intended for use by individuals under 18 years of age. We do not knowingly collect data from
+        minors. If such data is discovered, it will be deleted immediately upon verification.
+      </p>
 
-    <h2>13. Updates to This Privacy Policy</h2>
-    <p>We may revise this policy periodically to reflect updates in technology, law, or operational practices.
-      Significant changes will be communicated through notices on our website or via email. Please review this page
-      regularly for the latest version.</p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">12. International Data Transfers</h2>
+      <p class="text-[#4d5354] mb-4">
+        Your data may be processed on servers located outside your country of residence. We ensure adequate protection
+        measures in compliance with international data transfer regulations (e.g., GDPR, Standard Contractual Clauses).
+      </p>
 
-    <h2>14. Contact Information</h2>
-    <p>For privacy inquiries, requests, or complaints, please contact us at:</p>
-    <p><strong>Email:</strong> <a href="mailto:privacy@example.com">privacy@example.com</a><br><strong>Support:</strong>
-      <a href="mailto:support@example.com">support@example.com</a><br><strong>Address:</strong> Indore
-    </p>
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">13. Updates to This Privacy Policy</h2>
+      <p class="text-[#4d5354] mb-4">
+        We may revise this policy periodically to reflect updates in technology, law, or operational practices.
+        Significant changes will be communicated through notices on our website or via email. Please review this page
+        regularly for the latest version.
+      </p>
 
+      <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">14. Contact Information</h2>
+      <p class="text-[#4d5354] mb-4">For privacy inquiries, requests, or complaints, please contact us at:</p>
+      <p class="text-[#4d5354]">
+        <strong>Email:</strong> <a href="mailto:privacy@example.com"
+          class="text-[#004aad] hover:underline">privacy@example.com</a><br>
+        <strong>Support:</strong> <a href="mailto:support@example.com"
+          class="text-[#004aad] hover:underline">support@example.com</a><br>
+        <strong>Address:</strong> Indore
+      </p>
+    </div>
+  </main>
 
-  </div>
-
-  <!-- Footer Contact us -->
-
-  <div class="footer_main">
-    <div class="footer_contact">
-      <div class="footer_container">
-
-
-        <!-- Customer Service -->
-        <div class="C_customer">
-          <h3>Customer Support</h3>
-          <ul>
-            <li><a href="help-centre.html">Help Center</a></li>
-            <li><a href="user-guid.html">User Guide</a></li>
-          </ul>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="C_QuickLinks">
-          <h3>Trust and Transparency</h3>
-          <ul>
-            <li><a href="about-us.html">About Us</a></li>
-            <li><a href="/src/web-app/Index.html">Contact Us</a></li>
-            <li><a href="companies-hiring.html">Companies Hiring</a>
-            </li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="terms.html">Terms of Service</a></li>
-          </ul>
-        </div>
-
-        <!-- Connect With Us -->
-        <div class="C_connect">
-          <h3>Connect With Us</h3>
-          <ul class="footer_contact">
-            <li>
-              <span>📧</span>
-              <a href="">resumesupport@gmail.com</a>
-            </li>
-            <li>
-              <span>📞</span>
-              <a href="">+91 123 456 7890</a>
-            </li>
-            <li>
-              <span>📍</span>
-              <span>Indore, Madhya Pradesh</span>
-            </li>
-          </ul>
-        </div>
-
+  <!-- Footer Contact Section -->
+  <div
+    class="flex flex-col md:flex-row gap-8 p-10 md:px-[60px] md:py-[50px] lg:px-[120px] lg:py-[60px] lg:justify-between">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Customer Service -->
+      <div>
+        <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Customer Support</h3>
+        <ul class="list-none p-0 m-0">
+          <li><a href="help-centre.html"
+              class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Help
+              Center</a></li>
+          <li><a href="user-guid.html"
+              class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">User
+              Guide</a></li>
+        </ul>
       </div>
 
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Trust and Transparency</h3>
+        <ul class="list-none p-0 m-0">
+          <li><a href="about-us.html"
+              class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">About
+              Us</a></li>
+          <li><a href="/src/web-app/Index.html"
+              class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Contact
+              Us</a></li>
+          <li><a href="companies-hiring.html"
+              class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Companies
+              Hiring</a></li>
+          <li><a href="privacy.html"
+              class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Privacy
+              Policy</a></li>
+          <li><a href="terms.html"
+              class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Terms
+              of Service</a></li>
+        </ul>
+      </div>
+
+      <!-- Connect With Us -->
+      <div>
+        <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Connect With Us</h3>
+        <ul class="list-none p-0 m-0">
+          <li class="flex items-center gap-2 mb-4">
+            <span>📧</span>
+            <a href=""
+              class="text-[#5b6779] font-medium no-underline transition-colors hover:text-[#4f46e5]">resumesupport@gmail.com</a>
+          </li>
+          <li class="flex items-center gap-2 mb-4">
+            <span>📞</span>
+            <a href="" class="text-[#5b6779] font-medium no-underline transition-colors hover:text-[#4f46e5]">+91 123
+              456 7890</a>
+          </li>
+          <li class="flex items-center gap-2 mb-4">
+            <span>📍</span>
+            <span class="text-[#5b6779] font-medium">Indore, Madhya Pradesh</span>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="Social-Media-main">
-      <div class="Social-Media">
-        <h3>Social-Media Connections</h3>
 
-        <div class="social-media-container">
-          <div class="social-media-tag">
-            <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" fill="#FF4500" />
-                <circle cx="8.5" cy="12" r="1.5" fill="#FFFFFF" />
-                <circle cx="15.5" cy="12" r="1.5" fill="#FFFFFF" />
-                <path d="M8 15c1.5 1 6.5 1 8 0" stroke="#FFFFFF" stroke-width="1.5" fill="none"
-                  stroke-linecap="round" />
-              </svg>
-              <span>Reddit</span>
-            </a>
-          </div>
-          <div class="social-media-tag">
-            <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <rect width="24" height="24" fill="#000000" />
-                <path fill="#FFFFFF" d="M6 6h2l4 5 4-5h2l-5 6 5 6h-2l-4-5-4 5H6l5-6z" />
-              </svg>
-              <span>X</span>
-            </a>
-          </div>
-
-          <div class="social-media-tag">
-            <a href="https://in.linkedin.com/" target="_blank" rel="noopener noreferrer">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <rect width="24" height="24" rx="4" fill="#0A66C2" />
-                <rect x="5" y="9" width="2.5" height="8" fill="#FFFFFF" />
-                <circle cx="6.25" cy="6.5" r="1.25" fill="#FFFFFF" />
-                <path fill="#FFFFFF"
-                  d="M10 9h2.4v1.1c.34-.7 1.2-1.2 2.3-1.2 2 0 3.3 1.3 3.3 3.8V17h-2.5v-3.6c0-1-.4-1.7-1.3-1.7-.9 0-1.4.6-1.4 1.7V17H10z" />
-              </svg>
-              <span>LinkedIn</span>
-            </a>
-          </div>
-
-          <div class="social-media-tag">
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <rect x="1" y="5" width="22" height="14" rx="4" ry="4" fill="#FF0000" />
-                <polygon points="10,8 16,12 10,16" fill="#FFFFFF" />
-              </svg>
-              <span>YouTube</span>
-            </a>
-          </div>
-
-          <div class="social-media-tag">
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <rect width="24" height="24" rx="4" fill="#1877F2" />
-                <path fill="#FFFFFF" d="M13 8h2V5h-2c-1.7 0-3 1.3-3 3v2H8v3h2v6h3v-6h2.2l.3-3H13V8z" />
-              </svg>
-              <span>Facebook</span>
-            </a>
-          </div>
-
-          <div class="social-media-tag">
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <defs>
-                  <radialGradient id="igGradient" cx="33%" cy="100%" r="100%" fx="33%" fy="100%">
-                    <stop offset="0%" stop-color="#fdf497" />
-                    <stop offset="25%" stop-color="#fdf497" />
-                    <stop offset="50%" stop-color="#fd5949" />
-                    <stop offset="75%" stop-color="#d6249f" />
-                    <stop offset="100%" stop-color="#285AEB" />
-                  </radialGradient>
-                </defs>
-                <rect width="512" height="512" rx="120" fill="url(#igGradient)" />
-                <path fill="none" stroke="#fff" stroke-width="40"
-                  d="M256 160c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96z" />
-                <circle cx="370" cy="142" r="30" fill="#fff" />
-                <rect x="92" y="92" width="328" height="328" rx="100" fill="none" stroke="#fff" stroke-width="40" />
-              </svg>
-              <span>Instagram</span>
-            </a>
-          </div>
+    <!-- Social Media -->
+    <div>
+      <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Social-Media Connections</h3>
+      <div class="flex flex-col gap-2.5">
+        <div>
+          <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+              <circle cx="12" cy="12" r="10" fill="#FF4500" />
+              <circle cx="8.5" cy="12" r="1.5" fill="#FFFFFF" />
+              <circle cx="15.5" cy="12" r="1.5" fill="#FFFFFF" />
+              <path d="M8 15c1.5 1 6.5 1 8 0" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round" />
+            </svg>
+            <span>Reddit</span>
+          </a>
         </div>
-
-
+        <div>
+          <a href="https://x.com/" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+              <rect width="24" height="24" fill="#000000" />
+              <path fill="#FFFFFF" d="M6 6h2l4 5 4-5h2l-5 6 5 6h-2l-4-5-4 5H6l5-6z" />
+            </svg>
+            <span>X</span>
+          </a>
+        </div>
+        <div>
+          <a href="https://in.linkedin.com/" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+              <rect width="24" height="24" rx="4" fill="#0A66C2" />
+              <rect x="5" y="9" width="2.5" height="8" fill="#FFFFFF" />
+              <circle cx="6.25" cy="6.5" r="1.25" fill="#FFFFFF" />
+              <path fill="#FFFFFF"
+                d="M10 9h2.4v1.1c.34-.7 1.2-1.2 2.3-1.2 2 0 3.3 1.3 3.3 3.8V17h-2.5v-3.6c0-1-.4-1.7-1.3-1.7-.9 0-1.4.6-1.4 1.7V17H10z" />
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+        </div>
+        <div>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+              <rect x="1" y="5" width="22" height="14" rx="4" ry="4" fill="#FF0000" />
+              <polygon points="10,8 16,12 10,16" fill="#FFFFFF" />
+            </svg>
+            <span>YouTube</span>
+          </a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+              <rect width="24" height="24" rx="4" fill="#1877F2" />
+              <path fill="#FFFFFF" d="M13 8h2V5h-2c-1.7 0-3 1.3-3 3v2H8v3h2v6h3v-6h2.2l.3-3H13V8z" />
+            </svg>
+            <span>Facebook</span>
+          </a>
+        </div>
+        <div>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-[30px] flex-shrink-0">
+              <defs>
+                <radialGradient id="igGradient" cx="33%" cy="100%" r="100%" fx="33%" fy="100%">
+                  <stop offset="0%" stop-color="#fdf497" />
+                  <stop offset="25%" stop-color="#fdf497" />
+                  <stop offset="50%" stop-color="#fd5949" />
+                  <stop offset="75%" stop-color="#d6249f" />
+                  <stop offset="100%" stop-color="#285AEB" />
+                </radialGradient>
+              </defs>
+              <rect width="512" height="512" rx="120" fill="url(#igGradient)" />
+              <path fill="none" stroke="#fff" stroke-width="40"
+                d="M256 160c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96z" />
+              <circle cx="370" cy="142" r="30" fill="#fff" />
+              <rect x="92" y="92" width="328" height="328" rx="100" fill="none" stroke="#fff" stroke-width="40" />
+            </svg>
+            <span>Instagram</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-  <footer>© 2025 Intelligent Resume Screening | Guided by Prof. Atul Barve</footer>
+
+  <!-- Fixed Footer -->
+  <footer class="w-full bg-[#004aad] text-white text-[13px] text-center py-2.5 border-t border-white/5 z-[999]">
+    <p>© 2025 Intelligent Resume Screening | Guided by Prof. Atul Barve</p>
+  </footer>
+
 </body>
 
 </html>
