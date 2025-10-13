@@ -254,3 +254,45 @@ document.addEventListener('DOMContentLoaded', () => {
         setAllScores(backendScores);
     }, 1500); // Simulate a 1.5-second delay before scores arrive.
 });
+
+
+// Key Features Video Popup
+const features = document.querySelectorAll('#features .feature');
+const videoModal = document.getElementById('videoModal');
+const featureVideo = document.getElementById('featureVideo');
+const closeVideo = document.getElementById('closeVideo');
+
+const videoMap = {
+    'AI-Powered Matching': './videos/ai_matching.mp4',
+    'Bias Mitigation': './videos/bias_mitigation.mp4',
+    'Explainable Results': './videos/explainable_results.mp4',
+    'Visual Reports': './videos/visual_reports.mp4'
+};
+
+features.forEach(feature => {
+    feature.style.cursor = 'pointer';
+    feature.addEventListener('click', () => {
+        const title = feature.querySelector('h3').textContent.trim();
+        const videoSrc = videoMap[title];
+        if (videoSrc) {
+            featureVideo.src = videoSrc;
+            videoModal.style.display = 'flex';
+            featureVideo.play();
+        }
+    });
+});
+
+closeVideo.addEventListener('click', () => {
+    featureVideo.pause();
+    videoModal.style.display = 'none';
+    featureVideo.src = '';
+});
+
+videoModal.addEventListener('click', e => {
+    if (e.target === videoModal) {
+        featureVideo.pause();
+        videoModal.style.display = 'none';
+        featureVideo.src = '';
+    }
+});
+

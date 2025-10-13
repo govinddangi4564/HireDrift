@@ -52,7 +52,8 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 5px 20px;
-  position: relative; /* Needed for positioning the mobile menu */
+  position: relative;
+  /* Needed for positioning the mobile menu */
 }
 
 .name-logo {
@@ -77,7 +78,8 @@ h2.name {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 15px; /* Adjust spacing between items */
+  gap: 15px;
+  /* Adjust spacing between items */
 }
 
 .nav-menu a {
@@ -104,13 +106,16 @@ h2.name {
 
 /* --- Hamburger Menu Icon Styles (Hidden on Desktop) --- */
 .nav-toggle {
-  display: none; /* Hide the checkbox */
+  display: none;
+  /* Hide the checkbox */
 }
 
 .nav-toggle-label {
-  display: none; /* Hide the hamburger icon on desktop */
+  display: none;
+  /* Hide the hamburger icon on desktop */
   cursor: pointer;
-  z-index: 1; /* Ensures it's clickable */
+  z-index: 1;
+  /* Ensures it's clickable */
 }
 
 /* Styling the three lines of the hamburger icon */
@@ -142,6 +147,7 @@ h2.name {
 
 /* --- Media Query for Mobile Devices --- */
 @media (max-width: 992px) {
+
   /* Widened the breakpoint for better compatibility */
   /* Show the hamburger icon */
   .nav-toggle-label {
@@ -155,20 +161,23 @@ h2.name {
 
   /* Style the navigation menu for mobile view */
   .nav-menu {
-    display: none; /* Hide menu by default */
+    display: none;
+    /* Hide menu by default */
     position: absolute;
-    top: 100%; /* Position it right below the header */
+    top: 100%;
+    /* Position it right below the header */
     right: 0;
     width: 40%;
     background-color: #603a17;
-    flex-direction: column; /* Stack items vertically */
+    flex-direction: column;
+    /* Stack items vertically */
     align-items: center;
     padding: 20px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   /* Show the menu when the checkbox is checked */
-  .nav-toggle:checked ~ .nav-menu {
+  .nav-toggle:checked~.nav-menu {
     display: flex;
   }
 
@@ -189,6 +198,7 @@ h2.name {
     background-color: rgba(255, 255, 255, 0.1);
   }
 }
+
 /* Hero Section */
 .hero {
   background-color: #cdbb8e;
@@ -198,16 +208,19 @@ h2.name {
   position: relative;
   overflow: hidden;
 }
+
 .hero h1 {
   font-size: 2.8em;
   animation: fadeIn 1.2s ease-in;
 }
+
 .hero p {
   max-width: 600px;
   margin: 15px auto;
   font-size: 1.1em;
   animation: fadeIn 2s ease-in;
 }
+
 .hero button {
   background-color: white;
   color: #007bff;
@@ -219,15 +232,18 @@ h2.name {
   font-weight: bold;
   transition: background 0.3s;
 }
+
 .hero button:hover {
   background-color: #e6f0ff;
   transform: scale(1.05);
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -247,6 +263,7 @@ section h2 {
   margin-bottom: 10px;
   font-size: 1.8em;
 }
+
 section p.sub {
   text-align: center;
   color: #555;
@@ -255,24 +272,84 @@ section p.sub {
 
 /* Features */
 .features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
   gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
+
 .feature {
-  background: rgb(236, 232, 221);
+  background: #f5f5f0;
   border-radius: 10px;
-  padding: 25px;
+  padding: 20px;
+  width: 250px;
   text-align: center;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
-  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* pushes video section to bottom */
 }
+
 .feature:hover {
   transform: translateY(-6px);
 }
+
 .feature h3 {
   color: #007bff;
   margin-bottom: 10px;
+}
+
+.feature .video {
+  margin-top: auto;
+  /* ensures it stays at the bottom */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #555;
+  cursor: pointer;
+}
+
+.video i {
+  margin-top: 3px;
+  margin-right: 3px;
+  font-size: 0.9rem;
+  color: #536066;
+}
+
+.video p {
+  font-size: 0.9rem;
+  color: #737980;
+}
+
+/* Video Popup Modal */
+.video-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.video-modal video {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 8px;
+}
+
+.video-modal .close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 /* Upload Zone */
@@ -286,11 +363,13 @@ section p.sub {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   cursor: pointer;
 }
+
 .upload-area.dragover {
   background: rgba(0, 123, 255, 0.1);
   border-color: #00a8ff;
   transform: scale(1.02);
 }
+
 /* .upload-area i {
   font-size: 50px;
   color: #007bff;
@@ -313,6 +392,7 @@ section p.sub {
   font-size: 0.95em;
   color: #333;
 }
+
 .progress-bar {
   height: 10px;
   background: #e0e0e0;
@@ -320,6 +400,7 @@ section p.sub {
   overflow: hidden;
   margin-top: 10px;
 }
+
 .progress {
   height: 100%;
   width: 0%;
@@ -338,6 +419,7 @@ input[type="email"] {
   border-radius: 6px;
   background: #f9fbfd;
 }
+
 button.submit-btn {
   background-color: #007bff;
   color: white;
@@ -349,6 +431,7 @@ button.submit-btn {
   font-size: 1em;
   transition: background 0.3s;
 }
+
 button.submit-btn:hover {
   background-color: #0056b3;
 }
@@ -378,6 +461,7 @@ button.submit-btn:hover {
   max-width: 1120px;
   width: 100%;
 }
+
 .main-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -394,6 +478,7 @@ button.submit-btn:hover {
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
 }
+
 .card-intro {
   color: #4b5563;
   font-size: 0.875rem;
@@ -406,21 +491,25 @@ button.submit-btn:hover {
   gap: 1.5rem;
   margin-top: 2rem;
 }
+
 .score-item {
   text-align: center;
 }
+
 .score-header {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.5rem;
 }
+
 .score-title {
   font-size: 0.875rem;
   font-weight: 600;
   color: #374151;
   margin-right: 0.5rem;
 }
+
 .info-link {
   width: 18px;
   height: 18px;
@@ -436,6 +525,7 @@ button.submit-btn:hover {
   line-height: 1;
   transition: background-color 0.2s, color 0.2s;
 }
+
 .info-link:hover {
   background-color: #e5e7eb;
   color: #4b5563;
@@ -448,15 +538,18 @@ button.submit-btn:hover {
   height: 96px;
   margin: 0 auto;
 }
+
 .progress-svg {
   width: 100%;
   height: 100%;
 }
+
 .progress-circle-bg {
   fill: none;
   stroke: #e5e7eb;
   stroke-width: 3;
 }
+
 .progress-circle {
   fill: none;
   stroke-width: 3;
@@ -467,6 +560,7 @@ button.submit-btn:hover {
   transform-origin: center;
   transition: stroke-dashoffset 0.8s ease-out, stroke 0.8s ease-out;
 }
+
 .score-value {
   position: absolute;
   top: 50%;
@@ -485,16 +579,20 @@ button.submit-btn:hover {
   margin-top: 0.5rem;
   padding: 0.125rem 0.625rem;
   border-radius: 9999px;
-  min-height: 18px; /* Prevents layout shift */
+  min-height: 18px;
+  /* Prevents layout shift */
 }
+
 .badge-weak {
   background-color: #ffedd5;
   color: #ff4800;
 }
+
 .badge-average {
   background-color: #ffedd5;
   color: #783014;
 }
+
 .badge-good,
 .badge-excellent {
   background-color: #dcfce7;
@@ -509,23 +607,28 @@ button.submit-btn:hover {
   gap: 1.5rem 1rem;
   font-size: 0.875rem;
 }
+
 .details-column {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
+
 .detail-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .detail-label {
   color: #4b5563;
 }
+
 .detail-value {
   font-weight: 700;
   color: #1f2937;
 }
+
 .detail-value-low {
   font-weight: 700;
   color: #dc2626;
@@ -537,11 +640,13 @@ button.submit-btn:hover {
   font-weight: 700;
   line-height: 1.2;
 }
+
 .text-content p {
   margin-top: 1.5rem;
   font-size: 1.125rem;
   color: #738394;
 }
+
 .cta-button {
   margin-top: 2rem;
   display: inline-block;
@@ -554,6 +659,7 @@ button.submit-btn:hover {
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
+
 .cta-button:hover {
   background-color: #0d9488;
 }
@@ -653,6 +759,7 @@ p {
   h2 {
     font-size: 1.6em;
   }
+
   .step h3 {
     font-size: 1.1em;
   }
@@ -663,15 +770,19 @@ p {
   .results-card {
     padding: 2rem;
   }
+
   .card-intro {
     font-size: 1rem;
   }
+
   .scores-grid {
     grid-template-columns: repeat(4, 1fr);
   }
+
   .details-grid {
     grid-template-columns: repeat(4, 1fr);
   }
+
   .text-content h1 {
     font-size: 2.5rem;
   }
@@ -682,6 +793,7 @@ p {
     grid-template-columns: repeat(2, 1fr);
     gap: 4rem;
   }
+
   .text-content h1 {
     font-size: 3rem;
   }
