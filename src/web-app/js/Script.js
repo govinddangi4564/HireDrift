@@ -20,6 +20,35 @@ function handleFiles(files) {
     simulateUpload(file);
 }
 
+// Auto open popup after 5 seconds
+setTimeout(() => {
+    openPopup();
+}, 5000);
+
+// Function to open popup
+function openPopup() {
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden'; // prevent scroll when popup is open
+}
+
+// Function to close popup (only via × button)
+function closePopup() {
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = 'auto';
+    history.replaceState(null, null, ' '); // remove #sign-in from URL
+}
+
+// Automatically open popup when URL contains #sign-in
+window.addEventListener('load', () => {
+    if (window.location.hash === '#sign-in') {
+        openPopup();
+    }
+});
+
+// ✅ Removed the overlay click listener
+// Now the popup closes only when the close button is clicked
+
+
 /*
   Behavior:
   - Wait for a user interaction (scroll / wheel / touch / key) before starting to observe.

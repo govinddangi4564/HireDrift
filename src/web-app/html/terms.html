@@ -5,325 +5,426 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Terms & Conditions — Intelligent Resume Screening (SBERT)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --bg: #0f1724;
-            --card: #0b1220;
-            --muted: #94a3b8;
-            --accent: #7c3aed;
-            --glass: rgba(255, 255, 255, 0.03);
-            --maxw: 900px;
-            --radius: 12px;
-            --pad: 22px;
-            --mono: system-ui;
-        }
-
-        html,
         body {
-            height: 100%;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
         }
 
-        body {
-            margin: 0;
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            background: linear-gradient(180deg, #071129 0%, #071226 100%);
-            color: #e6eef8;
-            -webkit-font-smoothing: antialiased;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: var(--maxw);
-        }
-
-        header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 18px
-        }
-
-        .logo {
-            width: 56px;
-            height: 56px;
-            background: var(--glass);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--accent)
-        }
-
-        h1 {
-            font-size: 20px;
-            margin: 0
-        }
-
-        p.lead {
-            margin: 6px 0 18px;
-            color: var(--muted)
-        }
-
-        .card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-            border-radius: var(--radius);
-            padding: var(--pad);
-            box-shadow: 0 6px 30px rgba(2, 6, 23, 0.6);
-        }
-
-        nav.toc {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 18px
-        }
-
-        nav.toc a {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 8px 10px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--muted);
-            font-size: 13px
-        }
-
-        nav.toc a:hover {
-            color: #fff;
-            background: rgba(124, 58, 237, 0.09)
-        }
-
+        /* Custom styles for details/summary that Tailwind doesn't cover */
         details {
             background: transparent;
-            border-left: 3px solid rgba(255, 255, 255, 0.03);
+            border-left: 3px solid rgba(0, 0, 0, 0.05);
             padding: 12px 14px;
             border-radius: 10px;
-            margin: 12px 0
+            margin: 12px 0;
         }
 
         summary {
             cursor: pointer;
             outline: none;
-            font-weight: 600
+            font-weight: 600;
         }
 
         details[open] {
-            border-left-color: var(--accent);
-            background: linear-gradient(90deg, rgba(124, 58, 237, 0.03), transparent)
+            border-left-color: #004aad;
+            background: linear-gradient(90deg, rgba(0, 74, 173, 0.05), transparent);
         }
 
-        .section-meta {
-            color: var(--muted);
-            font-size: 13px;
-            margin-top: 6px
-        }
-
-        .small {
-            font-size: 13px;
-            color: var(--muted)
-        }
-
-        footer {
-            margin-top: 18px;
-            color: var(--muted);
-            font-size: 13px
-        }
-
-        /* Responsive */
-        @media (max-width:600px) {
-            body {
-                padding: 20px
-            }
-
-            .logo {
-                width: 44px;
-                height: 44px
-            }
-        }
-
-        /* print-friendly */
         @media print {
-            body {
-                background: white;
-                color: black
-            }
 
-            .card {
-                box-shadow: none;
-                background: white
-            }
-
+            header,
+            footer,
             nav.toc {
-                display: none
+                display: none;
+            }
+
+            body {
+                background: white !important;
+                color: black !important;
             }
         }
     </style>
 </head>
 
-<body>
-    <main class="container">
-        <div class="card">
-            <header>
-                <div class="logo">SB</div>
-                <div>
-                    <h1>Terms &amp; Conditions — Intelligent Resume Screening &amp; Shortlisting</h1>
-                    <p class="lead">These Terms govern the use of the <strong>Intelligent Resume Screening</strong>
-                        service (the "Service") which uses NLP models (including SBERT) to assist with candidate
-                        matching and shortlisting.</p>
+<body class="flex flex-col min-h-screen bg-[#fff8f2] text-[#231e2c]">
+
+    <!-- Fixed Header -->
+    <header class="fixed top-0 left-0 w-full h-[70px] bg-[#603a17] text-white z-[1000]">
+        <nav class="max-w-full mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center px-5 py-0">
+            <div class="flex items-center gap-2.5 -mt-2.5">
+                <div class="logo">
+                    <img src="/src/web-app/images/Logo.png" alt="AI Resume Screening" class="rounded-full w-10">
                 </div>
-            </header>
+                <h2 class="text-[26px] font-bold text-white">AI Resume Screening</h2>
+            </div>
+            <div class="flex items-center gap-2 mt-2 lg:mt-0">
+                <a href="/src/web-app/Index.html"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Home</a>
+                <a href="#"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Features</a>
+                <a href="#upload"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Upload</a>
+                <a href="#About"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">About</a>
+                <a href="#team"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Team</a>
+                <a href="#contact"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Contact</a>
+                <button id="toggle"
+                    class="ml-2.5 px-2.5 py-[7px] rounded-[25px] cursor-pointer text-[13px] bg-[#e0e0e0] text-black flex items-center gap-1.5 border-none transition-all">
+                    <span class="text-[17px]">🌙</span>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-            <nav class="toc" aria-label="Contents">
-                <a href="#scope">Scope</a>
-                <a href="#data">Data &amp; Privacy</a>
-                <a href="#model">Model &amp; Accuracy</a>
-                <a href="#fairness">Fairness &amp; Bias</a>
-                <a href="#liability">Liability</a>
-                <a href="#user-rights">User Rights</a>
-                <a href="#updates">Updates</a>
-            </nav>
+    <!-- Main Terms Content -->
+    <main class="flex-1 pt-[120px] pb-20 px-5 box-border flex items-center justify-center">
+        <div class="w-full max-w-[900px]">
+            <div class="bg-white rounded-[14px] p-[22px] shadow-[0_1px_12px_rgba(2,6,23,0.188)]">
+                <header class="mb-6">
+                    <div
+                        class="w-14 h-14 bg-black/5 rounded-[10px] flex items-center justify-center font-bold text-[#004aad] mb-3">
+                        SB
+                    </div>
+                    <div>
+                        <h1 class="text-[22px] m-0 text-[#231e2c] font-bold">Terms &amp; Conditions</h1>
+                        <p class="text-[#4d5354] mt-1.5 mb-4">
+                            These Terms govern the use of the <strong>Intelligent Resume Screening</strong> service (the
+                            "Service") which uses NLP models (including SBERT) to assist with candidate matching and
+                            shortlisting.
+                        </p>
+                    </div>
+                </header>
 
-            <section id="scope">
-                <details open>
-                    <summary>1. Scope of Service</summary>
-                    <div class="section-meta">Applies to all visitors, recruiters, and candidates who interact with the
-                        Service.</div>
-                    <p class="small">The Service provides automated screening and ranking suggestions for resumes and
-                        candidate profiles using natural language processing (NLP). It produces similarity scores,
-                        relevance rankings, and shortlists to help human reviewers. The Service relies on Sentence-BERT
-                        (SBERT) embeddings and additional algorithms to encode resume and job description text.</p>
-                </details>
-            </section>
+                <nav class="flex flex-wrap gap-2.5 mb-4" aria-label="Contents">
+                    <a href="#scope"
+                        class="bg-black/[0.03] px-2.5 py-2 rounded-lg no-underline text-[#4d5354] text-[13px] hover:text-[#004aad] hover:bg-black/[0.06]">Scope</a>
+                    <a href="#data"
+                        class="bg-black/[0.03] px-2.5 py-2 rounded-lg no-underline text-[#4d5354] text-[13px] hover:text-[#004aad] hover:bg-black/[0.06]">Data
+                        &amp; Privacy</a>
+                    <a href="#model"
+                        class="bg-black/[0.03] px-2.5 py-2 rounded-lg no-underline text-[#4d5354] text-[13px] hover:text-[#004aad] hover:bg-black/[0.06]">Model
+                        &amp; Accuracy</a>
+                    <a href="#fairness"
+                        class="bg-black/[0.03] px-2.5 py-2 rounded-lg no-underline text-[#4d5354] text-[13px] hover:text-[#004aad] hover:bg-black/[0.06]">Fairness
+                        &amp; Bias</a>
+                    <a href="#liability"
+                        class="bg-black/[0.03] px-2.5 py-2 rounded-lg no-underline text-[#4d5354] text-[13px] hover:text-[#004aad] hover:bg-black/[0.06]">Liability</a>
+                    <a href="#user-rights"
+                        class="bg-black/[0.03] px-2.5 py-2 rounded-lg no-underline text-[#4d5354] text-[13px] hover:text-[#004aad] hover:bg-black/[0.06]">User
+                        Rights</a>
+                    <a href="#updates"
+                        class="bg-black/[0.03] px-2.5 py-2 rounded-lg no-underline text-[#4d5354] text-[13px] hover:text-[#004aad] hover:bg-black/[0.06]">Updates</a>
+                </nav>
 
-            <section id="data">
-                <details>
-                    <summary>2. Data Collection, Use &amp; Storage</summary>
-                    <div class="section-meta">What we collect, why, and how long we retain it.</div>
-                    <p class="small"><strong>Data collected:</strong> resumes, CV text, cover letters, job descriptions,
-                        metadata (timestamps, uploader identity, annotations), and usage logs. Where provided, candidate
-                        contact details and attachments may be stored to support recruitment workflows.</p>
-                    <p class="small"><strong>Purpose:</strong> to compute SBERT embeddings, perform semantic matching,
-                        rank candidates, and generate shortlists for human review. We may also use anonymized/aggregated
-                        data to improve the Service and for research and analytics.</p>
-                    <p class="small"><strong>Retention:</strong> We retain personal data only as long as necessary for
-                        the purposes described or to comply with legal obligations. You may request deletion; see
-                        Section 7.</p>
-                    <p class="small"><strong>Security:</strong> We apply industry-standard technical and organizational
-                        measures (encryption in transit and at rest, access controls, logging) to protect data. However,
-                        no system is perfectly secure — see Section 6 for limits on liability.</p>
-                </details>
-            </section>
+                <!-- Terms Sections -->
+                <section id="scope">
+                    <details open>
+                        <summary>1. Scope of Service</summary>
+                        <div class="text-[#4d5354] text-[13px] mt-1.5">Applies to all visitors, recruiters, and
+                            candidates who interact with the Service.</div>
+                        <p class="text-[13px] text-[#4d5354] mt-2">The Service provides automated screening and ranking
+                            suggestions for resumes and candidate profiles using natural language processing (NLP). It
+                            produces similarity scores, relevance rankings, and shortlists to help human reviewers. The
+                            Service relies on Sentence-BERT (SBERT) embeddings and additional algorithms to encode
+                            resume and job description text.</p>
+                    </details>
+                </section>
 
-            <section id="model">
-                <details>
-                    <summary>3. Model, Explainability &amp; Accuracy</summary>
-                    <div class="section-meta">How SBERT is used and limitations of automated outputs.</div>
-                    <p class="small">The Service encodes text (resumes, job descriptions) into dense vector
-                        representations using SBERT (Sentence-BERT) or compatible embedding models. Similarity and
-                        ranking are computed over those vectors and combined with configurable business rules (keywords,
-                        thresholds, custom weights).</p>
-                    <p class="small">Automated scores are probabilistic signals — they are not definitive measures of
-                        candidate quality. Absolute accuracy depends on the quality of input data, model version, and
-                        configuration. We recommend human review of all shortlists before interview or hiring decisions.
-                    </p>
-                    <p class="small"><strong>Versioning:</strong> We may update or replace the embedding model (SBERT
-                        variant) over time. Model version and training data (where applicable) may affect results.
-                        Changes will be documented in our release notes and through the admin dashboard.</p>
-                </details>
-            </section>
+                <section id="data">
+                    <details>
+                        <summary>2. Data Collection, Use &amp; Storage</summary>
+                        <div class="text-[#4d5354] text-[13px] mt-1.5">What we collect, why, and how long we retain it.
+                        </div>
+                        <p class="text-[13px] text-[#4d5354] mt-2"><strong>Data collected:</strong> resumes, CV text,
+                            cover letters, job descriptions, metadata (timestamps, uploader identity, annotations), and
+                            usage logs. Where provided, candidate contact details and attachments may be stored to
+                            support recruitment workflows.</p>
+                        <p class="text-[13px] text-[#4d5354] mt-2"><strong>Purpose:</strong> to compute SBERT
+                            embeddings, perform semantic matching, rank candidates, and generate shortlists for human
+                            review. We may also use anonymized/aggregated data to improve the Service and for research
+                            and analytics.</p>
+                        <p class="text-[13px] text-[#4d5354] mt-2"><strong>Retention:</strong> We retain personal data
+                            only as long as necessary for the purposes described or to comply with legal obligations.
+                            You may request deletion; see Section 7.</p>
+                        <p class="text-[13px] text-[#4d5354] mt-2"><strong>Security:</strong> We apply industry-standard
+                            technical and organizational measures (encryption in transit and at rest, access controls,
+                            logging) to protect data. However, no system is perfectly secure — see Section 6 for limits
+                            on liability.</p>
+                    </details>
+                </section>
 
-            <section id="fairness">
-                <details>
-                    <summary>4. Fairness, Bias &amp; Non-Discrimination</summary>
-                    <div class="section-meta">Our commitment and candidate protections.</div>
-                    <p class="small">Automated NLP models can reflect or amplify biases present in training data. We
-                        strive to detect and mitigate biased behaviors (through preprocessing, balanced datasets,
-                        calibration, and manual audits). Nevertheless, the Service cannot guarantee bias-free outputs.
-                    </p>
-                    <p class="small">Users must ensure compliance with applicable non-discrimination laws and internal
-                        policies when using the Service. The Service provides tools and settings (e.g., anonymization,
-                        attribute filtering) to reduce bias risk, but final responsibility for fair hiring decisions
-                        rests with the human users and the organization using the Service.</p>
-                </details>
-            </section>
+                <section id="model">
+                    <details>
+                        <summary>3. Model, Explainability &amp; Accuracy</summary>
+                        <div class="text-[#4d5354] text-[13px] mt-1.5">How SBERT is used and limitations of automated
+                            outputs.</div>
+                        <p class="text-[13px] text-[#4d5354] mt-2">The Service encodes text (resumes, job descriptions)
+                            into dense vector representations using SBERT (Sentence-BERT) or compatible embedding
+                            models. Similarity and ranking are computed over those vectors and combined with
+                            configurable business rules (keywords, thresholds, custom weights).</p>
+                        <p class="text-[13px] text-[#4d5354] mt-2">Automated scores are probabilistic signals — they are
+                            not definitive measures of candidate quality. Absolute accuracy depends on the quality of
+                            input data, model version, and configuration. We recommend human review of all shortlists
+                            before interview or hiring decisions.</p>
+                        <p class="text-[13px] text-[#4d5354] mt-2"><strong>Versioning:</strong> We may update or replace
+                            the embedding model (SBERT variant) over time. Model version and training data (where
+                            applicable) may affect results. Changes will be documented in our release notes and through
+                            the admin dashboard.</p>
+                    </details>
+                </section>
 
-            <section id="liability">
-                <details>
-                    <summary>5. Limitation of Liability &amp; Disclaimers</summary>
-                    <div class="section-meta">Important legal limits.</div>
-                    <p class="small">THE SERVICE IS PROVIDED "AS IS" AND FOR ASSISTIVE PURPOSES ONLY. WE DO NOT
-                        GUARANTEE THAT THE SERVICE WILL IDENTIFY EVERY QUALIFIED CANDIDATE OR THAT RESULTS ARE FREE FROM
-                        ERROR OR BIAS.</p>
-                    <p class="small">To the fullest extent permitted by law, our company and its affiliates shall not be
-                        liable for indirect, incidental, special, or consequential damages arising out of your use of
-                        the Service, including hiring decisions, lost opportunities, or claims by candidates. Some
-                        jurisdictions do not allow the exclusion of certain warranties or limitations of liability —
-                        where prohibited, these limitations will not apply.</p>
-                </details>
-            </section>
+                <section id="fairness">
+                    <details>
+                        <summary>4. Fairness, Bias &amp; Non-Discrimination</summary>
+                        <div class="text-[#4d5354] text-[13px] mt-1.5">Our commitment and candidate protections.</div>
+                        <p class="text-[13px] text-[#4d5354] mt-2">Automated NLP models can reflect or amplify biases
+                            present in training data. We strive to detect and mitigate biased behaviors (through
+                            preprocessing, balanced datasets, calibration, and manual audits). Nevertheless, the Service
+                            cannot guarantee bias-free outputs.</p>
+                        <p class="text-[13px] text-[#4d5354] mt-2">Users must ensure compliance with applicable
+                            non-discrimination laws and internal policies when using the Service. The Service provides
+                            tools and settings (e.g., anonymization, attribute filtering) to reduce bias risk, but final
+                            responsibility for fair hiring decisions rests with the human users and the organization
+                            using the Service.</p>
+                    </details>
+                </section>
 
-            <section id="user-rights">
-                <details>
-                    <summary>6. Candidate &amp; User Rights</summary>
-                    <div class="section-meta">How to access, correct, delete, or object to processing.</div>
-                    <p class="small"><strong>Access &amp; correction:</strong> Candidates have the right to request
-                        access to personal data that we hold and to request corrections if data is inaccurate.</p>
-                    <p class="small"><strong>Deletion/Right to be forgotten:</strong> Candidates or account admins may
-                        request deletion of personal data. We will respond to legitimate requests within a reasonable
-                        time and remove data unless retention is required by law.</p>
-                    <p class="small"><strong>Automated decision-making:</strong> If a final decision is made solely by
-                        automated means that produces legal or similarly significant effects, eligible individuals may
-                        have rights to obtain human intervention, express their point of view, and contest the decision.
-                        We design the Service to support human-in-the-loop review to avoid solely automated adverse
-                        decisions.</p>
-                </details>
-            </section>
+                <section id="liability">
+                    <details>
+                        <summary>5. Limitation of Liability &amp; Disclaimers</summary>
+                        <div class="text-[#4d5354] text-[13px] mt-1.5">Important legal limits.</div>
+                        <p class="text-[13px] text-[#4d5354] mt-2">THE SERVICE IS PROVIDED "AS IS" AND FOR ASSISTIVE
+                            PURPOSES ONLY. WE DO NOT GUARANTEE THAT THE SERVICE WILL IDENTIFY EVERY QUALIFIED CANDIDATE
+                            OR THAT RESULTS ARE FREE FROM ERROR OR BIAS.</p>
+                        <p class="text-[13px] text-[#4d5354] mt-2">To the fullest extent permitted by law, our company
+                            and its affiliates shall not be liable for indirect, incidental, special, or consequential
+                            damages arising out of your use of the Service, including hiring decisions, lost
+                            opportunities, or claims by candidates. Some jurisdictions do not allow the exclusion of
+                            certain warranties or limitations of liability — where prohibited, these limitations will
+                            not apply.</p>
+                    </details>
+                </section>
 
-            <section id="compliance">
-                <details>
-                    <summary>7. Compliance with Laws &amp; Export Controls</summary>
-                    <div class="section-meta">Users must comply with applicable laws.</div>
-                    <p class="small">You are responsible for ensuring that your use of the Service, including storage
-                        and transfer of candidate data, complies with local data protection laws (e.g., GDPR, CCPA) and
-                        employment regulations. Export controls and ML model use restrictions may apply depending on
-                        your jurisdiction.</p>
-                </details>
-            </section>
+                <section id="user-rights">
+                    <details>
+                        <summary>6. Candidate &amp; User Rights</summary>
+                        <div class="text-[#4d5354] text-[13px] mt-1.5">How to access, correct, delete, or object to
+                            processing.</div>
+                        <p class="text-[13px] text-[#4d5354] mt-2"><strong>Access &amp; correction:</strong> Candidates
+                            have the right to request access to personal data that we hold and to request corrections if
+                            data is inaccurate.</p>
+                        <p class="text-[13px] text-[#4d5354] mt-2"><strong>Deletion/Right to be forgotten:</strong>
+                            Candidates or account admins may request deletion of personal data. We will respond to
+                            legitimate requests within a reasonable time and remove data unless retention is required by
+                            law.</p>
+                        <p class="text-[13px] text-[#4d5354] mt-2"><strong>Automated decision-making:</strong> If a
+                            final decision is made solely by automated means that produces legal or similarly
+                            significant effects, eligible individuals may have rights to obtain human intervention,
+                            express their point of view, and contest the decision. We design the Service to support
+                            human-in-the-loop review to avoid solely automated adverse decisions.</p>
+                    </details>
+                </section>
 
-            <section id="security">
-                <details>
-                    <summary>8. Security Practices</summary>
-                    <div class="section-meta">Measures we take and recommended customer practices.</div>
-                    <p class="small">We use encryption, network segmentation, and role-based access controls. Customers
-                        should use strong passwords, enable multi-factor authentication for admin accounts, and follow
-                        secure data handling procedures (least privilege, regular audits).</p>
-                </details>
-            </section>
+                <section id="compliance">
+                    <details>
+                        <summary>7. Compliance with Laws &amp; Export Controls</summary>
+                        <div class="text-[#4d5354] text-[13px] mt-1.5">Users must comply with applicable laws.</div>
+                        <p class="text-[13px] text-[#4d5354] mt-2">You are responsible for ensuring that your use of the
+                            Service, including storage and transfer of candidate data, complies with local data
+                            protection laws (e.g., GDPR, CCPA) and employment regulations. Export controls and ML model
+                            use restrictions may apply depending on your jurisdiction.</p>
+                    </details>
+                </section>
 
-            <section id="updates">
-                <details>
-                    <summary>9. Updates, Termination &amp; Contact</summary>
-                    <div class="section-meta">How we update terms and how to contact us.</div>
-                    <p class="small">We may update these Terms from time to time. Material changes will be communicated
-                        via email and posted on our website. Continued use after notice constitutes acceptance of the
-                        updated Terms.</p>
-                    <p class="small">To request data access, deletion, or to report concerns about bias or model
-                        behavior, contact: <strong>privacy@example.com</strong>. For general questions:
-                        <strong>support@example.com</strong>.</p>
-                </details>
-            </section>
+                <section id="security">
+                    <details>
+                        <summary>8. Security Practices</summary>
+                        <div class="text-[#4d5354] text-[13px] mt-1.5">Measures we take and recommended customer
+                            practices.</div>
+                        <p class="text-[13px] text-[#4d5354] mt-2">We use encryption, network segmentation, and
+                            role-based access controls. Customers should use strong passwords, enable multi-factor
+                            authentication for admin accounts, and follow secure data handling procedures (least
+                            privilege, regular audits).</p>
+                    </details>
+                </section>
 
-            <footer>
-                <p class="small">Last updated: <strong>October 9, 2025</strong>. <br>Company name: <em>Replace with your
-                        organization</em>. These Terms form a binding agreement between you and the Company concerning
-                    the Service.</p>
-            </footer>
+                <section id="updates">
+                    <details>
+                        <summary>9. Updates, Termination &amp; Contact</summary>
+                        <div class="text-[#4d5354] text-[13px] mt-1.5">How we update terms and how to contact us.</div>
+                        <p class="text-[13px] text-[#4d5354] mt-2">We may update these Terms from time to time. Material
+                            changes will be communicated via email and posted on our website. Continued use after notice
+                            constitutes acceptance of the updated Terms.</p>
+                        <p class="text-[13px] text-[#4d5354] mt-2">To request data access, deletion, or to report
+                            concerns about bias or model behavior, contact: <strong>privacy@example.com</strong>. For
+                            general questions: <strong>support@example.com</strong>.</p>
+                    </details>
+                </section>
+            </div>
         </div>
     </main>
+
+    <!-- Footer Contact Section -->
+    <div
+        class="flex flex-col md:flex-row gap-8 p-10 md:px-[60px] md:py-[50px] lg:px-[120px] lg:py-[60px] lg:justify-between">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Customer Service -->
+            <div>
+                <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Customer Support</h3>
+                <ul class="list-none p-0 m-0">
+                    <li><a href="help-centre.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Help
+                            Center</a></li>
+                    <li><a href="user-guid.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">User
+                            Guide</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Trust and Transparency</h3>
+                <ul class="list-none p-0 m-0">
+                    <li><a href="about-us.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">About
+                            Us</a></li>
+                    <li><a href="/src/web-app/Index.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Contact
+                            Us</a></li>
+                    <li><a href="companies-hiring.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Companies
+                            Hiring</a></li>
+                    <li><a href="privacy.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Privacy
+                            Policy</a></li>
+                    <li><a href="Cookie-Policy.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Cookies
+                            Policy</a></li>
+                    <li><a href="terms.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Terms
+                            of Service</a></li>
+                </ul>
+            </div>
+
+            <!-- Connect With Us -->
+            <div>
+                <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Connect With Us</h3>
+                <ul class="list-none p-0 m-0">
+                    <li class="flex items-center gap-2 mb-4">
+                        <span>📧</span>
+                        <a href=""
+                            class="text-[#5b6779] font-medium no-underline transition-colors hover:text-[#4f46e5]">resumesupport@gmail.com</a>
+                    </li>
+                    <li class="flex items-center gap-2 mb-4">
+                        <span>📞</span>
+                        <a href=""
+                            class="text-[#5b6779] font-medium no-underline transition-colors hover:text-[#4f46e5]">+91
+                            123 456 7890</a>
+                    </li>
+                    <li class="flex items-center gap-2 mb-4">
+                        <span>📍</span>
+                        <span class="text-[#5b6779] font-medium">Indore, Madhya Pradesh</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Social Media -->
+        <div>
+            <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Social-Media Connections</h3>
+            <div class="flex flex-col gap-2.5">
+                <div>
+                    <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+                            <circle cx="12" cy="12" r="10" fill="#FF4500" />
+                            <circle cx="8.5" cy="12" r="1.5" fill="#FFFFFF" />
+                            <circle cx="15.5" cy="12" r="1.5" fill="#FFFFFF" />
+                            <path d="M8 15c1.5 1 6.5 1 8 0" stroke="#FFFFFF" stroke-width="1.5" fill="none"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span>Reddit</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://x.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+                            <rect width="24" height="24" fill="#000000" />
+                            <path fill="#FFFFFF" d="M6 6h2l4 5 4-5h2l-5 6 5 6h-2l-4-5-4 5H6l5-6z" />
+                        </svg>
+                        <span>X</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://in.linkedin.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+                            <rect width="24" height="24" rx="4" fill="#0A66C2" />
+                            <rect x="5" y="9" width="2.5" height="8" fill="#FFFFFF" />
+                            <circle cx="6.25" cy="6.5" r="1.25" fill="#FFFFFF" />
+                            <path fill="#FFFFFF"
+                                d="M10 9h2.4v1.1c.34-.7 1.2-1.2 2.3-1.2 2 0 3.3 1.3 3.3 3.8V17h-2.5v-3.6c0-1-.4-1.7-1.3-1.7-.9 0-1.4.6-1.4 1.7V17H10z" />
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+                            <rect x="1" y="5" width="22" height="14" rx="4" ry="4" fill="#FF0000" />
+                            <polygon points="10,8 16,12 10,16" fill="#FFFFFF" />
+                        </svg>
+                        <span>YouTube</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+                            <rect width="24" height="24" rx="4" fill="#1877F2" />
+                            <path fill="#FFFFFF" d="M13 8h2V5h-2c-1.7 0-3 1.3-3 3v2H8v3h2v6h3v-6h2.2l.3-3H13V8z" />
+                        </svg>
+                        <span>Facebook</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-[30px] flex-shrink-0">
+                            <defs>
+                                <radialGradient id="igGradient" cx="33%" cy="100%" r="100%" fx="33%" fy="100%">
+                                    <stop offset="0%" stop-color="#fdf497" />
+                                    <stop offset="25%" stop-color="#fdf497" />
+                                    <stop offset="50%" stop-color="#fd5949" />
+                                    <stop offset="75%" stop-color="#d6249f" />
+                                    <stop offset="100%" stop-color="#285AEB" />
+                                </radialGradient>
+                            </defs>
+                            <rect width="512" height="512" rx="120" fill="url(#igGradient)" />
+                            <path fill="none" stroke="#fff" stroke-width="40"
+                                d="M256 160c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96z" />
+                            <circle cx="370" cy="142" r="30" fill="#fff" />
+                            <rect x="92" y="92" width="328" height="328" rx="100" fill="none" stroke="#fff"
+                                stroke-width="40" />
+                        </svg>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Footer -->
+    <footer class="w-full bg-[#004aad] text-white text-[13px] text-center py-2.5 border-t border-white/5 z-[999]">
+        <p>© 2025 Intelligent Resume Screening | Guided by Prof. Atul Barve</p>
+    </footer>
+
 </body>
 
 </html>

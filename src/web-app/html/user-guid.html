@@ -5,244 +5,63 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>User Guide — Intelligent Resume Screening (SBERT)</title>
-    <style>
-        :root {
-            --bg: #0f1724;
-            --card: #0b1220;
-            --muted: #656c70;
-            --accent: #004aad;
-            --glass: rgba(255, 255, 255, 0.03);
-            --radius: 14px;
-            --pad: 22px;
-            --maxw: 950px;
-        }
-
-        /* === Base layout === */
-        body {
-            margin: 0;
-            font-family: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
-            background:#e2ede1;
-            color: rgb(26, 49, 59);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding-top: 90px;
-        }
-
-        main.container {
-            width: 100%;
-            background: #fbf8f0;
-            max-width: var(--maxw);
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        /* === Fixed Header === */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #603a17;
-            color: #fff;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .name-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo img {
-            width: 46px;
-            height: 46px;
-            border-radius: 8px;
-            background: var(--glass);
-        }
-
-        .name {
-            font-size: 30px;
-            font-weight: 600;
-            /* color: var(--accent); */
-            color: white;
-            margin: 0;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 22px;
-        }
-
-        .nav-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 15px;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .Mode button {
-            background: var(--accent);
-            border: none;
-            color: #fff;
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            transition: background 0.3s ease;
-        }
-
-        .Mode button:hover {
-            background: #5b21b6;
-        }
-
-        /* === Card === */
-        .card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
-            border-radius: var(--radius);
-            padding: var(--pad);
-            box-shadow: 0 6px 30px rgba(2, 6, 23, 0.6);
-        }
-
-        h1 {
-            font-size: 22px;
-            margin: 0;
-        }
-
-        p.lead {
-            margin: 6px 0 18px;
-            color: var(--muted);
-        }
-
-        h2 {
-            color: var(--accent);
-            font-size: 18px;
-            margin-top: 22px;
-        }
-
-        p {
-            color: #4d5354;
-            margin-bottom: 12px;
-            line-height: 1.7;
-        }
-
-        ul,
-        ol {
-            color: #4d5354;
-            margin-left: 25px;
-            line-height: 1.7;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* === Fixed Footer === */
-        footer {
-            position: static;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #004aad;
-            text-align: center;
-            padding: 10px 0;
-            z-index: 1000;
-        }
-
-        footer p {
-            color: white;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding: 14px 18px;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .Mode button {
-                align-self: flex-end;
-            }
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <!-- ===== Fixed Header ===== -->
-    <header>
-        <nav>
-            <div class="name-logo">
-                <div class="logo"><img src="/Documents/Logo.png" alt="AI Resume Screening"></div>
-                <h2 class="name">AI Resume Screening</h2>
+<body class="font-sans flex flex-col bg-gray-50">
+
+    <header class="fixed top-0 left-0 w-full h-auto md:h-[70px] bg-[#603a17] text-white z-50 shadow-md">
+        <nav
+            class="container mx-auto flex flex-col md:flex-row justify-between md:items-center p-4 md:p-0 md:px-5 md:h-full">
+            <div class="flex items-center gap-3">
+                <div class="logo">
+                    <img src="/src/web-app/images/Logo.png" alt="AI Resume Screening" class="rounded-full w-10">
+                </div>
+                <h2 class="name text-2xl font-bold">AI Resume Screening</h2>
             </div>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#features">Features</a>
-                <a href="#upload">Upload</a>
-                <a href="#about">About</a>
-                <a href="#team">Team</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="Mode">
-                <button id="toggle">
-                    <span class="icon">🌙</span>
-                    <span class="Mode_text">Dark Mode</span>
-                </button>
+            <div class="nav-links flex flex-wrap items-center mt-4 md:mt-0 gap-x-2">
+                <a href="/src/web-app/Index.html"
+                    class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">Home</a>
+                <a href="#features"
+                    class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">Features</a>
+                <a href="#upload"
+                    class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">Upload</a>
+                <a href="#About" class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">About</a>
+                <a href="#team" class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">Team</a>
+                <a href="#contact"
+                    class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">Contact</a>
+                <div class="Mode">
+                    <button id="toggle"
+                        class="flex items-center gap-2 h-[35px] px-3 rounded-full cursor-pointer text-sm bg-black text-white transition-colors duration-1000">
+                        <span class="icon text-lg">🌙</span>
+                        <span class="Mode_text">Dark Mode</span>
+                    </button>
+                </div>
             </div>
         </nav>
     </header>
 
-    <!-- ===== Main Content ===== -->
-    <main class="container">
-        <div class="card">
-            <h1>User Guide — Intelligent Resume Screening using NLP (SBERT)</h1>
-            <p class="lead">
+    <main class="container mx-auto flex-grow pt-36 md:pt-28 px-4 pb-20">
+        <div class="card bg-white p-8 rounded-2xl shadow-lg max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-center mb-5 text-gray-800">User Guide</h1>
+            <p class="text-lg text-center text-gray-600">
                 A step-by-step guide for using the AI-powered resume screening system built on
-                <strong>Sentence-BERT (SBERT)</strong> and advanced NLP techniques.
+                <strong class="font-semibold text-gray-900">Sentence-BERT (SBERT)</strong> and advanced NLP techniques.
             </p>
 
-            <p>Welcome to the <strong>Intelligent Resume Screening and Shortlisting System</strong>. This guide helps
-                recruiters, administrators, and students understand how to use our platform effectively for candidate
-                shortlisting using AI and NLP.</p>
+            <p class="mt-4 text-gray-700">Welcome to the <strong class="font-semibold text-gray-900">Intelligent Resume
+                    Screening and Shortlisting System</strong>. This guide helps recruiters, administrators, and
+                students understand how to use our platform effectively for candidate shortlisting using AI and NLP.</p>
 
-            <h2>1. Overview</h2>
-            <p>The system is designed to automatically analyze, rank, and shortlist resumes based on their semantic
-                similarity to job descriptions using <strong>SBERT</strong> (Sentence-BERT) embeddings. Unlike
-                traditional keyword searches, SBERT understands the context and meaning of words, improving fairness and
-                efficiency in hiring.</p>
+            <h2 class="mt-7 text-xl font-semibold text-gray-800">1. Overview</h2>
+            <p class="mt-2 text-gray-700">The system is designed to automatically analyze, rank, and shortlist resumes
+                based on their semantic similarity to job descriptions using <strong
+                    class="font-semibold text-gray-900">SBERT</strong> (Sentence-BERT) embeddings. Unlike traditional
+                keyword searches, SBERT understands the context and meaning of words, improving fairness and efficiency
+                in hiring.</p>
 
-            <h2>2. System Features</h2>
-            <ul>
+            <h2 class="mt-7 text-xl font-semibold text-gray-800">2. System Features</h2>
+            <ul class="list-disc ml-5 mt-2 space-y-1 text-gray-700">
                 <li>Upload and manage job descriptions and candidate resumes.</li>
                 <li>Automatic similarity scoring using SBERT-based NLP models.</li>
                 <li>Visual ranking dashboard for top-matching candidates.</li>
@@ -250,8 +69,8 @@
                 <li>Secure user authentication and encrypted data handling.</li>
             </ul>
 
-            <h2>3. Getting Started</h2>
-            <ol>
+            <h2 class="mt-7 text-xl font-semibold text-gray-800">3. Getting Started</h2>
+            <ol class="list-decimal ml-5 mt-2 space-y-2 text-gray-700">
                 <li><strong>Step 1:</strong> Sign up or log in to your recruiter or admin account.</li>
                 <li><strong>Step 2:</strong> Navigate to the <em>Job Description Upload</em> section and upload the role
                     details (title, skills, experience level, etc.).</li>
@@ -262,64 +81,220 @@
                 </li>
             </ol>
 
-            <h2>4. How the System Works</h2>
-            <p>The backend uses <strong>Sentence-BERT</strong> to encode resumes and job descriptions into numerical
-                embeddings. These embeddings are then compared using cosine similarity to determine semantic closeness.
-                The workflow includes:</p>
-            <ul>
+            <h2 class="mt-7 text-xl font-semibold text-gray-800">4. How the System Works</h2>
+            <p class="mt-2 text-gray-700">The backend uses <strong
+                    class="font-semibold text-gray-900">Sentence-BERT</strong> to encode resumes and job descriptions
+                into numerical embeddings. These embeddings are then compared using cosine similarity to determine
+                semantic closeness. The workflow includes:</p>
+            <ul class="list-disc ml-5 mt-2 space-y-1 text-gray-700">
                 <li>Text preprocessing (tokenization, cleaning, normalization).</li>
                 <li>SBERT model encoding (transforming text to vector form).</li>
                 <li>Similarity computation and ranking.</li>
                 <li>Optional bias correction and normalization for fair results.</li>
             </ul>
 
-            <h2>5. Tips for Recruiters</h2>
-            <ul>
+            <h2 class="mt-7 text-xl font-semibold text-gray-800">5. Tips for Recruiters</h2>
+            <ul class="list-disc ml-5 mt-2 space-y-1 text-gray-700">
                 <li>Use clear, detailed job descriptions — the more context, the better the model performs.</li>
                 <li>Ensure resumes are well-formatted and readable (avoid image-based resumes).</li>
                 <li>Review AI results manually before making final decisions.</li>
                 <li>Regularly update the SBERT model to maintain fairness and accuracy.</li>
             </ul>
 
-            <h2>6. Administrator Functions</h2>
-            <ul>
+            <h2 class="mt-7 text-xl font-semibold text-gray-800">6. Administrator Functions</h2>
+            <ul class="list-disc ml-5 mt-2 space-y-1 text-gray-700">
                 <li>Manage user access and authentication credentials.</li>
                 <li>Monitor system logs and data storage for performance.</li>
                 <li>Oversee retraining of the NLP model with anonymized datasets.</li>
                 <li>Export statistical reports for audit and compliance.</li>
             </ul>
 
-            <h2>7. Security & Data Handling</h2>
-            <p>All data is encrypted using AES standards and stored in secure cloud environments. The system
-                automatically deletes temporary resume data after analysis to maintain confidentiality. Admins can
-                configure retention periods as per institutional policy.</p>
+            <h2 class="mt-7 text-xl font-semibold text-gray-800">7. Security & Data Handling</h2>
+            <p class="mt-2 text-gray-700">All data is encrypted using AES standards and stored in secure cloud
+                environments. The system automatically deletes temporary resume data after analysis to maintain
+                confidentiality. Admins can configure retention periods as per institutional policy.</p>
 
-            <h2>8. Troubleshooting</h2>
-            <ul>
+            <h2 class="mt-7 text-xl font-semibold text-gray-800">8. Troubleshooting</h2>
+            <ul class="list-disc ml-5 mt-2 space-y-1 text-gray-700">
                 <li>If resume upload fails, ensure file size is under 5MB and in PDF or DOCX format.</li>
                 <li>If similarity scores are missing, check internet connectivity or server status.</li>
                 <li>For login issues, reset your password via the <em>Forgot Password</em> option.</li>
             </ul>
 
-            <h2>9. Ethical Use Guidelines</h2>
-            <p>This AI system is designed to <strong>assist</strong> recruitment, not replace human judgment. Always
+            <h2 class="mt-7 text-xl font-semibold text-gray-800">9. Ethical Use Guidelines</h2>
+            <p class="mt-2 text-gray-700">This AI system is designed to <strong
+                    class="font-semibold text-gray-900">assist</strong> recruitment, not replace human judgment. Always
                 validate model outputs and avoid discriminatory decisions based solely on algorithmic results. The
                 platform follows fairness and transparency principles aligned with responsible AI practices.</p>
 
-            <h2>10. Support and Feedback</h2>
-            <p>For assistance, contact the technical team via email or chat support. User feedback helps us enhance the
-                SBERT model and improve interface usability.</p>
-            <p><strong>Email:</strong> <a href="mailto:support@example.com">support@example.com</a><br>
-                <strong>Feedback Portal:</strong> <a href="#">www.example.com/feedback</a>
+            <h2 class="mt-7 text-xl font-semibold text-gray-800">10. Support and Feedback</h2>
+            <p class="mt-2 text-gray-700">For assistance, contact the technical team via email or chat support. User
+                feedback helps us enhance the SBERT model and improve interface usability.</p>
+            <p class="mt-2 text-gray-700">
+                <strong class="font-semibold text-gray-900">Email:</strong> <a href="mailto:support@example.com"
+                    class="text-blue-600 hover:underline">support@example.com</a><br>
+                <strong class="font-semibold text-gray-900">Feedback Portal:</strong> <a href="#"
+                    class="text-blue-600 hover:underline">www.example.com/feedback</a>
             </p>
         </div>
     </main>
 
-    <!-- ===== Fixed Footer ===== -->
-    <footer>
+    <div
+        class="footer_main bg-white flex flex-col gap-8 px-5 py-10 md:px-16 md:py-12 lg:flex-row lg:justify-between lg:px-32 lg:py-16">
+        <div class="footer_contact">
+            <div class="footer_container grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Customer Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="help-centre.html"
+                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">Help
+                                Center</a></li>
+                        <li><a href="user-guid.html"
+                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">User
+                                Guide</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Trust and Transparency</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about-us.html"
+                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">About
+                                Us</a></li>
+                        <li><a href="/src/web-app/Index.html"
+                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">Contact
+                                Us</a></li>
+                        <li><a href="companies-hiring.html"
+                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">Companies
+                                Hiring</a></li>
+                        <li><a href="privacy.html"
+                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">Privacy
+                                Policy</a></li>
+                        <li><a href="Cookie-Policy.html"
+                                class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Cookies
+                                Policy</a></li>
+                        <li><a href="terms.html"
+                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">Terms
+                                of Service</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Connect With Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <span>📧</span>
+                            <a href="#"
+                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">resumesupport@gmail.com</a>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <span>📞</span>
+                            <a href="#"
+                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">+91
+                                123 456 7890</a>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <span>📍</span>
+                            <span class="font-medium">Indore, Madhya Pradesh</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="Social-Media-main">
+            <div class="Social-Media">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Social-Media Connections</h3>
+                <div class="social-media-container flex flex-col gap-3 md:flex-row md:flex-wrap lg:flex-col">
+                    <div class="social-media-tag">
+                        <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
+                                <circle cx="12" cy="12" r="10" fill="#FF4500" />
+                                <circle cx="8.5" cy="12" r="1.5" fill="#FFFFFF" />
+                                <circle cx="15.5" cy="12" r="1.5" fill="#FFFFFF" />
+                                <path d="M8 15c1.5 1 6.5 1 8 0" stroke="#FFFFFF" stroke-width="1.5" fill="none"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span>Reddit</span>
+                        </a>
+                    </div>
+                    <div class="social-media-tag">
+                        <a href="https://x.com/" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
+                                <rect width="24" height="24" fill="#000000" />
+                                <path fill="#FFFFFF" d="M6 6h2l4 5 4-5h2l-5 6 5 6h-2l-4-5-4 5H6l5-6z" />
+                            </svg>
+                            <span>X</span>
+                        </a>
+                    </div>
+                    <div class="social-media-tag">
+                        <a href="https://in.linkedin.com/" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
+                                <rect width="24" height="24" rx="4" fill="#0A66C2" />
+                                <rect x="5" y="9" width="2.5" height="8" fill="#FFFFFF" />
+                                <circle cx="6.25" cy="6.5" r="1.25" fill="#FFFFFF" />
+                                <path fill="#FFFFFF"
+                                    d="M10 9h2.4v1.1c.34-.7 1.2-1.2 2.3-1.2 2 0 3.3 1.3 3.3 3.8V17h-2.5v-3.6c0-1-.4-1.7-1.3-1.7-.9 0-1.4.6-1.4 1.7V17H10z" />
+                            </svg>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                    <div class="social-media-tag">
+                        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
+                                <rect x="1" y="5" width="22" height="14" rx="4" ry="4" fill="#FF0000" />
+                                <polygon points="10,8 16,12 10,16" fill="#FFFFFF" />
+                            </svg>
+                            <span>YouTube</span>
+                        </a>
+                    </div>
+                    <div class="social-media-tag">
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
+                                <rect width="24" height="24" rx="4" fill="#1877F2" />
+                                <path fill="#FFFFFF" d="M13 8h2V5h-2c-1.7 0-3 1.3-3 3v2H8v3h2v6h3v-6h2.2l.3-3H13V8z" />
+                            </svg>
+                            <span>Facebook</span>
+                        </a>
+                    </div>
+                    <div class="social-media-tag">
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-8 h-8">
+                                <defs>
+                                    <radialGradient id="igGradient" cx="33%" cy="100%" r="100%" fx="33%" fy="100%">
+                                        <stop offset="0%" stop-color="#fdf497" />
+                                        <stop offset="25%" stop-color="#fdf497" />
+                                        <stop offset="50%" stop-color="#fd5949" />
+                                        <stop offset="75%" stop-color="#d6249f" />
+                                        <stop offset="100%" stop-color="#285AEB" />
+                                    </radialGradient>
+                                </defs>
+                                <rect width="512" height="512" rx="120" fill="url(#igGradient)" />
+                                <path fill="none" stroke="#fff" stroke-width="40"
+                                    d="M256 160c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96z" />
+                                <circle cx="370" cy="142" r="30" fill="#fff" />
+                                <rect x="92" y="92" width="328" height="328" rx="100" fill="none" stroke="#fff"
+                                    stroke-width="40" />
+                            </svg>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w-full bg-[#004aad] text-white text-sm text-center p-3 border-t border-white/10">
         <p>Last Updated: <strong>October 9, 2025</strong>&nbsp;&nbsp;&nbsp;&nbsp;
             © 2025 Intelligent Resume Screening System — All Rights Reserved.</p>
     </footer>
+
 </body>
 
 </html>

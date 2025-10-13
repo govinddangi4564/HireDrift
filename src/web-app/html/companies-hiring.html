@@ -5,135 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Companies Hiring | AI Resume Screening</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Global style */
         body {
-            font-family: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
-            background: linear-gradient(180deg, #071129 0%, #071226 100%);
-            color: #e6eef8;
-            margin: 0;
-            padding: 40px;
-        }
-
-        /* Header and nav */
-        header {
-            margin-bottom: 30px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 22px;
-            color: #7c3aed;
-        }
-
-        .nav-links a {
-            color: #e6eef8;
-            text-decoration: none;
-            margin-left: 18px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #7c3aed;
-        }
-
-        /* Card layout */
-        .content-container {
-            max-width: 950px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
-            border-radius: 14px;
-            padding: 24px;
-            box-shadow: 0 6px 30px rgba(2, 6, 23, 0.6);
-        }
-
-        /* Text and structure */
-        h1 {
-            color: #7c3aed;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            color: #7c3aed;
-            margin-top: 24px;
-            font-size: 18px;
-        }
-
-        p,
-        li {
-            color: #cbd5e1;
-            line-height: 1.7;
-        }
-
-        ul {
-            margin-left: 20px;
-        }
-
-        a {
-            color: #7c3aed;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 30px;
-            font-size: 13px;
-            color: #94a3b8;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 10px;
-            text-align: center;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            body {
-                padding: 20px;
-            }
-
-            .nav-links a {
-                margin-left: 12px;
-            }
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
         }
     </style>
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
 
-    <header>
-        <nav>
-            <div class="logo">AI Resume Screening</div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="support.html">Support</a>
-                <a href="privacy.html">Privacy</a>
-                <a href="userguide.html">User Guide</a>
+    <!-- Fixed Header -->
+    <header class="fixed top-0 left-0 w-full h-[70px] bg-[#603a17] text-white z-[1000]">
+        <nav class="max-w-full mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center px-5 py-0">
+            <div class="flex items-center gap-2.5 -mt-2.5">
+                <div class="logo">
+                    <img src="/src/web-app/images/Logo.png" alt="AI Resume Screening" class="rounded-full w-10">
+                </div>
+                <h2 class="text-[30px] font-bold text-white">AI Resume Screening</h2>
+            </div>
+            <div class="flex items-center gap-2 mt-2 lg:mt-0">
+                <a href="/src/web-app/Index.html"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Home</a>
+                <a href="#features"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Features</a>
+                <a href="#upload"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Upload</a>
+                <a href="#About"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">About</a>
+                <a href="#team"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Team</a>
+                <a href="#contact"
+                    class="text-white no-underline font-medium px-2.5 py-2.5 transition-colors hover:text-[#ffd500]">Contact</a>
+                <button id="toggle"
+                    class="h-[35px] px-[7px] py-[7px] rounded-[25px] cursor-pointer text-[13px] bg-black text-white transition-all flex items-center gap-1.5">
+                    <span class="text-[17px]">🌙</span>
+                    <span>Dark Mode</span>
+                </button>
             </div>
         </nav>
     </header>
 
-    <main class="content-container">
-        <div class="card">
-            <h1>Companies Hiring Through AI Resume Screening</h1>
-            <p>We are proud to collaborate with leading organizations that trust our <strong>AI-driven
+    <!-- Main Content -->
+    <main class="flex-1 pt-[120px] pb-20 px-5 box-border max-w-[950px] mx-auto">
+        <div class="p-[30px] rounded-[14px] shadow-[0_1px_12px_rgba(2,6,23,0.188)] bg-white">
+            <h1 class="text-[#231e2c] text-center mb-5 text-3xl font-bold">Companies Hiring Through AI Resume Screening
+            </h1>
+            <p class="text-[#4d5354] mb-4">
+                We are proud to collaborate with leading organizations that trust our <strong>AI-driven
                     screening</strong> technology to identify and hire top talent through intelligent resume analysis
-                powered by <strong>SBERT (Sentence-BERT)</strong>.</p>
+                powered by <strong>SBERT (Sentence-BERT)</strong>.
+            </p>
 
-            <h2>Top Partner Companies</h2>
-            <ul>
+            <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">Top Partner Companies</h2>
+            <ul class="ml-5 list-disc text-[#4d5354] mb-4 space-y-2">
                 <li><strong>Google:</strong> Hiring Software Engineers and AI Researchers for global teams.</li>
                 <li><strong>Amazon:</strong> Recruiting Data Analysts, ML Engineers, and Backend Developers.</li>
                 <li><strong>Microsoft:</strong> Seeking professionals for Cloud Solutions and AI Infrastructure
@@ -145,25 +70,184 @@
                 </li>
             </ul>
 
-            <h2>Career Support for Applicants</h2>
-            <p>Our <strong>Intelligent Resume Screening System</strong> analyzes resume semantics using SBERT embeddings
-                to ensure fair and accurate shortlisting. Candidates can enhance their chances of being shortlisted by
-                aligning their resumes with job-specific skill keywords.</p>
+            <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">Career Support for Applicants</h2>
+            <p class="text-[#4d5354] mb-4">
+                Our <strong>Intelligent Resume Screening System</strong> analyzes resume semantics using SBERT
+                embeddings to ensure fair and accurate shortlisting. Candidates can enhance their chances of being
+                shortlisted by aligning their resumes with job-specific skill keywords.
+            </p>
 
-            <h2>Benefits of Using Our Platform</h2>
-            <ul>
+            <h2 class="text-[#231e2c] mt-7 text-lg font-semibold">Benefits of Using Our Platform</h2>
+            <ul class="ml-5 list-disc text-[#4d5354] mb-4 space-y-2">
                 <li>AI-assisted resume optimization and ranking.</li>
                 <li>Fair, bias-minimized shortlisting powered by NLP.</li>
                 <li>Faster hiring and reduced recruiter workload.</li>
                 <li>Transparent candidate-job matching.</li>
             </ul>
 
-            <p>Stay updated with the latest hiring opportunities by visiting our <a href="support.html">Support
-                    Center</a> or subscribing to hiring alerts.</p>
-
-            <footer>© 2025 Intelligent Resume Screening | Guided by Prof. Atul Barve</footer>
+            <p class="text-[#4d5354]">
+                Stay updated with the latest hiring opportunities by visiting our <a href="support.html"
+                    class="text-[#004aad] hover:underline">Support Center</a> or subscribing to hiring alerts.
+            </p>
         </div>
     </main>
+
+    <!-- Footer Contact Section -->
+    <div
+        class="flex flex-col md:flex-row gap-8 p-10 md:px-[60px] md:py-[50px] lg:px-[120px] lg:py-[60px] lg:justify-between">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Customer Service -->
+            <div>
+                <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Customer Support</h3>
+                <ul class="list-none p-0 m-0">
+                    <li><a href="help-centre.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Help
+                            Center</a></li>
+                    <li><a href="user-guid.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">User
+                            Guide</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Trust and Transparency</h3>
+                <ul class="list-none p-0 m-0">
+                    <li><a href="about-us.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">About
+                            Us</a></li>
+                    <li><a href="/src/web-app/Index.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Contact
+                            Us</a></li>
+                    <li><a href="companies-hiring.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Companies
+                            Hiring</a></li>
+                    <li><a href="privacy.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Privacy
+                            Policy</a></li>
+                    <li><a href="Cookie-Policy.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Cookies
+                            Policy</a></li>
+                    <li><a href="terms.html"
+                            class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Terms
+                            of Service</a></li>
+                </ul>
+            </div>
+
+            <!-- Connect With Us -->
+            <div>
+                <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Connect With Us</h3>
+                <ul class="list-none p-0 m-0">
+                    <li class="flex items-center gap-2 mb-4">
+                        <span>📧</span>
+                        <a href=""
+                            class="text-[#5b6779] font-medium no-underline transition-colors hover:text-[#4f46e5]">resumesupport@gmail.com</a>
+                    </li>
+                    <li class="flex items-center gap-2 mb-4">
+                        <span>📞</span>
+                        <a href=""
+                            class="text-[#5b6779] font-medium no-underline transition-colors hover:text-[#4f46e5]">+91
+                            123 456 7890</a>
+                    </li>
+                    <li class="flex items-center gap-2 mb-4">
+                        <span>📍</span>
+                        <span class="text-[#5b6779] font-medium">Indore, Madhya Pradesh</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Social Media -->
+        <div>
+            <h3 class="text-lg font-semibold text-[#231e2c] mb-4">Social-Media Connections</h3>
+            <div class="flex flex-col gap-2.5">
+                <div>
+                    <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+                            <circle cx="12" cy="12" r="10" fill="#FF4500" />
+                            <circle cx="8.5" cy="12" r="1.5" fill="#FFFFFF" />
+                            <circle cx="15.5" cy="12" r="1.5" fill="#FFFFFF" />
+                            <path d="M8 15c1.5 1 6.5 1 8 0" stroke="#FFFFFF" stroke-width="1.5" fill="none"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span>Reddit</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://x.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+                            <rect width="24" height="24" fill="#000000" />
+                            <path fill="#FFFFFF" d="M6 6h2l4 5 4-5h2l-5 6 5 6h-2l-4-5-4 5H6l5-6z" />
+                        </svg>
+                        <span>X</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://in.linkedin.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+                            <rect width="24" height="24" rx="4" fill="#0A66C2" />
+                            <rect x="5" y="9" width="2.5" height="8" fill="#FFFFFF" />
+                            <circle cx="6.25" cy="6.5" r="1.25" fill="#FFFFFF" />
+                            <path fill="#FFFFFF"
+                                d="M10 9h2.4v1.1c.34-.7 1.2-1.2 2.3-1.2 2 0 3.3 1.3 3.3 3.8V17h-2.5v-3.6c0-1-.4-1.7-1.3-1.7-.9 0-1.4.6-1.4 1.7V17H10z" />
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+                            <rect x="1" y="5" width="22" height="14" rx="4" ry="4" fill="#FF0000" />
+                            <polygon points="10,8 16,12 10,16" fill="#FFFFFF" />
+                        </svg>
+                        <span>YouTube</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] flex-shrink-0">
+                            <rect width="24" height="24" rx="4" fill="#1877F2" />
+                            <path fill="#FFFFFF" d="M13 8h2V5h-2c-1.7 0-3 1.3-3 3v2H8v3h2v6h3v-6h2.2l.3-3H13V8z" />
+                        </svg>
+                        <span>Facebook</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 no-underline text-[#444b4c] font-semibold transition-transform hover:scale-110 hover:text-[#1f3137]">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-[30px] flex-shrink-0">
+                            <defs>
+                                <radialGradient id="igGradient" cx="33%" cy="100%" r="100%" fx="33%" fy="100%">
+                                    <stop offset="0%" stop-color="#fdf497" />
+                                    <stop offset="25%" stop-color="#fdf497" />
+                                    <stop offset="50%" stop-color="#fd5949" />
+                                    <stop offset="75%" stop-color="#d6249f" />
+                                    <stop offset="100%" stop-color="#285AEB" />
+                                </radialGradient>
+                            </defs>
+                            <rect width="512" height="512" rx="120" fill="url(#igGradient)" />
+                            <path fill="none" stroke="#fff" stroke-width="40"
+                                d="M256 160c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96z" />
+                            <circle cx="370" cy="142" r="30" fill="#fff" />
+                            <rect x="92" y="92" width="328" height="328" rx="100" fill="none" stroke="#fff"
+                                stroke-width="40" />
+                        </svg>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Footer -->
+    <footer class="w-full bg-[#004aad] text-white text-[13px] text-center py-2.5 border-t border-white/5 z-[999]">
+        <p>© 2025 Intelligent Resume Screening | Guided by Prof. Atul Barve</p>
+    </footer>
 
 </body>
 
