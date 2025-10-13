@@ -51,7 +51,7 @@ body {
 
 /* --- Base Header Styles --- */
 header {
-  background-color: #603a17;
+  background-color: #46465f;
   color: var(--color);
   position: sticky;
   top: 0;
@@ -523,7 +523,7 @@ h2.name {
 
 /* Hero Section */
 .hero {
-  background-color: #cdbb8e;
+  background-color: #bfd5f1;
   color: black;
   text-align: center;
   padding: 80px 20px;
@@ -581,7 +581,7 @@ section h2 {
 }
 section p.sub {
   text-align: center;
-  color: #555;
+  color: #000000;
   margin-bottom: 30px;
 }
 
@@ -626,7 +626,7 @@ section p.sub {
 
 .upload-logo {
   font-size: 100px;
-  color: #2e373f;
+  color: #333b43;
   margin-bottom: 10px;
 }
 
@@ -637,11 +637,11 @@ section p.sub {
 .file-list {
   margin-top: 20px;
   font-size: 0.95em;
-  color: #333;
+  color: #181313;
 }
 .progress-bar {
   height: 10px;
-  background: #e0e0e0;
+  background: #e3e3e3;
   border: 1px solid rgba(0, 0, 0, 0.1);
 
   border-radius: 5px;
@@ -662,7 +662,7 @@ input[type="email"] {
   width: 100%;
   padding: 10px;
   margin-top: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #4340406c;
   border-radius: 6px;
   background-color: var(--box);
 }
@@ -715,7 +715,7 @@ button.submit-btn:hover {
   padding: 1.5rem;
 }
 .card-intro {
-  color: #4b5563;
+  color: #191c20;
   font-size: 0.875rem;
 }
 
@@ -738,10 +738,10 @@ button.submit-btn:hover {
 .score-title {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #374151;
+  color: #000220;
   margin-right: 0.5rem;
 }
-.info-link {
+/* .info-link {
   width: 18px;
   height: 18px;
   display: inline-flex;
@@ -759,7 +759,7 @@ button.submit-btn:hover {
 .info-link:hover {
   background-color: #e5e7eb;
   color: #4b5563;
-}
+} */
 
 /* Circular Progress Bar Styles */
 .progress-container {
@@ -774,7 +774,7 @@ button.submit-btn:hover {
 }
 .progress-circle-bg {
   fill: none;
-  stroke: #e5e7eb;
+  stroke: #ffffff;
   stroke-width: 3;
 }
 .progress-circle {
@@ -794,7 +794,7 @@ button.submit-btn:hover {
   transform: translate(-50%, -50%);
   font-size: 1.875rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #000000;
 }
 
 /* Badge Styles (Average, Excellent, etc.) */
@@ -840,7 +840,7 @@ button.submit-btn:hover {
   align-items: center;
 }
 .detail-label {
-  color: #4b5563;
+  color: #202328;
 }
 .detail-value {
   font-weight: 700;
@@ -860,7 +860,7 @@ button.submit-btn:hover {
 .text-content p {
   margin-top: 1.5rem;
   font-size: 1.125rem;
-  color: #738394;
+  color: #414b54;
 }
 
 /* Extra Details */
@@ -898,7 +898,7 @@ button.submit-btn:hover {
 
 .feature-text p {
   margin: 0;
-  color: #454251;
+  color: #2b2a2e;
   line-height: 1.4;
   font-family: sans-serif;
 }
@@ -1025,7 +1025,7 @@ p {
 }
 
 .footer_container a {
-  color: #5b6779;
+  color: #3e4957;
   text-decoration: none;
   transition: color 0.3s;
   display: block;
