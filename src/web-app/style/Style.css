@@ -5,7 +5,7 @@
 }
 
 :root {
-  --bg: #ecfdf5;
+  --bg: #c5eeff91;
   --cardbg: #e6ffeb;
   --box: #e1f0ffb4;
   --btn: #007bff;
@@ -149,7 +149,6 @@ h2.name {
 
 /* --- Media Query for Mobile Devices --- */
 @media (max-width: 992px) {
-
   /* Widened the breakpoint for better compatibility */
   /* Show the hamburger icon */
   .nav-toggle-label {
@@ -179,7 +178,7 @@ h2.name {
   }
 
   /* Show the menu when the checkbox is checked */
-  .nav-toggle:checked~.nav-menu {
+  .nav-toggle:checked ~ .nav-menu {
     display: flex;
   }
 
@@ -624,10 +623,26 @@ section p.sub {
   transition: transform 0.3s;
 }
 
-.feature:hover {
-  transform: translateY(-6px);
+.feature::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgb(121, 99, 14), rgb(47, 158, 175));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.feature:hover::before {
+  transform: scaleX(1);
 }
 
+.feature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
 .feature h3 {
   color: var(--text);
   margin-bottom: 10px;
@@ -671,7 +686,7 @@ section p.sub {
 }
 
 .video-modal video {
-  max-width: 80%;
+  max-width: 90%;
   max-height: 80%;
   border-radius: 8px;
 }
@@ -680,8 +695,8 @@ section p.sub {
   position: absolute;
   top: 20px;
   right: 30px;
-  font-size: 28px;
-  color: #fff;
+  font-size: 30px;
+  color: #ffffff;
   cursor: pointer;
   font-weight: bold;
 }
@@ -993,25 +1008,34 @@ button.submit-btn:hover {
   background-color: #0d9488;
 }
 
-/* Extra Details */
 .resume-features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   padding: 1rem;
-  animation: fadeIn 1.5s ease-in;
 }
 
 .Ex_feature {
-  background-color: var(--cardbg);
+  position: relative;
+  background-color: var(--cardbg, #111);
   border-radius: 12px;
-  padding: 1rem;
-  box-shadow: var(--bs);
-  transition: transform 0.3s;
+  padding: 1.5rem 1rem;
+  box-shadow: var(--bs, 0 5px 16px rgba(0, 0, 0, 0.09));
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .Ex_feature:hover {
-  transform: translateY(-6px);
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  /* background: conic-gradient(
+    from 0deg,
+    #b9c2cb4b,
+    #c7b3cd66,
+    #a9a99d82,
+    #b5bcc383
+  ); */
 }
 
 .Ex_feature img {
@@ -1028,7 +1052,7 @@ button.submit-btn:hover {
 
 .feature-text p {
   margin: 0;
-  color: #2b2a2e;
+  color: #000000;
   line-height: 1.4;
   font-family: sans-serif;
 }

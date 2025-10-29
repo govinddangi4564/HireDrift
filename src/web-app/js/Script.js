@@ -141,6 +141,8 @@ document.getElementById('toggle').addEventListener('click', () => {
     document.querySelector('.Mode_text').textContent = darkMode ? 'Light Mode' : 'Dark Mode';
 });
 
+
+// Resume Text: Managed by backend NLP
 function simulateUpload(file) {
     progress.style.width = '0%';
     let percent = 0;
@@ -172,30 +174,6 @@ function analyze() {
 
     drawChart(score);
 }
-
-// Graph Chart (No libraries)
-
-// function drawChart(score) {
-//     const canvas = document.getElementById('chart');
-//     const ctx = canvas.getContext('2d');
-//     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-//     // Background Bar
-//     ctx.fillStyle = '#e0e0e0';
-//     ctx.fillRect(50, 100, 300, 30);
-
-//     // Filled Bar
-//     const grad = ctx.createLinearGradient(50, 0, 350, 0);
-//     grad.addColorStop(0, '#007bff');
-//     grad.addColorStop(1, '#00a8ff');
-//     ctx.fillStyle = grad;
-//     ctx.fillRect(50, 100, (score / 100) * 300, 30);
-
-//     // Text
-//     ctx.font = '16px Segoe UI';
-//     ctx.fillStyle = '#004aad';
-//     ctx.fillText(`Match Score: ${score}%`, 120, 90);
-// }
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -306,6 +284,11 @@ features.forEach(feature => {
         if (videoSrc) {
             featureVideo.src = videoSrc;
             videoModal.style.display = 'flex';
+            
+            // ADDED: Apply to both body and html element
+            document.body.style.overflow = 'hidden'; 
+            document.documentElement.style.overflow = 'hidden'; 
+
             featureVideo.play();
         }
     });
@@ -314,14 +297,18 @@ features.forEach(feature => {
 closeVideo.addEventListener('click', () => {
     featureVideo.pause();
     videoModal.style.display = 'none';
+
+    // ADDED: Reset both elements
+    document.body.style.overflow = ''; 
+    document.documentElement.style.overflow = ''; 
+
     featureVideo.src = '';
 });
 
-videoModal.addEventListener('click', e => {
-    if (e.target === videoModal) {
-        featureVideo.pause();
-        videoModal.style.display = 'none';
-        featureVideo.src = '';
-    }
+// "Click outside to close" listener remains removed
+closeVideo.addEventListener('click', () => {
+    featureVideo.pause();
+    videoModal.style.display = 'none';
+    document.body.style.overflow = ''; // ADDED: Re-enables page scrolling
+    featureVideo.src = '';
 });
-
