@@ -64,6 +64,40 @@ window.addEventListener('load', () => {
         openPopup();
     }
 });
+// Initialize the Google client
+window.onload = function () {
+    google.accounts.id.initialize({
+        client_id: "513666330169-ilct40tpeopd4pdk8vsmmv3cgi7op7bo.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+    });
+
+    // Attach the sign-in popup to your custom button
+    document.getElementById("googleSignInBtn").addEventListener("click", function () {
+        google.accounts.id.prompt(); // triggers the popup
+    });
+};
+
+// Handle the Google Sign-In response
+function handleCredentialResponse(response) {
+    const data = parseJwt(response.credential);
+    console.log("User Info:", data);
+
+    document.getElementById("user-info").innerHTML = `
+        <h2>Welcome, ${data.name}</h2>
+        <img src="${data.picture}" width="100" height="100">
+        <p>Email: ${data.email}</p>
+      `;
+}
+
+// Helper function to decode the JWT token
+function parseJwt(token) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
+        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+    ).join(''));
+    return JSON.parse(jsonPayload);
+}
 
 // ✅ Removed the overlay click listener
 // Now the popup closes only when the close button is clicked
@@ -152,14 +186,51 @@ window.addEventListener('load', () => {
     });
 })();
 
-// Mode Change
-document.getElementById('toggle').addEventListener('click', () => {
-    document.body.classList.toggle('dark');
+const toggleBtn = document.getElementById('toggle');
+const body = document.body;
 
-    const darkMode = document.body.classList.contains('dark');
-    document.querySelector('.icon').textContent = darkMode ? '🌞' : '🌙';
-    document.querySelector('.Mode_text').textContent = darkMode ? 'Light Mode' : 'Dark Mode';
+// Mode toggle
+toggleBtn.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    const darkMode = body.classList.contains('dark');
+    document.querySelector('.icon').textContent = darkMode ? '☀️' : '🌑';
 });
+
+// Draggable floating behavior
+let isDragging = false;
+let offsetX, offsetY;
+
+toggleBtn.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - toggleBtn.getBoundingClientRect().left;
+    offsetY = e.clientY - toggleBtn.getBoundingClientRect().top;
+    toggleBtn.style.transition = 'none';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+
+    let x = e.clientX - offsetX;
+    let y = e.clientY - offsetY;
+
+    // Keep inside screen
+    const maxX = window.innerWidth - toggleBtn.offsetWidth;
+    const maxY = window.innerHeight - toggleBtn.offsetHeight;
+
+    x = Math.max(0, Math.min(x, maxX));
+    y = Math.max(0, Math.min(y, maxY));
+
+    toggleBtn.style.left = `${x}px`;
+    toggleBtn.style.top = `${y}px`;
+    toggleBtn.style.right = 'auto';
+    toggleBtn.style.bottom = 'auto';
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+    toggleBtn.style.transition = 'background-color 0.8s, color 0.3s';
+});
+
 
 
 // Resume Text: Managed by backend NLP
