@@ -246,7 +246,7 @@ h2.name {
 .sign-in-btn {
   background: white;
   color: #7c3aed;
-  padding: 8px 22px;
+  padding: 8px 12px;
   border-radius: 25px;
   font-size: 16px;
   font-weight: 600;
@@ -304,12 +304,118 @@ h2.name {
 }
 
 #user-info {
-      margin-top: 30px;
-    }
+  margin-top: 30px;
+}
 
-    img {
-      border-radius: 50%;
-    }
+img {
+  border-radius: 50%;
+}
+
+#Company-login {
+  color: #7c3aed;
+}
+
+/* Profile Popup Styles */
+.profile-popup {
+  max-width: 450px;
+  padding: 30px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid #7c3aed;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.profile-header h2 {
+  color: #1f2937;
+  font-size: 24px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.profile-details {
+  margin-bottom: 30px;
+}
+
+.profile-detail-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border-left: 4px solid #7c3aed;
+}
+
+.profile-detail-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-detail-label i {
+  color: #7c3aed;
+  font-size: 16px;
+}
+
+.profile-detail-value {
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 26px;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.logout-btn i {
+  font-size: 18px;
+}
+
+/* Profile button in header */
+#sign-in img {
+  vertical-align: middle;
+  display: inline-block;
+}
 
 /* Popup Form */
 .popup-form {

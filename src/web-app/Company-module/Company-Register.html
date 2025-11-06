@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company-Register</title>
+
+    <link rel="stylesheet" href="../style/Company-Register.css">
+</head>
+
+<body>
+
+    <!-- Pricing Page -->
+    <div class="pricing-page" id="pricingPage">
+        <div class="container">
+            <div class="header">
+                <h1>1-Week Free Trial — Screen 100 Resumes for Your Job</h1>
+                <p>Try HaiTalent with a 1-week free trial. No credit card needed. Screen resumes faster, shortlist
+                    smarter.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Pro Plan -->
+                <div class="pricing-card" data-plan="Pro">
+                    <div class="plan-name">Pro</div>
+                    <div class="price">$49<span>/month</span></div>
+                    <div class="resume-count">500 resumes</div>
+                    <div class="over-limit">ⓘ $0.05/resume over limit</div>
+                    <ul class="features">
+                        <li>Upload resumes for any number of roles</li>
+                        <li>AI shortlists candidates per job description</li>
+                        <li>Unlimited job descriptions</li>
+                        <li>Unlimited candidate exports</li>
+                        <li>AI screening questions</li>
+                        <li>Priority email & chat support</li>
+                    </ul>
+                    <button class="select-btn">Start Pro Plan</button>
+                </div>
+
+                <!-- Agency Plan (Popular) -->
+                <div class="pricing-card popular" data-plan="Agency">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="plan-name">Agency</div>
+                    <div class="price">$99<span>/month</span></div>
+                    <div class="resume-count">2000 resumes</div>
+                    <div class="over-limit">ⓘ $0.03/resume over limit</div>
+                    <ul class="features">
+                        <li>Upload resumes for any number of roles</li>
+                        <li>AI shortlists candidates per job description</li>
+                        <li>Unlimited job descriptions</li>
+                        <li>Unlimited candidate exports</li>
+                        <li>AI screening questions</li>
+                        <li>Priority email & chat support</li>
+                    </ul>
+                    <button class="select-btn">Start Agency Plan</button>
+                </div>
+
+                <!-- Hiring Sprint Plan -->
+                <div class="pricing-card" data-plan="Hiring Sprint">
+                    <div class="plan-name">Hiring Sprint</div>
+                    <div class="price">$199<span>/quarter</span></div>
+                    <div class="resume-count">6000 resumes</div>
+                    <div class="over-limit">ⓘ $0.02/resume over limit</div>
+                    <ul class="features">
+                        <li>Everything in the Agency Plan</li>
+                        <li>Extended 3-month access</li>
+                        <li>Perfect for peak hiring seasons or campus drives</li>
+                        <li>Priority email & chat support</li>
+                    </ul>
+                    <button class="select-btn">Start Hiring Sprint Plan</button>
+                </div>
+            </div>
+
+            <div class="bottom-features">
+                <div class="bottom-feature">Upload resumes for any number of roles</div>
+                <div class="bottom-feature">AI shortlists candidates per job description</div>
+                <div class="bottom-feature">Only pay for how many resumes you screen</div>
+            </div>
+
+            <div class="info-banner">
+                No limits on job descriptions, candidate exports, or AI screening questions
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Page -->
+    <div class="registration-page" id="registrationPage">
+        <div class="registration-card">
+            <div class="logo">
+                <img src="../images/Logo.png" alt="">
+                <div class="logo-text">SmartHire</div>
+            </div>
+
+            <div id="message" class="message"></div>
+
+
+            <h2>Sign up to SmartHire </h2>
+
+            <div class="selected-plan">
+                <div>Selected Plan:</div>
+                <div class="selected-plan-name" id="selectedPlanName">Pro Plan</div>
+            </div>
+
+            <form id="registrationForm">
+                <div class="form-group">
+                    <input type="text" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="signup-btn" id="companyRegister">Register Company</button>
+            </form>
+
+            <div class="login-link">
+                Already have an account? <a href="Company-login.htm">Login here</a>
+            </div>
+
+            <div class="divider">or</div>
+
+            <button class="back-btn" id="backBtn">← Back to Plans</button>
+        </div>
+    </div>
+
+    <script src="../js/Company-Register.js"></script>
+</body>
+
+</html>

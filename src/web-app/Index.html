@@ -11,7 +11,7 @@
     <title>Intelligent Resume Screening</title>
     <link rel="stylesheet" href="style/Style.css">
     <link rel="stylesheet" href="style/ModeChange.css">
-    <!-- Google Identity Services SDK -->
+    <!-- Google Identity Services -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
@@ -31,7 +31,7 @@
             <!-- Header -->
             <h2>Log in</h2>
             <p class="register-link">
-                New user? <a href="html/Registeration-Form.html">Register Now</a>
+                New user? <a href="./User-module/Registeration-Form.html">Register Now</a>
             </p>
 
 
@@ -96,7 +96,7 @@
                         <input type="checkbox" checked>
                         Remember me
                     </label>
-                    <a href="./html/forgot-password.html" class="forgot-password">Forgot Password</a>
+                    <a href="../web-app/User-module/forgot-password.html" class="forgot-password">Forgot Password</a>
                 </div>
 
                 <!-- Submit Button -->
@@ -106,12 +106,21 @@
             <!-- Footer Text -->
             <p class="footer-text">
                 By creating this account, you agree to our
-                <a href="html/privacy.html">Privacy Policy</a> &
-                <a href="html/Cookie-Policy.html">Cookie Policy</a>.
+                <a href="User-module/privacy.html">Privacy Policy</a> &
+                <a href="User-module/Cookie-Policy.html">Cookie Policy</a>.
             </p>
         </div>
     </div>
 
+    <!-- Profile Overlay -->
+    <div id="profileOverlay" class="overlay">
+        <div class="popup-form profile-popup">
+            <button onclick="closeProfilePopup()" class="close-btn">×</button>
+            <div id="profileContent">
+                <!-- Profile content will be inserted here -->
+            </div>
+        </div>
+    </div>
 
     <header>
         <nav>
@@ -130,12 +139,15 @@
                 <a href="#features">Features</a>
                 <a href="#upload">Upload</a>
                 <a href="#About">About</a>
-                <a href="#team">Team</a>
                 <a href="#contact">Contact</a>
                 <!-- Sign In Button (Top Right) - Add this to your page -->
                 <button onclick="openPopup()" class="sign-in-btn" id="sign-in">
                     <i class="fa-solid fa-user"></i>
                     Sign In
+                </button>
+                <button class="sign-in-btn" id="sign-in">
+                    <i class="fa-solid fa-user"></i>
+                    <a href="../web-app/Company-module/Company-login.htm" id="Company-login">HR Login</a>
                 </button>
 
                 <!-- Mode Change -->
@@ -526,30 +538,6 @@
             </div>
         </div>
 
-        <!-- Team -->
-        <section id="team" class="scroll-item" style="margin-top:60px;">
-            <h2>Our Team</h2>
-            <p class="sub">The creative minds behind this system.</p>
-            <div class="features">
-                <div class="feature scroll-item">
-                    <h3>Govind Dangi</h3>
-                    <p>Frontend & UI Design</p>
-                </div>
-                <div class="feature scroll-item">
-                    <h3>Akshat Chouhan</h3>
-                    <p>Backend & Data Flow</p>
-                </div>
-                <div class="feature scroll-item">
-                    <h3>Amrita Priya</h3>
-                    <p>NLP & AI Development</p>
-                </div>
-                <div class="feature scroll-item">
-                    <h3>Ayush Kumar</h3>
-                    <p>Testing & Documentation</p>
-                </div>
-            </div>
-        </section>
-
         <!-- Contact -->
 
         <section id="contact" class="scroll-item" style="margin-top: 60px;">
@@ -583,8 +571,8 @@
                 <div class="C_customer">
                     <h3>Customer Support</h3>
                     <ul>
-                        <li><a href="html/help-centre.html">Help Center</a></li>
-                        <li><a href="html/user-guid.html">User Guide</a></li>
+                        <li><a href="User-module/help-centre.html">Help Center</a></li>
+                        <li><a href="User-module/user-guid.html">User Guide</a></li>
                     </ul>
                 </div>
 
@@ -592,13 +580,13 @@
                 <div class="C_QuickLinks">
                     <h3>Trust and Transparency</h3>
                     <ul>
-                        <li><a href="html/about-us.html">About Us</a></li>
+                        <li><a href="User-module/about-us.html">About Us</a></li>
                         <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="html/companies-hiring.html">Companies Hiring</a>
+                        <li><a href="User-module/companies-hiring.html">Companies Hiring</a>
                         </li>
-                        <li><a href="html/privacy.html">Privacy Policy</a></li>
-                        <li><a href="html/Cookie-Policy.html">Cookies Policy</a></li>
-                        <li><a href="html/terms.html">Terms of Service</a></li>
+                        <li><a href="User-module/privacy.html">Privacy Policy</a></li>
+                        <li><a href="User-module/Cookie-Policy.html">Cookies Policy</a></li>
+                        <li><a href="User-module/terms.html">Terms of Service</a></li>
                     </ul>
                 </div>
 

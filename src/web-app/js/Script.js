@@ -63,40 +63,300 @@ window.addEventListener('load', () => {
     if (window.location.hash === '#sign-in') {
         openPopup();
     }
+    
+    // Initialize Google Sign-In
+    initializeGoogleSignIn();
+    
+    // Check if user is already signed in on page load
+    const savedUser = localStorage.getItem('googleUser');
+    if (savedUser) {
+        try {
+            const user = JSON.parse(savedUser);
+            googleUser = user;
+            updateSignInButtonToProfile(user);
+        } catch (error) {
+            console.error('Error loading saved user:', error);
+            localStorage.removeItem('googleUser');
+        }
+    }
 });
-// Initialize the Google client
-window.onload = function () {
-    google.accounts.id.initialize({
-        client_id: "513666330169-ilct40tpeopd4pdk8vsmmv3cgi7op7bo.apps.googleusercontent.com",
-        callback: handleCredentialResponse
-    });
 
-    // Attach the sign-in popup to your custom button
-    document.getElementById("googleSignInBtn").addEventListener("click", function () {
-        google.accounts.id.prompt(); // triggers the popup
-    });
-};
+// Google Sign-In Implementation
+let googleUser = null;
+let tokenClient = null;
 
-// Handle the Google Sign-In response
-function handleCredentialResponse(response) {
-    const data = parseJwt(response.credential);
-    console.log("User Info:", data);
+// Function to initialize Google Sign-In
+function initializeGoogleSignIn() {
+    const googleSignInBtn = document.getElementById('googleSignInBtn');
 
-    document.getElementById("user-info").innerHTML = `
-        <h2>Welcome, ${data.name}</h2>
-        <img src="${data.picture}" width="100" height="100">
-        <p>Email: ${data.email}</p>
-      `;
+    if (!googleSignInBtn) {
+        console.warn('Google Sign-In button not found');
+        return;
+    }
+
+    // Wait for Google Identity Services to load
+    function waitForGoogle() {
+        if (typeof google !== 'undefined' && google.accounts) {
+            setupGoogleSignIn();
+        } else {
+            // Retry if Google Identity Services hasn't loaded yet
+            setTimeout(waitForGoogle, 100);
+        }
+    }
+
+    waitForGoogle();
 }
 
-// Helper function to decode the JWT token
-function parseJwt(token) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
-        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-    ).join(''));
-    return JSON.parse(jsonPayload);
+function setupGoogleSignIn() {
+    const googleSignInBtn = document.getElementById('googleSignInBtn');
+
+    // IMPORTANT: Replace this with your actual Google Client ID
+    // Get it from: https://console.cloud.google.com/apis/credentials
+    // For development/testing, you can use a placeholder that will show instructions
+    const CLIENT_ID = '716638260025-otlb8qrc3p2fs6288oh4u1v1qe3upkh5.apps.googleusercontent.com';
+
+    // Check if Client ID is configured
+    if (CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
+        // Show instructions if not configured
+        googleSignInBtn.addEventListener('click', () => {
+            alert('Google Sign-In Configuration Required!\n\n' +
+                'To enable Google Sign-In:\n' +
+                '1. Go to https://console.cloud.google.com/\n' +
+                '2. Create a new project or select existing one\n' +
+                '3. Enable Google+ API\n' +
+                '4. Go to APIs & Services > Credentials\n' +
+                '5. Create OAuth 2.0 Client ID\n' +
+                '6. Add authorized JavaScript origins\n' +
+                '7. Replace CLIENT_ID in Script.js (line ~95) with your Client ID');
+        });
+        return;
+    }
+
+    // Initialize Google Identity Services
+    google.accounts.id.initialize({
+        client_id: CLIENT_ID,
+        callback: handleCredentialResponse,
+    });
+
+    // Initialize OAuth 2.0 token client for fallback
+    tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CLIENT_ID,
+        scope: 'email profile',
+        callback: handleTokenResponse,
+    });
+
+    // Add click event listener to the button
+    googleSignInBtn.addEventListener('click', () => {
+        // Try to use One Tap first
+        google.accounts.id.prompt((notification) => {
+            if (notification.isNotDisplayed() || notification.isSkippedMoment() || notification.isDismissedMoment()) {
+                // If One Tap is not available, use OAuth 2.0 popup
+                if (tokenClient) {
+                    tokenClient.requestAccessToken({ prompt: 'consent' });
+                }
+            }
+        });
+    });
+}
+
+// Handle credential response from Google One Tap
+function handleCredentialResponse(response) {
+    try {
+        // Decode the JWT token to get user info
+        const payload = JSON.parse(atob(response.credential.split('.')[1]));
+
+        // Store user info
+        googleUser = {
+            name: payload.name,
+            email: payload.email,
+            picture: payload.picture,
+            sub: payload.sub
+        };
+
+        // Display user info
+        displayUserInfo(googleUser);
+
+        // Close the popup after successful sign-in
+        setTimeout(() => {
+            closePopup();
+        }, 2000);
+    } catch (error) {
+        console.error('Error handling credential response:', error);
+        alert('Failed to sign in with Google. Please try again.');
+    }
+}
+
+// Handle token response from OAuth 2.0 flow
+function handleTokenResponse(tokenResponse) {
+    if (tokenResponse.error) {
+        console.error('Google Sign-In error:', tokenResponse.error);
+        alert('Failed to sign in with Google: ' + tokenResponse.error);
+        return;
+    }
+
+    // Fetch user info using the access token
+    fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+        headers: {
+            'Authorization': `Bearer ${tokenResponse.access_token}`
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch user info');
+            }
+            return response.json();
+        })
+        .then(data => {
+            googleUser = {
+                name: data.name,
+                email: data.email,
+                picture: data.picture,
+                id: data.id
+            };
+            displayUserInfo(googleUser);
+
+            // Close the popup after successful sign-in
+            setTimeout(() => {
+                closePopup();
+            }, 2000);
+        })
+        .catch(error => {
+            console.error('Error fetching user info:', error);
+            alert('Failed to sign in with Google. Please try again.');
+        });
+}
+
+// Display user information after successful sign-in
+function displayUserInfo(user) {
+    const userInfoDiv = document.getElementById('user-info');
+    if (userInfoDiv && user) {
+        userInfoDiv.innerHTML = `
+            <div style="text-align: center; padding: 20px; background: #f9fafb; border-radius: 12px; margin-top: 20px;">
+                <img src="${user.picture}" alt="${user.name}" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 10px; border: 3px solid #7c3aed;">
+                <h3 style="margin: 10px 0; color: #1f2937; font-size: 20px;">Welcome, ${user.name}!</h3>
+                <p style="color: #6b7280; margin: 5px 0; font-size: 14px;">${user.email}</p>
+                <p style="color: #22c55e; margin-top: 10px; font-weight: 600; font-size: 14px;">✓ Successfully signed in with Google</p>
+            </div>
+        `;
+    }
+    
+    // Update the sign-in button to profile button
+    updateSignInButtonToProfile(user);
+}
+
+// Update sign-in button to profile button after successful sign-in
+function updateSignInButtonToProfile(user) {
+    const signInBtn = document.getElementById('sign-in');
+    if (signInBtn && user) {
+        // Remove onclick attribute and add new event listener
+        signInBtn.removeAttribute('onclick');
+        signInBtn.innerHTML = `
+            <img src="${user.picture}" alt="Profile" style="width: 24px; height: 24px; border-radius: 50%; margin-right: 8px; border: 2px solid #7c3aed;">
+            <span>Profile</span>
+        `;
+        signInBtn.onclick = (e) => {
+            e.preventDefault();
+            openProfilePopup();
+        };
+        
+        // Store user data in localStorage for persistence
+        localStorage.setItem('googleUser', JSON.stringify(user));
+    }
+}
+
+// Function to open profile popup
+function openProfilePopup() {
+    if (!googleUser) {
+        // If no user data, try to load from localStorage
+        const savedUser = localStorage.getItem('googleUser');
+        if (savedUser) {
+            try {
+                googleUser = JSON.parse(savedUser);
+            } catch (error) {
+                console.error('Error loading saved user:', error);
+                alert('Please sign in first.');
+                openPopup();
+                return;
+            }
+        } else {
+            alert('Please sign in first.');
+            openPopup();
+            return;
+        }
+    }
+    
+    const profileOverlay = document.getElementById('profileOverlay');
+    const profileContent = document.getElementById('profileContent');
+    
+    if (profileOverlay && profileContent && googleUser) {
+        // Display only essential profile information
+        profileContent.innerHTML = `
+            <div class="profile-header">
+                <img src="${googleUser.picture}" alt="${googleUser.name}" class="profile-picture">
+                <h2>${googleUser.name}</h2>
+            </div>
+            <div class="profile-details">
+                <div class="profile-detail-item">
+                    <div class="profile-detail-label">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Email</span>
+                    </div>
+                    <div class="profile-detail-value">${googleUser.email}</div>
+                </div>
+                <div class="profile-detail-item">
+                    <div class="profile-detail-label">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Account Type</span>
+                    </div>
+                    <div class="profile-detail-value">Google Account</div>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <button onclick="logout()" class="logout-btn">
+                    <i class="fa-solid fa-sign-out-alt"></i>
+                    Sign Out
+                </button>
+            </div>
+        `;
+        
+        profileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Function to close profile popup
+function closeProfilePopup() {
+    const profileOverlay = document.getElementById('profileOverlay');
+    if (profileOverlay) {
+        profileOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Function to logout
+function logout() {
+    // Clear user data
+    googleUser = null;
+    localStorage.removeItem('googleUser');
+    
+    // Reset sign-in button
+    const signInBtn = document.getElementById('sign-in');
+    if (signInBtn) {
+        signInBtn.innerHTML = `
+            <i class="fa-solid fa-user"></i>
+            Sign In
+        `;
+        signInBtn.onclick = (e) => {
+            e.preventDefault();
+            openPopup();
+        };
+    }
+    
+    // Close profile popup
+    closeProfilePopup();
+    
+    // Show success message
+    alert('Successfully signed out!');
 }
 
 // ✅ Removed the overlay click listener
