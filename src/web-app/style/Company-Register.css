@@ -85,11 +85,18 @@ body {
 }
 
 .plan-name {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 700;
   color: #333;
   margin-bottom: 15px;
 }
+
+.plan-name span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #686767;
+}
+
 
 .price {
   font-size: 48px;
@@ -236,7 +243,7 @@ body {
   margin-bottom: 30px;
 }
 
-.logo img{
+.logo img {
   width: 50px;
 }
 
@@ -246,7 +253,7 @@ body {
   font-weight: 700;
 }
 
-.message{
+.message {
   color: #2c8577;
 }
 

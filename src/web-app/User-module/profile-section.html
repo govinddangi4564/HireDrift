@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/User-Profile.css">
+</head>
+
+<body>
+    <div class="profile-container">
+        <!-- Header -->
+        <header class="profile-header">
+            <a href="../Index.html" class="back-button" title="Back to Home">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h1>My Profile</h1>
+            <button id="logoutButton" class="logout-button" title="Sign Out">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </header>
+
+        <!-- Profile Card -->
+        <div class="profile-card">
+            <!-- Profile Picture Section -->
+            <div class="profile-picture-section">
+                <img id="profilePicture" src="https://via.placeholder.com/120" alt="User Profile Picture">
+                <label for="pictureUpload" class="upload-icon">
+                    <i class="fas fa-camera"></i>
+                </label>
+                <input type="file" id="pictureUpload" accept="image/*" style="display: none;">
+                <h2 id="userName">User Name</h2>
+                <p id="userEmail">user.email@example.com</p>
+            </div>
+
+            <!-- Profile Form -->
+            <form id="profileForm" class="profile-form">
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullName"><i class="fas fa-user-circle"></i> Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" disabled>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
+                    <input type="tel" id="phone" placeholder="e.g., +91 12345-67890" disabled>
+                </div>
+
+                <!-- Account Type -->
+                <div class="form-group">
+                    <label for="accountType"><i class="fab fa-google"></i> Account Type</label>
+                    <input type="text" id="accountType" value="Google Account" disabled>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" id="editButton" class="action-button edit-btn">
+                        <i class="fas fa-pencil-alt"></i> Edit Profile
+                    </button>
+                    <button type="submit" id="saveButton" class="action-button save-btn" style="display: none;">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Additional Sections -->
+        <div class="additional-sections">
+            <!-- Change Password -->
+            <div class="profile-card">
+                <h3><i class="fas fa-lock"></i> Security</h3>
+                <div class="security-section">
+                    <p>Manage your account security settings.</p>
+                    <button class="action-button secondary-btn">Change Password</button>
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="profile-card">
+                <h3><i class="fas fa-bell"></i> Notifications</h3>
+                <div class="notification-section">
+                    <div class="notification-toggle">
+                        <label for="newsletterToggle">Receive newsletters and promotions</label>
+                        <label class="switch">
+                            <input type="checkbox" id="newsletterToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="notification-toggle">
+                        <label for="activityToggle">Get notified about account activity</label>
+                        <label class="switch">
+                            <input type="checkbox" id="activityToggle" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Account -->
+            <div class="profile-card danger-zone">
+                <h3><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
+                <div class="danger-section">
+                    <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+                    <button class="action-button danger-btn">Delete My Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/User-Profile.js"></script>
+</body>
+
+</html>

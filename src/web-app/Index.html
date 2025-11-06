@@ -31,7 +31,7 @@
             <!-- Header -->
             <h2>Log in</h2>
             <p class="register-link">
-                New user? <a href="./User-module/Registeration-Form.html">Register Now</a>
+                New user? <a href="User-module/Registeration-Form.html">Register Now</a>
             </p>
 
 
@@ -50,7 +50,8 @@
         14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 
         2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                 </svg>
-                Continue with Google
+                <span class="button-text">Continue with Google</span>
+                <div class="spinner"></div>
             </button>
 
             <div id="user-info"></div>
@@ -77,17 +78,17 @@
             </div>
 
             <!-- Form -->
-            <form>
-                <!-- Username/Email Field -->
+            <form id="loginForm" novalidate>
+                <!-- Email Field -->
                 <div class="form-group">
-                    <label>Username or Email</label>
-                    <input type="text" placeholder="Username or email" required>
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="Email" required>
                 </div>
 
                 <!-- Password Field -->
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" placeholder="Enter Password" required>
+                    <input type="password" id="loginPassword" placeholder="Enter Password" required>
                 </div>
 
                 <!-- Remember Me & Forgot Password -->
@@ -145,9 +146,9 @@
                     <i class="fa-solid fa-user"></i>
                     Sign In
                 </button>
-                <button class="sign-in-btn" id="sign-in">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="../web-app/Company-module/Company-login.htm" id="Company-login">HR Login</a>
+                <button class="sign-in-btn" id="hr-login-btn">
+                    <a href="../web-app/Company-module/Company-login.htm" id="Company-login"
+                        class="flex items-center gap-2"><i class="fa-solid fa-briefcase"></i>HR Login</a>
                 </button>
 
                 <!-- Mode Change -->

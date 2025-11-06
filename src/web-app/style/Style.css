@@ -500,6 +500,38 @@ img {
   height: 20px;
 }
 
+/* Spinner for loading state */
+.spinner {
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #7c3aed; /* Purple color to match theme */
+    width: 20px;
+    height: 20px;
+    animation: spin 0.8s linear infinite;
+    display: none; /* Hidden by default */
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loading state for the Google button */
+.google-btn.loading {
+    cursor: wait;
+}
+
+.google-btn.loading .google-icon,
+.google-btn.loading .button-text {
+    display: none;
+}
+
+.google-btn.loading .spinner {
+    display: block;
+}
+
+
 /* Social Buttons */
 /* .social-buttons {
   display: flex;
