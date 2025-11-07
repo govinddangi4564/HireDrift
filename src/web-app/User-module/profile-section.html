@@ -11,100 +11,139 @@
 
 <body>
     <div class="profile-container">
-        <!-- Header -->
-        <header class="profile-header">
-            <a href="../Index.html" class="back-button" title="Back to Home">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <h1>My Profile</h1>
-            <button id="logoutButton" class="logout-button" title="Sign Out">
-                <i class="fas fa-sign-out-alt"></i>
+        <div class="top-actions">
+            <button id="logoutBtn" class="action-button danger-btn logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
             </button>
-        </header>
-
-        <!-- Profile Card -->
-        <div class="profile-card">
-            <!-- Profile Picture Section -->
-            <div class="profile-picture-section">
-                <img id="profilePicture" src="https://via.placeholder.com/120" alt="User Profile Picture">
-                <label for="pictureUpload" class="upload-icon">
-                    <i class="fas fa-camera"></i>
-                </label>
-                <input type="file" id="pictureUpload" accept="image/*" style="display: none;">
-                <h2 id="userName">User Name</h2>
-                <p id="userEmail">user.email@example.com</p>
-            </div>
-
-            <!-- Profile Form -->
-            <form id="profileForm" class="profile-form">
-                <!-- Full Name -->
-                <div class="form-group">
-                    <label for="fullName"><i class="fas fa-user-circle"></i> Full Name</label>
-                    <input type="text" id="fullName" placeholder="Enter your full name" disabled>
+        </div>
+        <!-- Left Column -->
+        <div class="left-column">
+            <div class="profile-card">
+                <div class="profile-picture-section">
+                    <img id="profilePicture" src="https://via.placeholder.com/120" alt="User Profile Picture">
+                    <label for="pictureUpload" class="upload-icon">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                    <input type="file" id="pictureUpload" accept="image/*" style="display: none;">
                 </div>
-
-                <!-- Phone Number -->
-                <div class="form-group">
-                    <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
-                    <input type="tel" id="phone" placeholder="e.g., +91 12345-67890" disabled>
-                </div>
-
-                <!-- Account Type -->
-                <div class="form-group">
-                    <label for="accountType"><i class="fab fa-google"></i> Account Type</label>
-                    <input type="text" id="accountType" value="Google Account" disabled>
-                </div>
-
-                <!-- Form Actions -->
-                <div class="form-actions">
-                    <button type="button" id="editButton" class="action-button edit-btn">
+                <h2 id="userName" class="user-name">User Name</h2>
+                <p id="userEmail" class="user-email">user.email@example.com</p>
+                <div class="profile-actions">
+                    <button id="editButton" class="action-button edit-btn">
                         <i class="fas fa-pencil-alt"></i> Edit Profile
                     </button>
-                    <button type="submit" id="saveButton" class="action-button save-btn" style="display: none;">
+                    <button id="saveButton" class="action-button save-btn" style="display: none;">
                         <i class="fas fa-save"></i> Save Changes
                     </button>
                 </div>
-            </form>
+            </div>
+
+            <div class="profile-card">
+                <h3><i class="fas fa-share-alt"></i> Social Media</h3>
+                <div class="social-media-section">
+                    <div class="form-group">
+                        <label for="linkedin"><i class="fab fa-linkedin"></i> LinkedIn</label>
+                        <input type="text" id="linkedin" placeholder="LinkedIn profile URL" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="github"><i class="fab fa-github"></i> GitHub</label>
+                        <input type="text" id="github" placeholder="GitHub profile URL" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter"><i class="fab fa-twitter"></i> Twitter</label>
+                        <input type="text" id="twitter" placeholder="Twitter profile URL" disabled>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Additional Sections -->
-        <div class="additional-sections">
-            <!-- Change Password -->
+        <!-- Right Column -->
+        <div class="right-column">
             <div class="profile-card">
-                <h3><i class="fas fa-lock"></i> Security</h3>
-                <div class="security-section">
-                    <p>Manage your account security settings.</p>
-                    <button class="action-button secondary-btn">Change Password</button>
+                <div class="tab-navigation">
+                    <button class="tab-link active" data-tab="about">About</button>
+                    <button class="tab-link" data-tab="experience">Experience</button>
+                    <button class="tab-link" data-tab="education">Education</button>
+                    <button class="tab-link" data-tab="settings">Settings</button>
                 </div>
-            </div>
 
-            <!-- Notifications -->
-            <div class="profile-card">
-                <h3><i class="fas fa-bell"></i> Notifications</h3>
-                <div class="notification-section">
-                    <div class="notification-toggle">
-                        <label for="newsletterToggle">Receive newsletters and promotions</label>
-                        <label class="switch">
-                            <input type="checkbox" id="newsletterToggle">
-                            <span class="slider round"></span>
-                        </label>
+                <div id="about" class="tab-content active">
+                    <h3><i class="fas fa-user"></i> About Me</h3>
+                    <textarea id="aboutMe" placeholder="Write something about yourself..." disabled></textarea>
+
+                    <h3><i class="fas fa-cogs"></i> Skills</h3>
+                    <div id="skills" class="skills-section">
+                        <!-- Skills will be dynamically added here -->
                     </div>
-                    <div class="notification-toggle">
-                        <label for="activityToggle">Get notified about account activity</label>
-                        <label class="switch">
-                            <input type="checkbox" id="activityToggle" checked>
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
+                    <input type="text" id="skillInput" placeholder="Add a skill and press Enter" disabled>
                 </div>
-            </div>
 
-            <!-- Delete Account -->
-            <div class="profile-card danger-zone">
-                <h3><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
-                <div class="danger-section">
-                    <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
-                    <button class="action-button danger-btn">Delete My Account</button>
+                <div id="experience" class="tab-content">
+                    <h3><i class="fas fa-briefcase"></i> Experience</h3>
+                    <div class="experience-section">
+                        <div class="empty-state" id="experienceEmptyState">
+                            <i class="fas fa-briefcase-blank fa-2x"></i>
+                            <p>No experience added yet</p>
+                        </div>
+                        <div class="experience-list">
+                            <!-- Experience items will be added here -->
+                        </div>
+                    </div>
+                    <button class="action-button secondary-btn add-btn" id="addExperienceButton" disabled>
+                        <i class="fas fa-plus"></i> Add Experience
+                    </button>
+                </div>
+
+                <div id="education" class="tab-content">
+                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <div class="education-section">
+                        <div class="empty-state" id="educationEmptyState">
+                            <i class="fas fa-graduation-cap fa-2x"></i>
+                            <p>No education added yet</p>
+                        </div>
+                        <div class="education-list">
+                            <!-- Education items will be added here -->
+                        </div>
+                    </div>
+                    <button class="action-button secondary-btn add-btn" id="addEducationButton" disabled>
+                        <i class="fas fa-plus"></i> Add Education
+                    </button>
+                </div>
+
+                <div id="settings" class="tab-content">
+                    <h3><i class="fas fa-lock"></i> Security</h3>
+                    <div class="security-section">
+                        <p>Manage your account security settings.</p>
+                        <button class="action-button secondary-btn">Change Password</button>
+                    </div>
+
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <div class="notification-section">
+                        <div class="notification-toggle">
+                            <label for="newsletterToggle">Receive newsletters and promotions</label>
+                            <label class="switch">
+                                <input type="checkbox" id="newsletterToggle">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="notification-toggle">
+                            <label for="activityToggle">Get notified about account activity</label>
+                            <label class="switch">
+                                <input type="checkbox" id="activityToggle" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <h3><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
+                    <div class="danger-section">
+                        <p>Permanently delete your account and all associated data.</p>
+                        <div class="danger-actions">
+                            <button id="deleteAccountButton" class="action-button danger-btn">Delete My Account</button>
+                            <button id="logoutBtnSettings" class="action-button danger-btn" style="margin-left:12px;"><i
+                                    class="fas fa-sign-out-alt"></i> Logout</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

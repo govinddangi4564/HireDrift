@@ -292,10 +292,7 @@ function displayUserInfo(user) {
     if (userInfoDiv && user) {
         userInfoDiv.innerHTML = `
             <div style="text-align: center; padding: 20px; background: #f9fafb; border-radius: 12px; margin-top: 20px;">
-                <img src="${user.picture}" alt="${user.name}" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 10px; border: 3px solid #7c3aed;">
-                <h3 style="margin: 10px 0; color: #1f2937; font-size: 20px;">Welcome, ${user.name}!</h3>
-                <p style="color: #6b7280; margin: 5px 0; font-size: 14px;">${user.email}</p>
-                <p style="color: #22c55e; margin-top: 10px; font-weight: 600; font-size: 14px;">✓ Successfully signed in with Google</p>
+                <p style="color: #22c55e; margin-top: 10px; font-weight: 600; font-size: 16px;">✓ Sign-in done!</p>
             </div>
         `;
     }
