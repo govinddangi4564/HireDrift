@@ -49,6 +49,48 @@ body {
   }
 }
 
+/* Floating Button */
+#scrollToTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  outline: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: none;
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+#scrollToTopBtn:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+/* Show Button when active */
+#scrollToTopBtn.show {
+  display: block;
+  animation: fadeIn 0.3s;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* --- Base Header Styles --- */
 header {
   background-color: #46465f;
@@ -204,7 +246,7 @@ h2.name {
 .sign-in-btn {
   background: white;
   color: #7c3aed;
-  padding: 8px 22px;
+  padding: 8px 12px;
   border-radius: 25px;
   font-size: 16px;
   font-weight: 600;
@@ -259,6 +301,120 @@ h2.name {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+#user-info {
+  margin-top: 30px;
+}
+
+img {
+  border-radius: 50%;
+}
+
+#Company-login {
+  color: #7c3aed;
+}
+
+/* Profile Popup Styles */
+.profile-popup {
+  max-width: 450px;
+  padding: 30px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid #7c3aed;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.profile-header h2 {
+  color: #1f2937;
+  font-size: 24px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.profile-details {
+  margin-bottom: 30px;
+}
+
+.profile-detail-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border-left: 4px solid #7c3aed;
+}
+
+.profile-detail-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-detail-label i {
+  color: #7c3aed;
+  font-size: 16px;
+}
+
+.profile-detail-value {
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 26px;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.logout-btn i {
+  font-size: 18px;
+}
+
+/* Profile button in header */
+#sign-in img {
+  vertical-align: middle;
+  display: inline-block;
 }
 
 /* Popup Form */
@@ -344,8 +500,40 @@ h2.name {
   height: 20px;
 }
 
+/* Spinner for loading state */
+.spinner {
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #7c3aed; /* Purple color to match theme */
+    width: 20px;
+    height: 20px;
+    animation: spin 0.8s linear infinite;
+    display: none; /* Hidden by default */
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loading state for the Google button */
+.google-btn.loading {
+    cursor: wait;
+}
+
+.google-btn.loading .google-icon,
+.google-btn.loading .button-text {
+    display: none;
+}
+
+.google-btn.loading .spinner {
+    display: block;
+}
+
+
 /* Social Buttons */
-.social-buttons {
+/* .social-buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -381,7 +569,7 @@ h2.name {
 }
 .social-btn.other {
   background: #7c3aed;
-}
+} */
 
 /* Divider */
 .divider {

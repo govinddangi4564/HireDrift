@@ -7,14 +7,14 @@
     <title>Register - Create Account</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async data-callback="initializeGoogleSignUp"></script>
 </head>
 
-<body
-    class="min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 flex items-center justify-center p-4">
+<body class="min-h-screen bg-[#c5eeff91] flex items-center justify-center p-4">
 
     <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 max-w-2xl w-full">
 
-        <!-- Header -->
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-3">Create Account</h1>
             <p class="text-gray-600">
@@ -23,9 +23,8 @@
             </p>
         </div>
 
-        <!-- Social Sign Up Buttons -->
         <div class="mb-8">
-            <button
+            <button id="googleSignUpBtn"
                 class="w-full py-3.5 border-2 border-gray-200 rounded-lg font-medium hover:bg-gray-50 hover:border-gray-300 transition-all flex items-center justify-center gap-3 mb-4">
                 <svg class="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4"
@@ -39,128 +38,87 @@
                 </svg>
                 Sign up with Google
             </button>
-
-            <div class="flex gap-4">
-                <button
-                    class="flex-1 py-3.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-                    <i class="fab fa-facebook-f"></i>
-                    Facebook
-                </button>
-                <button
-                    class="flex-1 py-3.5 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition-colors flex items-center justify-center gap-2">
-                    <i class="fab fa-github"></i>
-                    Github
-                </button>
-            </div>
         </div>
 
-        <!-- Divider -->
         <div class="relative text-center my-8">
             <span class="bg-white px-4 text-gray-400 relative z-10">or register with email</span>
             <div class="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-0"></div>
         </div>
 
-        <!-- Registration Form -->
-        <form class="space-y-5">
+        <form id="registrationForm" class="space-y-5" novalidate>
 
-            <!-- Name Fields -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">
                         <i class="fas fa-user text-purple-600 mr-2"></i>First Name
                     </label>
-                    <input type="text" placeholder="Govind" required
-                        class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600 transition-colors">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">
-                        <i class="fas fa-user text-purple-600 mr-2"></i>Last Name
-                    </label>
-                    <input type="text" placeholder="Dangi" required
+                    <input type="text" id="fullName" placeholder="Govind Dangi" required
                         class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600 transition-colors">
                 </div>
             </div>
 
-            <!-- Email Field -->
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
                     <i class="fas fa-envelope text-purple-600 mr-2"></i>Email Address
                 </label>
-                <input type="email" placeholder="govinddangi@gmail.com" required
+                <input type="email" id="email" placeholder="govinddangi@gmail.com" required
                     class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600 transition-colors">
             </div>
 
-            <!-- Username Field -->
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    <i class="fas fa-at text-purple-600 mr-2"></i>Username
-                </label>
-                <input type="text" placeholder="govinddangi123" required
-                    class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600 transition-colors">
-            </div>
-
-            <!-- Password Fields -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">
                         <i class="fas fa-lock text-purple-600 mr-2"></i>Password
                     </label>
-                    <input type="password" placeholder="••••••••" required
+                    <input type="password" id="password" placeholder="••••••••" required
                         class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600 transition-colors">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">
                         <i class="fas fa-lock text-purple-600 mr-2"></i>Confirm Password
                     </label>
-                    <input type="password" placeholder="••••••••" required
+                    <input type="password" id="confirmPassword" placeholder="••••••••" required
                         class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600 transition-colors">
                 </div>
             </div>
 
-            <!-- Phone Number (Optional) -->
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
                     <i class="fas fa-phone text-purple-600 mr-2"></i>Phone Number <span
                         class="text-gray-400 font-normal">(Optional)</span>
                 </label>
-                <input type="tel" placeholder="+91 12345-67890"
+                <input type="tel" id="phone" placeholder="+91 12345-67890"
                     class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600 transition-colors">
             </div>
 
-            <!-- Terms and Conditions -->
             <div class="flex items-start gap-3">
                 <input type="checkbox" id="terms" required class="w-5 h-5 mt-1 cursor-pointer">
                 <label for="terms" class="text-sm text-gray-600 cursor-pointer">
-                    I agree to the
-                    <a href="./terms.html" class="text-purple-600 font-semibold hover:underline">Terms and
+                    I agree to the <a href="terms.html" class="text-purple-600 font-semibold hover:underline">Terms and
                         Conditions</a>
-                    and
-                    <a href="./privacy.html" class="text-purple-600 font-semibold hover:underline">Privacy Policy</a>
+                    and <a href="privacy.html" class="text-purple-600 font-semibold hover:underline">Privacy Policy</a>
                 </label>
             </div>
 
-            <!-- Newsletter Subscription -->
             <div class="flex items-start gap-3">
-                <input type="checkbox" id="newsletter" class="w-5 h-5 mt-1 cursor-pointer">
+                <input type="checkbox" id="newsletter" class="w-5 h-5 mt-1 cursor-pointer" checked>
                 <label for="newsletter" class="text-sm text-gray-600 cursor-pointer">
                     Send me updates, promotions, and newsletters
                 </label>
             </div>
 
-            <!-- Submit Button -->
             <button type="submit"
                 class="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                 Create Account
             </button>
         </form>
 
-        <!-- Footer -->
         <p class="text-xs text-gray-400 text-center mt-6">
-            By creating an account, you agree to our terms and policies.
-            <br>Your data is protected and secure with us.
+            By creating an account, you agree to our terms and policies. <br>Your data is protected and secure with us.
         </p>
     </div>
 
+    <script src="../js/User-Register.js" defer></script>
 </body>
 
 </html>

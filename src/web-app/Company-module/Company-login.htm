@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Login</title>
+
+    <link rel="stylesheet" href="../style/Company-login.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="../images/Logo.png" alt="">
+            <h1>Company Portal</h1>
+            <p>Sign in to your account</p>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <button type="button" class="btn btn-secondary" id="registerBtn">Register Your Company</button>
+    </div>
+
+    <script src="../js/Company-login.js"></script>
+</body>
+
+</html>
