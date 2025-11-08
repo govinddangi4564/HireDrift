@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume Intelligence | Resume Upload</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/upload.css" />
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/upload.js" defer></script>
+</head>
+
+<body class="upload-page">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <h1>Talent Intelligence</h1>
+      <nav>
+        <a class="nav-link" href="dashboard.html">📊 Dashboard</a>
+        <a class="nav-link" href="jd.html">📝 JD Management</a>
+        <a class="nav-link" href="upload.html">📁 Resume Upload</a>
+        <a class="nav-link" href="shortlist.html">✅ Shortlist</a>
+        <a class="nav-link" href="candidate.html">👤 Candidate Detail</a>
+      </nav>
+      <div class="theme-toggle">
+        <span>Theme</span>
+        <button id="themeToggleBtn">Dark</button>
+      </div>
+    </aside>
+    <main class="content">
+      <header class="page-header">
+        <div>
+          <h2>Resume & JD Upload Module</h2>
+          <div class="breadcrumbs">Upload resumes and trigger AI parsing</div>
+        </div>
+        <div class="tabs">
+          <button class="active">Resumes</button>
+          <button>Job Descriptions</button>
+          <button>Parsing Logs</button>
+        </div>
+      </header>
+
+      <div id="resumeUploadContent" class="tab-section" data-tab-group="upload-view" data-tab-section="resumes">
+        <section class="form-card">
+          <h3>Upload Resumes</h3>
+          <div id="resumeDropZone" class="file-upload">
+            <strong>Drag & Drop resumes</strong>
+            <p>Supports PDF and DOCX. You can also click to choose files.</p>
+            <button class="btn btn-outline" type="button">Select Files</button>
+          </div>
+          <input id="resumeInput" type="file" accept=".pdf,.doc,.docx" multiple hidden />
+
+          <div class="upload-progress">
+            <div id="uploadProgressBar" class="bar"></div>
+          </div>
+
+          <div class="form-actions">
+            <button id="runMatchingBtn" class="btn btn-primary" type="button">Run AI Matching</button>
+          </div>
+        </section>
+
+        <section style="margin-top: 32px;">
+          <h3>Parsed Resume Preview</h3>
+          <div id="resumePreviewList" class="resume-preview"></div>
+        </section>
+      </div>
+
+      <section id="jdUploadContent" class="tab-section hidden" data-tab-group="upload-view" data-tab-section="jds">
+        <div class="card">
+          <h3>Job Descriptions</h3>
+          <p>You can manage your Job Descriptions on the <a href="jd.html">JD Management</a> page.</p>
+        </div>
+      </section>
+
+      <section id="parsingLogsContent" class="tab-section hidden" data-tab-group="upload-view" data-tab-section="logs">
+        <div class="card">
+          <h3>Parsing Logs</h3>
+          <p>Real-time log of resume processing events in this session.</p>
+          <table class="log-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>File Name</th>
+                <th>Status</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="parsingLogBody">
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <section class="assistant-panel"
+    data-initial-message="Upload assistant ready. Ask me about parsing status or errors.">
+    <header>
+      <strong>Upload Helper</strong>
+      <span class="pill">Parsing Logs</span>
+    </header>
+    <div id="assistantBody" class="assistant-body"></div>
+    <div class="assistant-input">
+      <input id="assistantInput" type="text" placeholder="Ask upload assistant" />
+    </div>
+  </section>
+</body>
+
+</html>

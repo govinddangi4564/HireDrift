@@ -319,7 +319,7 @@ function updateSignInButtonToProfile(user) {
         `;
         userSignInBtn.onclick = (e) => {
             e.preventDefault();
-            // Redirect to the dedicated profile page
+            // Redirect to the dedicated profile page (connected to actual file)
             window.location.href = 'User-module/profile-section.html';
         };
 

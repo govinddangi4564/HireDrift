@@ -1,0 +1,54 @@
+.dashboard-page .card-grid .card {
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-page .card::after {
+  content: "";
+  position: absolute;
+  inset: auto -30px -30px auto;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at center, rgba(45, 108, 223, 0.25), transparent 70%);
+  pointer-events: none;
+}
+
+.dashboard-page .panel ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  line-height: 1.6;
+}
+
+.dashboard-page .filters select {
+  min-width: 200px;
+}
+
+.dashboard-page .panel .card {
+  position: relative;
+  padding: 20px;
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  min-height: 280px;
+}
+
+.dashboard-page .panel .card canvas {
+  max-height: 280px;
+}
+
+.dashboard-page .panel header {
+  margin-bottom: 16px;
+}
+
+.dashboard-page .panel header h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.dashboard-page .panel header .breadcrumbs {
+  font-size: 0.875rem;
+  color: var(--text-muted, #666);
+}
+

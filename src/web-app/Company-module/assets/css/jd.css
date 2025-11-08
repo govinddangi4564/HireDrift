@@ -1,0 +1,24 @@
+.jd-page .jd-card {
+  border-left: 4px solid rgba(45, 108, 223, 0.4);
+  transition: transform 0.15s ease;
+}
+
+.jd-page .jd-card:hover {
+  transform: translateY(-3px);
+}
+
+.jd-page .jd-actions .btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.jd-page .jd-actions .btn-danger:hover {
+  background: rgb(185, 28, 28);
+}
+
+.jd-page #jdList {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+

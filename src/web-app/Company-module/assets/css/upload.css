@@ -1,0 +1,233 @@
+.upload-page #resumeDropZone {
+  cursor: pointer;
+  background-image: linear-gradient(
+    135deg,
+    rgba(45, 108, 223, 0.12),
+    rgba(15, 23, 42, 0.04)
+  );
+  padding: 32px;
+  border-radius: 12px;
+  border: 2px dashed var(--border);
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.upload-page #resumeDropZone.dragover {
+  border-color: var(--primary);
+  background-image: linear-gradient(
+    135deg,
+    rgba(45, 108, 223, 0.2),
+    rgba(15, 23, 42, 0.08)
+  );
+  transform: scale(1.01);
+}
+
+.upload-page .upload-progress {
+  margin-top: 32px;
+  background: var(--border);
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.upload-page .upload-progress .bar {
+  height: 100%;
+  background: var(--primary);
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.upload-page .resume-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.upload-page .candidate-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.2s ease;
+  border: 1px solid var(--border);
+}
+
+.upload-page .candidate-card:hover {
+  transform: translateY(-4px);
+}
+
+.upload-page .candidate-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.upload-page .match-pill {
+  background: var(--primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+}
+
+.upload-page .skill-analysis {
+  margin-top: 16px;
+}
+
+.upload-page .skill-score {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.upload-page .skill-score label {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.upload-page .score-bar {
+  flex: 2;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.upload-page .score-bar .fill {
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.upload-page .candidate-footer {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upload-page .ai-insights {
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(45, 108, 223, 0.08);
+  border-radius: 8px;
+}
+
+.upload-page .ai-insights h4 {
+  color: var(--primary);
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.upload-page .insights-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+}
+
+.upload-page .insights-list li {
+  padding: 4px 0;
+  color: var(--text-muted);
+}
+
+.upload-page .quick-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.upload-page .action-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upload-page .action-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.upload-page .match-score {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary);
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.upload-page .match-score span {
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--text-muted);
+}
+
+.upload-page .badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.upload-page .badge.high {
+  background: rgba(16, 185, 129, 0.12);
+  color: rgb(16, 185, 129);
+}
+
+.upload-page .badge.medium {
+  background: rgba(245, 158, 11, 0.12);
+  color: rgb(245, 158, 11);
+}
+
+.upload-page .badge.low {
+  background: rgba(239, 68, 68, 0.12);
+  color: rgb(239, 68, 68);
+}
+
+/* Log Table Styles */
+.upload-page .log-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+}
+
+.upload-page .log-table th,
+.upload-page .log-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.upload-page .log-table th {
+  background-color: var(--bg);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.upload-page .log-table td {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.upload-page .log-table .status-success {
+  color: #10b981;
+  font-weight: 500;
+}
+
+.upload-page .log-table .empty-log-row td {
+  text-align: center;
+  padding: 32px;
+}
