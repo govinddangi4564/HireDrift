@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume Intelligence | Candidate Detail</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/candidate.css" />
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/candidate.js" defer></script>
+</head>
+
+<body class="candidate-page">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <h1>Talent Intelligence</h1>
+      <nav>
+        <a class="nav-link" href="dashboard.html">📊 Dashboard</a>
+        <a class="nav-link" href="jd.html">📝 JD Management</a>
+        <a class="nav-link" href="upload.html">📁 Resume Upload</a>
+        <a class="nav-link" href="shortlist.html">✅ Shortlist</a>
+        <a class="nav-link" href="candidate.html">👤 Candidate Detail</a>
+      </nav>
+      <div class="theme-toggle">
+        <span>Theme</span>
+        <button id="themeToggleBtn">Dark</button>
+      </div>
+    </aside>
+    <main class="content">
+      <header class="page-header">
+        <div>
+          <h2>Candidate Detail</h2>
+          <div class="breadcrumbs">Deep dive into AI scored resume</div>
+        </div>
+        <div class="tabs" data-tab-group="candidate-view">
+          <button class="active" data-tab-target="profile">Profile</button>
+          <button data-tab-target="notes">Interview Notes</button>
+          <button data-tab-target="history">History</button>
+        </div>
+      </header>
+
+      <section id="candidateDetail" class="tab-section" data-tab-group="candidate-view" data-tab-section="profile">
+      </section>
+
+      <section id="interviewNotes" class="tab-section hidden" data-tab-group="candidate-view" data-tab-section="notes">
+        <div class="card">
+          <h3>Interview Notes</h3>
+          <p>No interview notes have been recorded for this candidate yet.</p>
+        </div>
+      </section>
+
+      <section id="activityHistory" class="tab-section hidden" data-tab-group="candidate-view"
+        data-tab-section="history">
+        <h3>Activity History</h3>
+        <p>No activity has been logged for this candidate yet.</p>
+      </section>
+
+      <section class="flex-row" style="margin-top: 32px;">
+        <div class="panel">
+          <header>
+            <h3>Matching Highlights</h3>
+          </header>
+          <div class="card">
+            <p>
+              AI uses SBERT embeddings to surface semantic overlaps between JD and resume content.
+              Highlighted skills show the strongest context matches.
+            </p>
+            <ul>
+              <li><span class="highlight">Transformers</span> matched with JD requirement</li>
+              <li><span class="highlight">MLOps</span> supports production readiness</li>
+              <li><span class="highlight">Python</span> expertise validated via project history</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel">
+          <header>
+            <h3>Smart Actions</h3>
+          </header>
+          <div class="card">
+            <button class="btn btn-primary" data-action="schedule-interview"
+              style="width: 100%; margin-bottom: 12px;">Schedule Interview</button>
+            <button class="btn btn-outline" data-action="request-update"
+              style="width: 100%; margin-bottom: 12px;">Request Updated Resume</button>
+            <button class="btn btn-outline" data-action="add-talent-pool" style="width: 100%;">Add to Talent
+              Pool</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <section class="assistant-panel"
+    data-initial-message="Need deeper insights? Ask for interview prompts or risk factors.">
+    <header>
+      <strong>Candidate Insights Bot</strong>
+      <span class="pill">Interview Prep</span>
+    </header>
+    <div id="assistantBody" class="assistant-body"></div>
+    <div class="assistant-input">
+      <input id="assistantInput" type="text" placeholder="Ask for probing questions" />
+    </div>
+  </section>
+</body>
+
+</html>

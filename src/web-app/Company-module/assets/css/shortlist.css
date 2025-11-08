@@ -1,0 +1,194 @@
+.shortlist-page table tr.selected td {
+  background: rgba(45, 108, 223, 0.16) !important;
+  position: relative;
+}
+
+.shortlist-page table tr.selected td::after {
+  /* content: "✓"; */
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.shortlist-page .report-actions {
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.shortlist-page #candidateTableBody tr {
+  transition: transform 0.15s ease;
+  cursor: pointer;
+}
+
+.is-comparing #candidateTableBody tr:hover {
+  background: rgba(45, 108, 223, 0.08);
+  transform: none;
+}
+
+.report-actions #compareBtn.active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.shortlist-page #candidateTableBody tr:not(.is-comparing tr):hover {
+  transform: translateY(-2px);
+}
+
+.compare-checkbox-cell {
+  display: none;
+}
+.is-comparing .compare-checkbox-cell {
+  display: table-cell;
+}
+
+.shortlist-page #candidateTableBody tr td:first-child a {
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.shortlist-page #candidateTableBody tr td:first-child a:hover {
+  text-decoration: underline;
+}
+
+/* Comparison Modal Styles */
+.comparison-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.comparison-card .score-pill {
+  background: var(--primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-weight: 500;
+}
+
+.comparison-section {
+  margin: 20px 0;
+}
+
+.comparison-section h4 {
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-list li {
+  margin: 8px 0;
+  color: var(--text);
+}
+
+.skills-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.skills-grid label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+}
+
+.tag.common {
+  background: rgba(45, 108, 223, 0.12);
+  color: var(--primary);
+}
+
+.tag.unique {
+  background: rgba(96, 165, 250, 0.12);
+  color: #3b82f6;
+}
+
+.strengths-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.strengths-list li {
+  margin: 8px 0;
+  padding-left: 24px;
+  position: relative;
+}
+
+.strengths-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.project-list li {
+  margin: 12px 0;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.comparison-card.first {
+  border-left: 4px solid var(--primary);
+}
+
+.comparison-card.second {
+  border-left: 4px solid #3b82f6;
+}
+
+/* Row-level compare button styles */
+.compare-row-btn {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.comparison-active .compare-row-btn {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Utility to hide specific buttons, e.g., on the selected row */
+.compare-row-btn.hidden {
+  display: none;
+}

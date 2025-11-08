@@ -64,7 +64,7 @@ companyRegister.addEventListener('click', function () {
 
     // In a real application, redirect to registration page
     setTimeout(() => {
-        window.location.href = '../Index.html';
+        window.location.href = './dashboard.html';
     }, 1500);
 });
 

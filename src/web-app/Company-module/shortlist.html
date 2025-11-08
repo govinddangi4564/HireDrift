@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume Intelligence | Candidate Shortlist</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/shortlist.css" />
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/shortlist.js" defer></script>
+</head>
+
+<body class="shortlist-page">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <h1>Talent Intelligence</h1>
+      <nav>
+        <a class="nav-link" href="dashboard.html">📊 Dashboard</a>
+        <a class="nav-link" href="jd.html">📝 JD Management</a>
+        <a class="nav-link" href="upload.html">📁 Resume Upload</a>
+        <a class="nav-link" href="shortlist.html">✅ Shortlist</a>
+        <a class="nav-link" href="candidate.html">👤 Candidate Detail</a>
+      </nav>
+      <div class="theme-toggle">
+        <span>Theme</span>
+        <button id="themeToggleBtn">Dark</button>
+      </div>
+    </aside>
+    <main class="content">
+      <header class="page-header">
+        <div>
+          <h2>Candidate Shortlist</h2>
+          <div class="breadcrumbs">Review AI ranked candidates and take actions</div>
+        </div>
+        <div class="report-actions">
+          <button id="compareBtn" class="btn btn-outline">Compare Candidates</button>
+          <button id="exportBtn" class="btn btn-primary">Export Shortlist</button>
+        </div>
+      </header>
+
+      <section class="filters">
+        <input id="candidateSearch" type="search" placeholder="Search by name or skill" />
+        <select id="candidateFilter">
+          <option value="all">Any match score</option>
+          <option value="70">Above 70%</option>
+          <option value="75">Above 75%</option>
+          <option value="80">Above 80%</option>
+          <option value="85">Above 85%</option>
+          <option value="90">Above 90%</option>
+        </select>
+        <select id="candidateDept">
+          <option value="all">Any Department</option>
+          <option value="engineering">Engineering</option>
+          <option value="data">Data</option>
+          <option value="qa">Quality</option>
+          <option value="hr">HR</option>
+        </select>
+        <select id="candidateRole">
+          <option value="all">Any Role</option>
+          <option value="Full Stack Developer">Full Stack</option>
+          <option value="Data Scientist">Data Scientist</option>
+          <option value="DevOps Engineer">DevOps</option>
+        </select>
+        <select id="candidateSort">
+          <option value="score">Sort by Final Score</option>
+          <option value="experience">Sort by Experience</option>
+          <option value="newest">Newest Uploads</option>
+        </select>
+        <label class="pill">
+          <input id="autoFilterToggle" type="checkbox" /> Auto-filter &gt; 80%
+        </label>
+      </section>
+
+      <section class="card" style="margin-top: 24px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Experience</th>
+              <th>Skill Match %</th>
+              <th>SBERT Score</th>
+              <th>Final Score</th>
+              <th>Actions</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="candidateTableBody"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <section class="assistant-panel" data-initial-message="Use smart filters or ask me for specific shortlist views!">
+    <header>
+      <strong>Shortlist Assistant</strong>
+      <span class="pill">Smart Filters</span>
+    </header>
+    <div id="assistantBody" class="assistant-body"></div>
+    <div class="assistant-input">
+      <input id="assistantInput" type="text" placeholder="e.g. Show top 10 Python candidates" />
+    </div>
+  </section>
+
+  <section id="comparisonModal" class="modal">
+    <div class="modal-content">
+      <header class="page-header" style="margin-bottom: 16px;">
+        <div>
+          <h3>Candidate Comparison</h3>
+          <div class="breadcrumbs">Side-by-side competency matrix</div>
+        </div>
+        <button class="btn btn-outline btn-close" type="button">Close</button>
+      </header>
+      <div id="comparisonContainer"></div>
+    </div>
+  </section>
+</body>
+
+</html>
