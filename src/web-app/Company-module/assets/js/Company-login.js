@@ -27,7 +27,7 @@ loginForm.addEventListener('submit', function (e) {
         console.log('Login attempt:', { email, password });
 
         setTimeout(() => {
-            window.location.href = '../Index.html';
+            window.location.href = './dashboard.html';
         }, 1500);
     } else {
         showMessage('Invalid email or password!', 'error');
@@ -41,6 +41,6 @@ registerBtn.addEventListener('click', function () {
 
     // In a real application, redirect to registration page
     setTimeout(() => {
-        window.location.href = '../Company-module/Company-Register.html';
+        window.location.href = 'Company-Register.html';
     }, 1500);
 });

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Resume Intelligence | JD Management</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/jd.css" />
+    <script src="assets/js/data.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+    <script src="assets/js/jd.js" defer></script>
+  </head>
+  <body class="jd-page">
+    <div class="app-layout">
+      <aside class="sidebar">
+        <h1>Talent Intelligence</h1>
+        <nav>
+          <a class="nav-link" href="dashboard.html">📊 Dashboard</a>
+          <a class="nav-link" href="jd.html">📝 JD Management</a>
+          <a class="nav-link" href="upload.html">📁 Resume Upload</a>
+          <a class="nav-link" href="shortlist.html">✅ Shortlist</a>
+          <a class="nav-link" href="candidate.html">👤 Candidate Detail</a>
+        </nav>
+        <div class="theme-toggle">
+          <span>Theme</span>
+          <button id="themeToggleBtn">Dark</button>
+        </div>
+      </aside>
+      <main class="content">
+        <header class="page-header">
+          <div>
+            <h2>Job Description Management</h2>
+            <div class="breadcrumbs">Upload, edit, and optimize job descriptions</div>
+          </div>
+          <div class="tabs">
+            <button class="active">Manage JDs</button>
+            <button>Templates</button>
+            <button>Insights</button>
+          </div>
+        </header>
+
+        <section class="form-card">
+          <h3>Add or Edit JD</h3>
+          <form id="jdForm">
+            <input type="hidden" name="jdId" />
+            <div class="form-grid">
+              <label>
+                Title
+                <input type="text" name="title" placeholder="e.g. Senior Data Scientist" required />
+              </label>
+              <label>
+                Department
+                <input type="text" name="department" placeholder="e.g. AI Labs" required />
+              </label>
+              <label>
+                Location
+                <input type="text" name="location" placeholder="e.g. Remote" required />
+              </label>
+              <label>
+                Keywords (comma separated)
+                <input type="text" name="keywords" placeholder="Python, SBERT, Transformers" required />
+              </label>
+            </div>
+            <label>
+              Description
+              <textarea name="description" placeholder="Paste or write the JD text"></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="btn btn-outline" type="reset">Clear</button>
+              <button class="btn btn-primary" type="submit">Save JD</button>
+            </div>
+          </form>
+        </section>
+
+        <section>
+          <header class="page-header" style="margin-top: 32px;">
+            <div>
+              <h3>JD Library</h3>
+              <div class="breadcrumbs">Curated job descriptions with extracted keywords</div>
+            </div>
+            <button id="jdUploadBtn" class="btn btn-outline" type="button">Upload JD Document</button>
+          </header>
+          <div id="jdList" class="jd-list"></div>
+          <input id="jdUploadInput" type="file" accept=".txt,.doc,.docx" hidden />
+        </section>
+      </main>
+    </div>
+
+    <section class="assistant-panel" data-initial-message="Need JD help? Ask for keyword suggestions or matching tips!">
+      <header>
+        <strong>AI JD Coach</strong>
+        <span class="pill">Keyword Tips</span>
+      </header>
+      <div id="assistantBody" class="assistant-body"></div>
+      <div class="assistant-input">
+        <input id="assistantInput" type="text" placeholder="Ask for keyword suggestions" />
+      </div>
+    </section>
+  </body>
+</html>
+

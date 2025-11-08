@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Resume Intelligence | Dashboard</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="assets/js/data.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+    <script src="assets/js/dashboard.js" defer></script>
+  </head>
+  <body class="dashboard-page">
+    <div class="app-layout">
+      <aside class="sidebar">
+        <h1>Talent Intelligence</h1>
+        <nav>
+          <a class="nav-link" href="dashboard.html">📊 Dashboard</a>
+          <a class="nav-link" href="jd.html">📝 JD Management</a>
+          <a class="nav-link" href="upload.html">📁 Resume Upload</a>
+          <a class="nav-link" href="shortlist.html">✅ Shortlist</a>
+          <a class="nav-link" href="candidate.html">👤 Candidate Detail</a>
+        </nav>
+        <div class="theme-toggle">
+          <span>Theme</span>
+          <button id="themeToggleBtn">Dark</button>
+        </div>
+      </aside>
+      <main class="content">
+        <header class="page-header">
+          <div>
+            <h2>HR Analytics Dashboard</h2>
+            <div class="breadcrumbs">Overview of resume intelligence performance</div>
+          </div>
+          <div class="tabs">
+            <button class="active">Overview</button>
+            <button>Benchmarks</button>
+            <button>Reports</button>
+          </div>
+        </header>
+
+        <section id="dashboardCards" class="card-grid"></section>
+
+        <section class="filters">
+          <select id="filterRole"></select>
+          <select id="filterDept"></select>
+          <select id="filterDate"></select>
+          <span id="filterResultPill" class="pill">0 candidates match filters</span>
+        </section>
+
+        <section class="flex-row">
+          <div class="panel">
+            <header>
+              <h3>Skill Distribution</h3>
+              <span class="breadcrumbs">Top skills in current pipeline</span>
+            </header>
+            <div class="card">
+              <canvas id="skillsChart" height="280"></canvas>
+            </div>
+          </div>
+          <div class="panel">
+            <header>
+              <h3>Match Score Trends</h3>
+              <span class="breadcrumbs">JD-wise average match score</span>
+            </header>
+            <div class="card">
+              <canvas id="matchChart" height="280"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <section class="flex-row">
+          <div class="panel">
+            <header>
+              <h3>Department Snapshot</h3>
+              <span class="breadcrumbs">Match rates by departments</span>
+            </header>
+            <div class="card">
+              <p>
+                Engineering team has the highest volume of resumes processed this week. AI Labs has
+                the highest SBERT similarity scores driven by transformer-heavy skill requirements.
+              </p>
+              <ul>
+                <li>Engineering: 85% average match</li>
+                <li>AI Labs: 90% SBERT score</li>
+                <li>Quality: 78% shortlist conversion</li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel">
+            <header>
+              <h3>Recommendations</h3>
+              <span class="breadcrumbs">AI generated insights for HR actions</span>
+            </header>
+            <div class="card">
+              <ul>
+                <li>Schedule interviews for top 5 data science candidates above 85% match.</li>
+                <li>Update QA JD keywords to include Playwright and gauge new matches.</li>
+                <li>Enable auto-filter to surface resumes above 80% final score.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <section class="assistant-panel" data-initial-message="Hi! I can answer HR analytics questions. Try 'Show shortlisted above 85%'">
+      <header>
+        <strong>AI HR Assistant</strong>
+        <span class="pill">Semantic Search</span>
+      </header>
+      <div id="assistantBody" class="assistant-body"></div>
+      <div class="assistant-input">
+        <input id="assistantInput" type="text" placeholder="Ask e.g. Candidates with React + 3 years" />
+      </div>
+    </section>
+  </body>
+</html>
+

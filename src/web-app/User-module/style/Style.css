@@ -1156,14 +1156,24 @@ button.submit-btn:hover {
   color: #202328;
 }
 
+.detail-value-first{
+  font-weight: 700;
+  color: #1f2937;
+  margin-top: -15px;
+}
+
 .detail-value {
   font-weight: 700;
   color: #1f2937;
+  
 }
+
+
+
 
 .detail-value-low {
   font-weight: 700;
-  color: #dc2626;
+  color: black;
 }
 
 /* Right Side: Text Content Styles */
