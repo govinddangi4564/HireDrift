@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Resume Intelligence | Resume Upload</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/upload.css" />
   <script src="assets/js/data.js" defer></script>
@@ -23,6 +24,10 @@
         <a class="nav-link" href="upload.html">📁 Resume Upload</a>
         <a class="nav-link" href="shortlist.html">✅ Shortlist</a>
         <a class="nav-link" href="candidate.html">👤 Candidate Detail</a>
+        <a class="nav-link Company-Profile" href="Company-Profile.html">👤 Profile</a>
+        <div class="sidebar-footer nav-link User-Section">
+          <a href="../Index.html"><i class="fas fa-arrow-left"></i> Back to User-Section</a>
+        </div>
       </nav>
       <div class="theme-toggle">
         <span>Theme</span>
@@ -31,34 +36,40 @@
     </aside>
     <main class="content">
       <header class="page-header">
+        <button id="sidebarToggle" class="sidebar-toggle-btn"><i class="fas fa-bars"></i></button>
         <div>
           <h2>Resume & JD Upload Module</h2>
           <div class="breadcrumbs">Upload resumes and trigger AI parsing</div>
         </div>
         <div class="tabs">
-          <button class="active">Resumes</button>
-          <button>Job Descriptions</button>
-          <button>Parsing Logs</button>
+          <button class="active" data-tab="resumes">Resumes</button>
+          <button data-tab="job-descriptions">Job Descriptions</button>
+          <button data-tab="parsing-logs">Parsing Logs</button>
         </div>
       </header>
 
-      <div id="resumeUploadContent" class="tab-section" data-tab-group="upload-view" data-tab-section="resumes">
+      <!-- Resumes Tab Content -->
+      <div id="tab-resumes" class="tab-content active">
         <section class="form-card">
           <h3>Upload Resumes</h3>
           <div id="resumeDropZone" class="file-upload">
-            <strong>Drag & Drop resumes</strong>
-            <p>Supports PDF and DOCX. You can also click to choose files.</p>
-            <button class="btn btn-outline" type="button">Select Files</button>
-          </div>
-          <input id="resumeInput" type="file" accept=".pdf,.doc,.docx" multiple hidden />
+            <div class="upload-area" id="uploadArea">
+              <div class="logo-text">
+                <i><i class="fa-solid fa-arrow-up-from-bracket upload-logo"></i></i>
+                <strong>Drag & Drop resumes</strong>
+              </div>
+              <p>Supports PDF and DOCX. You can also click to choose files.</p>
+              <!-- <button class="btn btn-outline" type="button">Select Files</button> -->
+            </div>
+            <input id="resumeInput" type="file" accept=".pdf,.doc,.docx" multiple hidden />
 
-          <div class="upload-progress">
-            <div id="uploadProgressBar" class="bar"></div>
-          </div>
+            <div class="upload-progress">
+              <div id="uploadProgressBar" class="bar"></div>
+            </div>
 
-          <div class="form-actions">
-            <button id="runMatchingBtn" class="btn btn-primary" type="button">Run AI Matching</button>
-          </div>
+            <div class="form-actions">
+              <button id="runMatchingBtn" class="btn btn-primary" type="button">Run AI Matching</button>
+            </div>
         </section>
 
         <section style="margin-top: 32px;">
@@ -67,18 +78,42 @@
         </section>
       </div>
 
-      <section id="jdUploadContent" class="tab-section hidden" data-tab-group="upload-view" data-tab-section="jds">
-        <div class="card">
-          <h3>Job Descriptions</h3>
+      <!-- Job Descriptions Tab Content -->
+      <div id="tab-job-descriptions" class="tab-content">
+        <section class="card">
+          <h3>Job Descriptions Management</h3>
           <p>You can manage your Job Descriptions on the <a href="jd.html">JD Management</a> page.</p>
-        </div>
-      </section>
 
-      <section id="parsingLogsContent" class="tab-section hidden" data-tab-group="upload-view" data-tab-section="logs">
-        <div class="card">
+          <div style="margin-top: 24px;">
+            <h4>Quick Actions</h4>
+            <div style="display: flex; gap: 12px; margin-top: 16px;">
+              <a href="jd.html" class="btn btn-primary">Go to JD Management</a>
+              <button class="btn btn-secondary" onclick="window.location.href='jd.html'">Create New JD</button>
+            </div>
+          </div>
+
+          <div style="margin-top: 32px;">
+            <h4>Recent Job Descriptions</h4>
+            <div id="recentJDs" class="jd-list" style="margin-top: 16px;">
+              <p class="breadcrumbs">Loading recent job descriptions...</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Parsing Logs Tab Content -->
+      <div id="tab-parsing-logs" class="tab-content">
+        <section class="card">
           <h3>Parsing Logs</h3>
           <p>Real-time log of resume processing events in this session.</p>
-          <table class="log-table">
+
+          <div style="margin-top: 24px; display: flex; gap: 12px; align-items: center;">
+            <button class="btn btn-secondary" id="clearLogsBtn">Clear Logs</button>
+            <button class="btn btn-secondary" id="exportLogsBtn">Export Logs</button>
+            <span class="breadcrumbs" id="logCount">0 entries</span>
+          </div>
+
+          <table class="log-table" style="margin-top: 24px;">
             <thead>
               <tr>
                 <th>Timestamp</th>
@@ -90,8 +125,8 @@
             <tbody id="parsingLogBody">
             </tbody>
           </table>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
   </div>
 

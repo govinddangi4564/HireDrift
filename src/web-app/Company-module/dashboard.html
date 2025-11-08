@@ -1,46 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Resume Intelligence | Dashboard</title>
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/css/dashboard.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-    <script src="assets/js/data.js" defer></script>
-    <script src="assets/js/app.js" defer></script>
-    <script src="assets/js/dashboard.js" defer></script>
-  </head>
-  <body class="dashboard-page">
-    <div class="app-layout">
-      <aside class="sidebar">
-        <h1>Talent Intelligence</h1>
-        <nav>
-          <a class="nav-link" href="dashboard.html">📊 Dashboard</a>
-          <a class="nav-link" href="jd.html">📝 JD Management</a>
-          <a class="nav-link" href="upload.html">📁 Resume Upload</a>
-          <a class="nav-link" href="shortlist.html">✅ Shortlist</a>
-          <a class="nav-link" href="candidate.html">👤 Candidate Detail</a>
-        </nav>
-        <div class="theme-toggle">
-          <span>Theme</span>
-          <button id="themeToggleBtn">Dark</button>
-        </div>
-      </aside>
-      <main class="content">
-        <header class="page-header">
-          <div>
-            <h2>HR Analytics Dashboard</h2>
-            <div class="breadcrumbs">Overview of resume intelligence performance</div>
-          </div>
-          <div class="tabs">
-            <button class="active">Overview</button>
-            <button>Benchmarks</button>
-            <button>Reports</button>
-          </div>
-        </header>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume Intelligence | Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/dashboard.js" defer></script>
+</head>
+
+<body class="dashboard-page">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <h1>Talent Intelligence</h1>
+      <nav>
+        <a class="nav-link" href="dashboard.html">📊 Dashboard</a>
+        <a class="nav-link" href="jd.html">📝 JD Management</a>
+        <a class="nav-link" href="upload.html">📁 Resume Upload</a>
+        <a class="nav-link" href="shortlist.html">✅ Shortlist</a>
+        <a class="nav-link" href="candidate.html">👤 Candidate Detail</a>
+        <a class="nav-link Company-Profile" href="Company-Profile.html">👤 Profile</a>
+        <div class="sidebar-footer nav-link User-Section">
+          <a href="../Index.html"><i class="fas fa-arrow-left"></i> Back to User-Section</a>
+        </div>
+      </nav>
+      <div class="theme-toggle">
+        <span>Theme</span>
+        <button id="themeToggleBtn">Dark</button>
+      </div>
+    </aside>
+    <main class="content">
+      <header class="page-header">
+        <button id="sidebarToggle" class="sidebar-toggle-btn"><i class="fas fa-bars"></i></button>
+        <div>
+          <h2>HR Analytics Dashboard</h2>
+          <div class="breadcrumbs">Overview of resume intelligence performance</div>
+        </div>
+        <div class="tabs">
+          <button class="active" data-tab="overview">Overview</button>
+          <button data-tab="benchmarks">Benchmarks</button>
+          <button data-tab="reports">Reports</button>
+        </div>
+      </header>
+
+      <!-- Overview Tab Content -->
+      <div id="tab-overview" class="tab-content active">
         <section id="dashboardCards" class="card-grid"></section>
 
         <section class="filters">
@@ -103,19 +113,177 @@
             </div>
           </div>
         </section>
-      </main>
-    </div>
-
-    <section class="assistant-panel" data-initial-message="Hi! I can answer HR analytics questions. Try 'Show shortlisted above 85%'">
-      <header>
-        <strong>AI HR Assistant</strong>
-        <span class="pill">Semantic Search</span>
-      </header>
-      <div id="assistantBody" class="assistant-body"></div>
-      <div class="assistant-input">
-        <input id="assistantInput" type="text" placeholder="Ask e.g. Candidates with React + 3 years" />
       </div>
-    </section>
-  </body>
-</html>
 
+      <!-- Benchmarks Tab Content -->
+      <div id="tab-benchmarks" class="tab-content">
+        <section class="card-grid">
+          <div class="card">
+            <h3>Industry Benchmarks</h3>
+            <div class="metric">78%</div>
+            <div class="trend positive">Your average match score</div>
+            <p class="breadcrumbs">Industry average: 72%</p>
+          </div>
+          <div class="card">
+            <h3>Time to Hire</h3>
+            <div class="metric">12 days</div>
+            <div class="trend positive">Average processing time</div>
+            <p class="breadcrumbs">Industry average: 18 days</p>
+          </div>
+          <div class="card">
+            <h3>Conversion Rate</h3>
+            <div class="metric">16.7%</div>
+            <div class="trend positive">Resume to shortlist</div>
+            <p class="breadcrumbs">Industry average: 12%</p>
+          </div>
+          <div class="card">
+            <h3>Quality Score</h3>
+            <div class="metric">8.5/10</div>
+            <div class="trend positive">Candidate quality rating</div>
+            <p class="breadcrumbs">Industry average: 7.2/10</p>
+          </div>
+        </section>
+
+        <section class="flex-row">
+          <div class="panel">
+            <header>
+              <h3>Performance vs Industry</h3>
+              <span class="breadcrumbs">How you compare to market standards</span>
+            </header>
+            <div class="card">
+              <ul>
+                <li><strong>Match Accuracy:</strong> 78% (Industry: 72%) - <span class="trend positive">+6%</span></li>
+                <li><strong>Processing Speed:</strong> 12 days (Industry: 18 days) - <span class="trend positive">-6 days</span></li>
+                <li><strong>Shortlist Rate:</strong> 16.7% (Industry: 12%) - <span class="trend positive">+4.7%</span></li>
+                <li><strong>Candidate Quality:</strong> 8.5/10 (Industry: 7.2/10) - <span class="trend positive">+1.3</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel">
+            <header>
+              <h3>Benchmark Insights</h3>
+              <span class="breadcrumbs">Key performance indicators</span>
+            </header>
+            <div class="card">
+              <ul>
+                <li>Your AI matching system performs 8% above industry average</li>
+                <li>Processing time is 33% faster than industry standard</li>
+                <li>Shortlist conversion rate exceeds market by 39%</li>
+                <li>Candidate quality scores are consistently high</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Reports Tab Content -->
+      <div id="tab-reports" class="tab-content">
+        <section class="filters">
+          <select id="reportType">
+            <option value="summary">Summary Report</option>
+            <option value="detailed">Detailed Report</option>
+            <option value="weekly">Weekly Report</option>
+            <option value="monthly">Monthly Report</option>
+          </select>
+          <select id="reportDateRange">
+            <option value="7">Last 7 days</option>
+            <option value="30">Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="all">All time</option>
+          </select>
+          <button class="btn-primary" id="generateReport">Generate Report</button>
+          <button class="btn-secondary" id="exportReport">Export PDF</button>
+        </section>
+
+        <section class="flex-row">
+          <div class="panel">
+            <header>
+              <h3>Report Summary</h3>
+              <span class="breadcrumbs">Key metrics and insights</span>
+            </header>
+            <div class="card">
+              <div id="reportSummary">
+                <p>Select a report type and date range, then click "Generate Report" to view detailed analytics.</p>
+                <ul>
+                  <li><strong>Total Resumes Processed:</strong> <span id="reportTotalResumes">-</span></li>
+                  <li><strong>Shortlisted Candidates:</strong> <span id="reportShortlisted">-</span></li>
+                  <li><strong>Average Match Score:</strong> <span id="reportAvgScore">-</span>%</li>
+                  <li><strong>Top Department:</strong> <span id="reportTopDept">-</span></li>
+                  <li><strong>Top Skill:</strong> <span id="reportTopSkill">-</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <header>
+              <h3>Report Actions</h3>
+              <span class="breadcrumbs">Available report operations</span>
+            </header>
+            <div class="card">
+              <ul>
+                <li><button class="btn-link">📊 View Analytics Report</button></li>
+                <li><button class="btn-link">📈 View Trends Report</button></li>
+                <li><button class="btn-link">👥 View Department Report</button></li>
+                <li><button class="btn-link">📋 View Candidate Report</button></li>
+                <li><button class="btn-link">💾 Download CSV Export</button></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <header>
+            <h3>Report History</h3>
+            <span class="breadcrumbs">Previously generated reports</span>
+          </header>
+          <div class="card">
+            <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <th style="padding: 12px; text-align: left;">Report Name</th>
+                  <th style="padding: 12px; text-align: left;">Date</th>
+                  <th style="padding: 12px; text-align: left;">Type</th>
+                  <th style="padding: 12px; text-align: left;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reportHistory">
+                <tr>
+                  <td style="padding: 12px;">Weekly Summary - Week 3</td>
+                  <td style="padding: 12px;">2025-01-20</td>
+                  <td style="padding: 12px;">Weekly</td>
+                  <td style="padding: 12px;">
+                    <button class="btn-link">View</button> | 
+                    <button class="btn-link">Download</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px;">Monthly Analytics - January</td>
+                  <td style="padding: 12px;">2025-01-31</td>
+                  <td style="padding: 12px;">Monthly</td>
+                  <td style="padding: 12px;">
+                    <button class="btn-link">View</button> | 
+                    <button class="btn-link">Download</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <section class="assistant-panel"
+    data-initial-message="Hi! I can answer HR analytics questions. Try 'Show shortlisted above 85%'">
+    <header>
+      <strong>AI HR Assistant</strong>
+      <span class="pill">Semantic Search</span>
+    </header>
+    <div id="assistantBody" class="assistant-body"></div>
+    <div class="assistant-input">
+      <input id="assistantInput" type="text" placeholder="Ask e.g. Candidates with React + 3 years" />
+    </div>
+  </section>
+</body>
+
+</html>

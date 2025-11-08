@@ -9,7 +9,11 @@
   inset: auto -30px -30px auto;
   width: 120px;
   height: 120px;
-  background: radial-gradient(circle at center, rgba(45, 108, 223, 0.25), transparent 70%);
+  background: radial-gradient(
+    circle at center,
+    rgba(45, 108, 223, 0.25),
+    transparent 70%
+  );
   pointer-events: none;
 }
 
@@ -26,10 +30,11 @@
 .dashboard-page .panel .card {
   position: relative;
   padding: 20px;
-  background: var(--card-bg, #fff);
+  background: var(--surface);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow);
   min-height: 280px;
+  color: var(--text);
 }
 
 .dashboard-page .panel .card canvas {
@@ -44,7 +49,7 @@
   margin: 0 0 4px 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-primary, #1a1a1a);
+  color: var(--text);
 }
 
 .dashboard-page .panel header .breadcrumbs {
@@ -52,3 +57,84 @@
   color: var(--text-muted, #666);
 }
 
+/* Tab Content Styles */
+.dashboard-page .tab-content {
+  display: none;
+}
+
+.dashboard-page .tab-content.active {
+  display: block;
+}
+
+.dashboard-page .tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.dashboard-page .tabs button {
+  padding: 8px 16px;
+  border: 1px solid var(--muted);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.dashboard-page .tabs button:hover {
+  background: var(--bg);
+  border-color: var(--primary);
+}
+
+.dashboard-page .tabs button.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.dashboard-page .btn-primary,
+.dashboard-page .btn-secondary {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid;
+  transition: all 0.2s ease;
+}
+
+.dashboard-page .btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.dashboard-page .btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.dashboard-page .btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+.dashboard-page .btn-secondary:hover {
+  background: var(--bg);
+}
+
+.dashboard-page .btn-link {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 4px 0;
+  font-size: 0.875rem;
+}
+
+.dashboard-page .btn-link:hover {
+  color: var(--primary-dark);
+}

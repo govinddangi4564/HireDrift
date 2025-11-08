@@ -4,52 +4,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Profile</title>
-    <link rel="stylesheet" href="../style/Company-Profile.css">
+    <title>Company Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/Company-Profile.css">
 </head>
 
 <body>
-    <div class="profile-container">
-        <div class="logo">
-            <img src="../images/Logo.png" alt="Company Logo">
-            <h1>Company Profile</h1>
-        </div>
-        <form id="companyProfileForm">
-            <div class="form-group">
-                <label for="companyName">Company Name</label>
-                <input type="text" id="companyName" name="companyName" required placeholder="Enter company name">
+    <div class="settings-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../images/Logo.png" alt="Company Logo">
+                <h2>Settings</h2>
             </div>
-            <div class="form-group">
-                <label for="companyEmail">Email</label>
-                <input type="email" id="companyEmail" name="companyEmail" required placeholder="Enter company email">
+            <nav class="settings-nav">
+                <a href="#profile" class="nav-item active" data-tab="profile"><i class="fas fa-user-circle"></i> Company
+                    Profile</a>
+                <a href="#plan" class="nav-item" data-tab="plan"><i class="fas fa-credit-card"></i> Plan & Billing</a>
+                <a href="#team" class="nav-item" data-tab="team"><i class="fas fa-users"></i> Team Members</a>
+                <a href="#security" class="nav-item" data-tab="security"><i class="fas fa-shield-alt"></i> Security</a>
+                <a href="#notifications" class="nav-item" data-tab="notifications"><i class="fas fa-bell"></i>
+                    Notifications</a>
+                <a href="#api" class="nav-item" data-tab="api"><i class="fas fa-code"></i> API Access</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </div>
-            <div class="form-group">
-                <label for="companyAddress">Address</label>
-                <input type="text" id="companyAddress" name="companyAddress" required
-                    placeholder="Enter company address">
+        </aside>
+
+        <main class="main-content">
+            <!-- Company Profile Tab -->
+            <div id="profile" class="tab-content active">
+                <header class="content-header">
+                    <h1>Company Profile</h1>
+                    <p>Update your company's public details and branding.</p>
+                </header>
+                <form id="companyProfileForm" class="settings-form">
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" id="companyName" name="companyName" required placeholder="Enter company name"
+                            value="Innovate Inc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="companyEmail">Email</label>
+                        <input type="email" id="companyEmail" name="companyEmail" required
+                            placeholder="Enter company email" value="contact@innovate.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="companyAddress">Address</label>
+                        <input type="text" id="companyAddress" name="companyAddress" required
+                            placeholder="Enter company address" value="123 Tech Street, Silicon Valley, CA">
+                    </div>
+                    <div class="form-group">
+                        <label for="companyWebsite">Website</label>
+                        <input type="url" id="companyWebsite" name="companyWebsite"
+                            placeholder="https://yourcompany.com" value="https://innovate.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="companyDescription">Description</label>
+                        <textarea id="companyDescription" name="companyDescription" rows="4"
+                            placeholder="Describe your company">Innovate Inc. is a leading provider of AI-driven recruitment solutions.</textarea>
+                    </div>
+                    <div class="form-group logo-upload">
+                        <label>Logo</label>
+                        <img src="../images/Logo.png" alt="Current Logo" class="current-logo">
+                        <input type="file" id="companyLogo" name="companyLogo" accept="image/*">
+                        <button type="button" class="btn btn-outline"
+                            onclick="document.getElementById('companyLogo').click();">Change Logo</button>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="companyDescription">Description</label>
-                <textarea id="companyDescription" name="companyDescription" rows="4"
-                    placeholder="Describe your company"></textarea>
+
+            <!-- Plan & Billing Tab -->
+            <div id="plan" class="tab-content">
+                <header class="content-header">
+                    <h1>Plan & Billing</h1>
+                    <p>Manage your subscription, view invoices, and update payment details.</p>
+                </header>
+                <div class="plan-card popular">
+                    <div class="popular-badge">Current Plan</div>
+                    <div class="plan-name">Agency</div>
+                    <div class="price">₹ 2499<span>/month</span></div>
+                    <div class="resume-count">2000 resumes included</div>
+                    <p class="plan-expiry">Your plan renews on December 8, 2025.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> Unlimited job descriptions</li>
+                        <li><i class="fas fa-check-circle"></i> Unlimited candidate exports</li>
+                        <li><i class="fas fa-check-circle"></i> AI screening questions</li>
+                        <li><i class="fas fa-check-circle"></i> Priority email & chat support</li>
+                    </ul>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="upgradePlanBtn">Upgrade Plan</button>
+                        <button class="btn btn-outline" id="cancelSubscriptionBtn">Cancel Subscription</button>
+                    </div>
+                </div>
+
+                <div class="billing-history">
+                    <h2 class="section-title">Billing History</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Invoice</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Nov 8, 2025</td>
+                                    <td>Monthly Subscription - Agency Plan</td>
+                                    <td>₹ 2499.00</td>
+                                    <td><span class="status-paid">Paid</span></td>
+                                    <td><a href="#" class="btn-link">Download</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="companyLogo">Logo</label>
-                <input type="file" id="companyLogo" name="companyLogo" accept="image/*">
+
+            <!-- Team Tab -->
+            <div id="team" class="tab-content">
+                <header class="content-header">
+                    <h1>Team Members</h1>
+                    <p>Invite and manage your team members.</p>
+                </header>
+                <div class="team-management">
+                    <form id="inviteForm" class="invite-form">
+                        <input type="email" id="memberEmail" placeholder="Enter email to invite..." required>
+                        <button type="submit" class="btn btn-primary">Send Invite</button>
+                    </form>
+
+                    <div class="team-list">
+                        <div class="team-member">
+                            <div class="member-info">
+                                <img src="https://i.pravatar.cc/40?u=jane" alt="Jane Doe">
+                                <div>
+                                    <span class="member-name">Jane Doe (You)</span>
+                                    <span class="member-email">jane.doe@innovate.com</span>
+                                </div>
+                            </div>
+                            <div class="member-actions">
+                                <span class="member-role">Admin</span>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-info">
+                                <img src="https://i.pravatar.cc/40?u=john" alt="John Smith">
+                                <div>
+                                    <span class="member-name">John Smith</span>
+                                    <span class="member-email">john.smith@innovate.com</span>
+                                </div>
+                            </div>
+                            <div class="member-actions">
+                                <select class="member-role-select">
+                                    <option value="Member" selected>Member</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                                <button class="btn-icon remove-member-btn" title="Remove Member">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="companyWebsite">Website</label>
-                <input type="url" id="companyWebsite" name="companyWebsite" placeholder="https://yourcompany.com">
+
+            <!-- Security Tab -->
+            <div id="security" class="tab-content">
+                <header class="content-header">
+                    <h1>Security</h1>
+                    <p>Change your password and manage account security.</p>
+                </header>
+                <form id="securityForm" class="settings-form">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" name="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" name="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+
+                <hr class="section-divider">
+
+                <div class="security-section">
+                    <h2 class="section-title">Two-Factor Authentication</h2>
+                    <div class="two-factor-setup">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <p>Add an extra layer of security to your account by enabling two-factor authentication.
+                            </p>
+                            <button class="btn btn-outline" id="enable2faBtn">Enable 2FA</button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="section-divider">
+
+                <div class="security-section">
+                    <h2 class="section-title">Active Sessions</h2>
+                    <ul class="session-list">
+                        <li>
+                            <i class="fas fa-desktop"></i>
+                            <div>
+                                <strong>Chrome on Windows</strong>
+                                <span>Indore, IN (Current session)</span>
+                            </div>
+                            <button class="btn btn-outline btn-sm">
+                                Log out
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="companyContact">Contact Number</label>
-                <input type="tel" id="companyContact" name="companyContact" placeholder="Enter contact number">
+
+            <!-- Other Tabs (Placeholders) -->
+            <div id="notifications" class="tab-content">
+                <header class="content-header">
+                    <h1>Notifications</h1>
+                    <p>Manage how you receive notifications from SmartHire.</p>
+                </header>
+                <div class="notification-settings">
+                    <div class="notification-item">
+                        <div>
+                            <strong>New Candidate Alerts</strong>
+                            <p>Receive an email when a new candidate matches a job description.</p>
+                        </div>
+                        <label class="toggle-switch" for="activityToggle">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Update Profile</button>
-        </form>
-        <div id="message" class="message"></div>
+            <div id="api" class="tab-content">
+                <header class="content-header">
+                    <h1>API Access</h1>
+                    <p>Manage API keys for third-party integrations.</p>
+                </header>
+                <div class="api-management">
+                    <div class="api-key-list">
+                        <div class="api-key-item">
+                            <div>
+                                <strong class="api-key-name">Primary API Key</strong>
+                                <span class="api-key-value">sk_live_******************1234</span>
+                            </div>
+                            <button class="btn-icon delete-key-btn" title="Delete Key">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="generateApiBtn">Generate New Key</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
     </div>
-    <script src="../js/Company-Profile.js"></script>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay"></div>
+
+    <div id="upgradePlanModal" class="modal">
+        <div class="modal-header">
+            <h2>Upgrade Your Plan</h2>
+            <button class="close-modal-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Select a new plan to unlock more features and increase your resume screening limit.</p>
+            <!-- Pricing cards can be dynamically inserted here -->
+            <div class.diff-block="pricing-grid-modal">
+                <!-- Example Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Hiring Sprint</div>
+                    <div class="price">₹ 5999<span>/quarter</span></div>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> 6000 resumes included</li>
+                        <li><i class="fas fa-check-circle"></i> Everything in Agency</li>
+                    </ul>
+                    <button class="btn btn-primary select-plan-btn">Select Sprint</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="twoFactorModal" class="modal">
+        <!-- 2FA Modal Content will be generated by JS -->
+    </div>
+
+    <div id="message" class="message"></div>
+    <script src="assets/js/Company-Profile.js"></script>
 </body>
 
 </html>

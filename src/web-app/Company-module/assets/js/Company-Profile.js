@@ -1,46 +1,319 @@
-// Professional Company Profile JS: Handles form submission, validation, and feedback
-
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('companyProfileForm');
+    const securityForm = document.getElementById('securityForm');
+    const inviteForm = document.getElementById('inviteForm');
     const messageDiv = document.getElementById('message');
+    const navItems = document.querySelectorAll('.nav-item');
+    const tabContents = document.querySelectorAll('.tab-content');
 
+    // --- Modal Elements ---
+    const modalOverlay = document.getElementById('modal-overlay');
+    const upgradePlanBtn = document.getElementById('upgradePlanBtn');
+    const upgradePlanModal = document.getElementById('upgradePlanModal');
+    const enable2faBtn = document.getElementById('enable2faBtn');
+    const twoFactorModal = document.getElementById('twoFactorModal');
+
+    // --- Other Interactive Elements ---
+    const cancelSubscriptionBtn = document.getElementById('cancelSubscriptionBtn');
+    const generateApiBtn = document.getElementById('generateApiBtn');
+    const logoInput = document.getElementById('companyLogo');
+    const logoPreview = document.querySelector('.current-logo');
+
+    // --- Tab Navigation ---
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetTab = item.getAttribute('data-tab');
+
+            // Update nav items
+            navItems.forEach(nav => nav.classList.remove('active'));
+            item.classList.add('active');
+
+            // Update tab content
+            tabContents.forEach(content => {
+                if (content.id === targetTab) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+
+            // Update URL hash
+            history.pushState(null, null, `#${targetTab}`);
+        });
+    });
+
+    // --- Handle initial tab from URL hash ---
+    const currentHash = window.location.hash.substring(1);
+    if (currentHash) {
+        const initialTab = document.querySelector(`.nav-item[data-tab="${currentHash}"]`);
+        if (initialTab) {
+            initialTab.click();
+        }
+    }
+
+    // --- Show Message Function ---
+    function showMessage(text, type = 'success') {
+        messageDiv.textContent = text;
+        messageDiv.className = `message ${type}`;
+        messageDiv.classList.add('show');
+
+        setTimeout(() => {
+            messageDiv.classList.remove('show');
+        }, 3000);
+    }
+
+    // --- Company Profile Form Submission ---
     form.addEventListener('submit', function (e) {
         e.preventDefault();
-        messageDiv.textContent = '';
-        messageDiv.style.color = '#d9534f';
 
-        // Get form values
         const companyName = document.getElementById('companyName').value.trim();
         const companyEmail = document.getElementById('companyEmail').value.trim();
-        const companyAddress = document.getElementById('companyAddress').value.trim();
-        const companyDescription = document.getElementById('companyDescription').value.trim();
-        const companyLogo = document.getElementById('companyLogo').files[0];
         const companyWebsite = document.getElementById('companyWebsite').value.trim();
-        const companyContact = document.getElementById('companyContact').value.trim();
 
         // Validation
-        if (!companyName || !companyEmail || !companyAddress) {
-            messageDiv.textContent = 'Please fill in all required fields.';
+        if (!companyName || !companyEmail) {
+            showMessage('Company Name and Email are required.', 'error');
             return;
         }
         if (companyWebsite && !/^https?:\/\/.+\..+/.test(companyWebsite)) {
-            messageDiv.textContent = 'Please enter a valid website URL.';
-            return;
-        }
-        if (companyContact && !/^\+?[0-9\-\s]{7,}$/.test(companyContact)) {
-            messageDiv.textContent = 'Please enter a valid contact number.';
-            return;
-        }
-        if (companyLogo && !companyLogo.type.startsWith('image/')) {
-            messageDiv.textContent = 'Logo must be an image file.';
+            showMessage('Please enter a valid website URL.', 'error');
             return;
         }
 
-        // Simulate saving profile (replace with actual backend integration)
-        messageDiv.style.color = '#28a745';
-        messageDiv.textContent = 'Profile updated successfully!';
+        // Simulate saving profile
+        showMessage('Profile updated successfully!');
+    });
 
-        // Optionally, reset form after success
-        // form.reset();
+    // --- Logo Preview ---
+    logoInput.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                logoPreview.src = event.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // --- Security Form Submission ---
+    securityForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (newPassword.length < 6) {
+            showMessage('New password must be at least 6 characters long.', 'error');
+            return;
+        }
+        if (newPassword !== confirmPassword) {
+            showMessage('Passwords do not match.', 'error');
+            return;
+        }
+
+        showMessage('Password changed successfully!');
+        securityForm.reset();
+    });
+
+    // --- Team Invitation Form ---
+    inviteForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const emailInput = document.getElementById('memberEmail');
+        const email = emailInput.value.trim();
+        if (email) {
+            showMessage(`Invite sent to ${email}!`);
+            emailInput.value = '';
+            // In a real app, you would add the new member to the list here
+        }
+    });
+
+    // --- Cancel Subscription ---
+    cancelSubscriptionBtn.addEventListener('click', function () {
+        if (confirm('Are you sure you want to cancel your subscription? This action cannot be undone.')) {
+            showMessage('Your subscription has been cancelled.', 'error');
+            // Add backend logic here
+        }
+    });
+
+    // --- API Key Generation ---
+    generateApiBtn.addEventListener('click', function () {
+        const newKey = `sk_live_******************${Math.floor(Math.random() * 9000) + 1000}`;
+        const apiKeyList = document.querySelector('.api-key-list');
+        const keyItem = document.createElement('div');
+        keyItem.className = 'api-key-item';
+        keyItem.innerHTML = `
+            <div>
+                <strong class="api-key-name">New API Key</strong>
+                <span class="api-key-value">${newKey}</span>
+            </div>
+            <button class="btn-icon delete-key-btn" title="Delete Key"><i class="fas fa-trash-alt"></i></button>
+        `;
+        apiKeyList.appendChild(keyItem);
+        showMessage('New API key generated successfully!');
+    });
+
+    // --- Modal Handling ---
+    function openModal(modal) {
+        modalOverlay.classList.add('active');
+        modal.classList.add('active');
+    }
+
+    function closeModal() {
+        document.querySelectorAll('.modal.active, .modal-overlay.active').forEach(el => {
+            el.classList.remove('active');
+        });
+    }
+
+    upgradePlanBtn.addEventListener('click', () => openModal(upgradePlanModal));
+
+    enable2faBtn.addEventListener('click', () => {
+        twoFactorModal.innerHTML = `
+            <div class="modal-header">
+                <h2>Enable Two-Factor Authentication</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Scan the QR code with your authenticator app, then enter the code below.</p>
+                <div class="qr-code-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=otpauth://totp/SmartHire:contact@innovate.com?secret=JBSWY3DPEHPK3PXP&issuer=SmartHire" alt="QR Code">
+                </div>
+                <form id="2faForm">
+                    <div class="form-group">
+                        <label for="verificationCode">Verification Code</label>
+                        <input type="text" id="verificationCode" class="verification-code-input" placeholder="_ _ _ _ _ _" required maxlength="6">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Verify & Enable</button>
+                    </div>
+                </form>
+            </div>
+        `;
+        openModal(twoFactorModal);
+
+        // Add form submission logic for 2FA
+        document.getElementById('2faForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const code = document.getElementById('verificationCode').value;
+            if (code && code.length === 6) {
+                showMessage('Two-Factor Authentication enabled successfully!');
+                closeModal();
+            } else {
+                showMessage('Please enter a valid 6-digit code.', 'error');
+            }
+        });
+    });
+
+    // Add event listeners to all close buttons and the overlay
+    document.querySelectorAll('.close-modal-btn, .modal-overlay').forEach(el => {
+        el.addEventListener('click', closeModal);
+    });
+
+    // Prevent modal clicks from closing the modal
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', e => e.stopPropagation());
     });
 });
+
+// Get the logout button element and attach handler if present
+const logoutBtn = document.getElementById('logoutBtn');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', handleLogout);
+}
+
+function handleLogout() {
+    // Show confirmation dialog
+    const confirmLogout = confirm('Are you sure you want to logout?');
+
+    if (confirmLogout) {
+        // Clear all stored data
+        clearStoredData();
+
+        // Redirect to index page
+        window.location.href = '../Index.html';
+    }
+}
+
+function clearStoredData() {
+    // SECTION: Selective logout
+    // Preserve user-created application data (JDs, candidates, shortlist, reports, theme)
+    // Remove only authentication/session related keys so user's saved data remains intact.
+
+    try {
+        // Common app storage keys that we want to preserve (defined in data.js)
+        const preserveKeys = [
+            'ats_hr_jds',
+            'ats_hr_candidates',
+            'ats_hr_shortlist',
+            'ats_hr_theme',
+            'ats_hr_reports'
+        ];
+
+        // Known auth/session keys to remove (examples used across the codebase)
+        const authKeys = ['googleUser', 'user', 'authToken', 'session', 'sessionId'];
+
+        // Remove auth keys from localStorage and sessionStorage
+        authKeys.forEach(k => {
+            try { localStorage.removeItem(k); } catch (e) { }
+            try { sessionStorage.removeItem(k); } catch (e) { }
+        });
+
+        // Optionally clear any other session-scoped items (but keep persistent app data)
+        // We'll clear sessionStorage entirely (it typically holds only session data like googleUser)
+        try { sessionStorage.clear(); } catch (e) { }
+
+        // Do NOT call localStorage.clear() - that would remove user-created data.
+
+        // Clean up auth-like cookies only (avoid deleting unrelated cookies)
+        const cookies = document.cookie ? document.cookie.split(';') : [];
+        cookies.forEach(cookie => {
+            const eqPos = cookie.indexOf('=');
+            const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+            if (/session|token|auth|google/i.test(name)) {
+                document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+            }
+        });
+
+        // Avoid aggressively clearing caches since they may contain persisted user data.
+        // If you still want to clear caches for logout, uncomment the following block.
+        // if (window.caches) {
+        //   caches.keys().then(names => names.forEach(name => caches.delete(name)));
+        // }
+    } catch (err) {
+        console.warn('clearStoredData encountered an issue:', err);
+    }
+}
+
+function clearCookies() {
+    // Get all cookies and delete them
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    }
+}
+
+function clearCache() {
+    // Clear application cache if supported
+    if (window.caches) {
+        caches.keys().then((names) => {
+            names.forEach(name => {
+                caches.delete(name);
+            });
+        });
+    }
+
+    // Clear browser cache for the domain (limited by browser security)
+    if (window.location.reload) {
+        window.location.reload(true);
+    }
+}
+
+// Prevent going back after logout
+window.history.forward();
+function noBack() {
+    window.history.forward();
+}

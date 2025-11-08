@@ -2,106 +2,256 @@
   cursor: pointer;
   background-image: linear-gradient(
     135deg,
-    rgba(45, 108, 223, 0.12),
-    rgba(15, 23, 42, 0.04)
+    rgba(45, 108, 223, 0.08),
+    rgba(15, 23, 42, 0.02)
   );
-  padding: 32px;
-  border-radius: 12px;
-  border: 2px dashed var(--border);
+  padding: 48px;
+  border-radius: 16px;
+  border: 2px dashed var(--primary);
   text-align: center;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-page #resumeDropZone::before {
+  /* content: "📄"; */
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.logo-text{
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text strong{
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.upload-logo{
+  font-size: 100px;
+  color: #333b43;
+  margin-bottom: 10px;
+}
+
+.upload-page #resumeDropZone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(45, 108, 223, 0.1),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.upload-page #resumeDropZone:hover::after {
+  opacity: 1;
 }
 
 .upload-page #resumeDropZone.dragover {
   border-color: var(--primary);
   background-image: linear-gradient(
     135deg,
-    rgba(45, 108, 223, 0.2),
-    rgba(15, 23, 42, 0.08)
+    rgba(45, 108, 223, 0.15),
+    rgba(15, 23, 42, 0.05)
   );
-  transform: scale(1.01);
+  transform: scale(1.02);
+  box-shadow: 0 8px 30px rgba(45, 108, 223, 0.15);
 }
 
 .upload-page .upload-progress {
   margin-top: 32px;
-  background: var(--border);
-  height: 6px;
-  border-radius: 3px;
+  background: var(--bg);
+  height: 8px;
+  border-radius: 999px;
   overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .upload-page .upload-progress .bar {
   height: 100%;
-  background: var(--primary);
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    var(--primary-dark) 100%
+  );
   width: 0;
-  transition: width 0.3s ease;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.upload-page .upload-progress .bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s infinite;
 }
 
 .upload-page .resume-preview {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 24px;
-  margin-top: 24px;
+  margin-top: 32px;
+  padding: 4px;
 }
 
 .upload-page .candidate-card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 20px;
-  transition: transform 0.2s ease;
-  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--muted);
+  position: relative;
+  overflow: hidden;
 }
 
 .upload-page .candidate-card:hover {
   transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: 0 12px 24px rgba(45, 108, 223, 0.1);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .upload-page .candidate-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--muted);
+  position: relative;
+}
+
+.upload-page .candidate-header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
 }
 
 .upload-page .match-pill {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
-  padding: 4px 12px;
-  border-radius: 16px;
+  padding: 6px 14px;
+  border-radius: 999px;
   font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(45, 108, 223, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.upload-page .match-pill::before {
+  content: "✨";
+  font-size: 14px;
 }
 
 .upload-page .skill-analysis {
-  margin-top: 16px;
+  margin-top: 20px;
+  background: var(--bg);
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.upload-page .skill-analysis h4 {
+  margin: 0 0 16px 0;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-page .skill-analysis h4::before {
+  content: "🎯";
+  font-size: 18px;
 }
 
 .upload-page .skill-score {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 8px 0;
+  gap: 16px;
+  margin: 12px 0;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.upload-page .skill-score:hover {
+  background: var(--surface);
 }
 
 .upload-page .skill-score label {
   flex: 1;
   font-size: 14px;
-  color: var(--text-muted);
+  color: var(--text);
+  font-weight: 500;
 }
 
 .upload-page .score-bar {
   flex: 2;
-  height: 6px;
-  background: var(--border);
-  border-radius: 3px;
+  height: 8px;
+  background: var(--muted);
+  border-radius: 999px;
   overflow: hidden;
+  position: relative;
 }
 
 .upload-page .score-bar .fill {
   height: 100%;
-  background: var(--primary);
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-page .score-bar .fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s infinite;
 }
 
 .upload-page .candidate-footer {
@@ -114,16 +264,42 @@
 }
 
 .upload-page .ai-insights {
-  margin-top: 16px;
-  padding: 12px;
-  background: rgba(45, 108, 223, 0.08);
-  border-radius: 8px;
+  margin-top: 20px;
+  padding: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(45, 108, 223, 0.08),
+    rgba(45, 108, 223, 0.04)
+  );
+  border-radius: 12px;
+  border: 1px solid rgba(45, 108, 223, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-page .ai-insights::before {
+  content: "🤖";
+  position: absolute;
+  right: -10px;
+  bottom: -10px;
+  font-size: 64px;
+  opacity: 0.1;
+  transform: rotate(15deg);
 }
 
 .upload-page .ai-insights h4 {
   color: var(--primary);
-  margin: 0 0 8px;
-  font-size: 14px;
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-page .ai-insights h4::before {
+  content: "💡";
+  font-size: 18px;
 }
 
 .upload-page .insights-list {
@@ -131,32 +307,72 @@
   padding: 0;
   margin: 0;
   font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .upload-page .insights-list li {
-  padding: 4px 0;
-  color: var(--text-muted);
+  padding: 8px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.upload-page .insights-list li:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateX(4px);
+}
+
+.upload-page .insights-list li::before {
+  content: "→";
+  color: var(--primary);
+  font-weight: bold;
 }
 
 .upload-page .quick-actions {
   display: flex;
-  gap: 8px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .upload-page .action-btn {
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
   font-size: 13px;
-  border: 1px solid var(--border);
-  background: var(--bg);
+  border: 1px solid var(--muted);
+  background: var(--surface);
   color: var(--text);
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
 }
 
 .upload-page .action-btn:hover {
   border-color: var(--primary);
   color: var(--primary);
+  background: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 108, 223, 0.1);
+}
+
+.upload-page .action-btn.primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.upload-page .action-btn.primary:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: white;
 }
 
 .upload-page .match-score {
@@ -230,4 +446,55 @@
 .upload-page .log-table .empty-log-row td {
   text-align: center;
   padding: 32px;
+}
+
+/* Tab Content Styles */
+.upload-page .tab-content {
+  display: none;
+}
+
+.upload-page .tab-content.active {
+  display: block;
+}
+
+.upload-page .tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.upload-page .tabs button {
+  padding: 8px 16px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  background: var(--card-bg, #fff);
+  color: var(--text-primary, #1a1a1a);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.upload-page .tabs button:hover {
+  background: var(--bg-secondary, #f9fafb);
+  border-color: var(--primary-color, #3b82f6);
+}
+
+.upload-page .tabs button.active {
+  background: var(--primary-color, #3b82f6);
+  color: #fff;
+  border-color: var(--primary-color, #3b82f6);
+}
+
+.upload-page .btn-link {
+  background: none;
+  border: none;
+  color: var(--primary-color, #3b82f6);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 4px 0;
+  font-size: 0.875rem;
+}
+
+.upload-page .btn-link:hover {
+  color: var(--primary-hover, #2563eb);
 }

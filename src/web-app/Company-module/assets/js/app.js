@@ -183,12 +183,38 @@ function handleAssistantQuery(query, render) {
   render(`Found ${filtered.length} candidates: ${summary}`);
 }
 
+function setupSidebarToggle() {
+  const sidebarToggleBtn = document.getElementById('sidebarToggle');
+  const sidebar = document.querySelector('.sidebar');
+
+  if (sidebarToggleBtn && sidebar) {
+    // Check if overlay already exists
+    let overlay = document.querySelector('.sidebar-overlay');
+    if (!overlay) {
+      // Create and append the overlay element if it doesn't exist
+      overlay = document.createElement('div');
+      overlay.classList.add('sidebar-overlay');
+      document.body.appendChild(overlay);
+    }
+
+    // Function to open or close the sidebar
+    const toggleSidebar = () => {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+    };
+
+    // Attach event listeners
+    sidebarToggleBtn.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
+  }
+}
+
 function initShared() {
   setActiveNav();
   handleThemeToggle();
   initTabs();
   setupAssistant();
+  setupSidebarToggle(); // Add this line to initialize the sidebar toggle
 }
 
 document.addEventListener("DOMContentLoaded", initShared);
-

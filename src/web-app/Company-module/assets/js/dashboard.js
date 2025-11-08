@@ -605,10 +605,49 @@ window.notifyDataUpdate = function() {
   document.dispatchEvent(new CustomEvent("dataUpdated"));
 };
 
+/**
+ * ============================================================================
+ * TAB BUTTON FUNCTIONALITY - Handle Overview, Benchmarks, Reports tabs
+ * ============================================================================
+ */
+function initializeTabButtons() {
+  const tabButtons = document.querySelectorAll('.tabs button');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  if (!tabButtons.length) return;
+  
+  tabButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      // Get the tab name from data-tab attribute
+      const tabName = button.getAttribute('data-tab');
+      
+      // Remove active class from all buttons
+      tabButtons.forEach((btn) => btn.classList.remove('active'));
+      
+      // Add active class to clicked button
+      button.classList.add('active');
+      
+      // Hide all tab contents
+      tabContents.forEach((content) => {
+        content.classList.remove('active');
+      });
+      
+      // Show the selected tab content
+      const targetContent = document.getElementById(`tab-${tabName}`);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+      
+      console.log(`Switched to ${tabName} tab`);
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   if (!document.body.classList.contains("dashboard-page")) return;
   renderDashboardCards();
   renderDashboardCharts();
   populateQuickFilters();
+  initializeTabButtons();
 });
 

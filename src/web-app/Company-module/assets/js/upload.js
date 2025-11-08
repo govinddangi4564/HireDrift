@@ -337,6 +337,11 @@ function appendToLog(fileName, status, details) {
     <td>${details}</td>
   `;
   logBody.prepend(newRow); // Add new logs to the top
+  
+  // Update log count if the function exists
+  if (typeof updateLogCount === 'function') {
+    updateLogCount();
+  }
 }
 /* --------------------------- Main Setup Function --------------------------- */
 
@@ -421,8 +426,148 @@ function setupResumeUpload() {
   }
 }
 
+/**
+ * ============================================================================
+ * TAB BUTTON FUNCTIONALITY - Handle Resumes, Job Descriptions, Parsing Logs tabs
+ * ============================================================================
+ */
+function initializeTabButtons() {
+  const tabButtons = document.querySelectorAll('.tabs button');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  if (!tabButtons.length) return;
+  
+  tabButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      // Get the tab name from data-tab attribute
+      const tabName = button.getAttribute('data-tab');
+      
+      // Remove active class from all buttons
+      tabButtons.forEach((btn) => btn.classList.remove('active'));
+      
+      // Add active class to clicked button
+      button.classList.add('active');
+      
+      // Hide all tab contents
+      tabContents.forEach((content) => {
+        content.classList.remove('active');
+      });
+      
+      // Show the selected tab content
+      const targetContent = document.getElementById(`tab-${tabName}`);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+      
+      console.log(`Switched to ${tabName} tab`);
+      
+      // Load content for specific tabs if needed
+      if (tabName === 'job-descriptions') {
+        loadRecentJDs();
+      } else if (tabName === 'parsing-logs') {
+        updateLogCount();
+      }
+    });
+  });
+}
+
+/**
+ * Load and display recent job descriptions
+ */
+function loadRecentJDs() {
+  const recentJDsContainer = document.getElementById('recentJDs');
+  if (!recentJDsContainer) return;
+  
+  const jds = getStoredData(STORAGE_KEYS.jds) || [];
+  
+  if (jds.length === 0) {
+    recentJDsContainer.innerHTML = '<p class="breadcrumbs">No job descriptions found. <a href="jd.html">Create your first JD</a></p>';
+    return;
+  }
+  
+  // Show last 5 JDs
+  const recentJDs = jds.slice(-5).reverse();
+  recentJDsContainer.innerHTML = recentJDs.map(jd => `
+    <div class="card" style="margin-bottom: 12px; padding: 16px;">
+      <h4 style="margin: 0 0 8px 0;">${jd.title}</h4>
+      <p class="breadcrumbs" style="margin: 0 0 8px 0;">${jd.department} • ${jd.location || 'Not specified'}</p>
+      <a href="jd.html?id=${jd.id}" class="btn-link">View Details →</a>
+    </div>
+  `).join('');
+}
+
+/**
+ * Update the log count display
+ */
+function updateLogCount() {
+  const logBody = document.querySelector("#parsingLogBody");
+  const logCount = document.querySelector("#logCount");
+  
+  if (!logBody || !logCount) return;
+  
+  const rows = logBody.querySelectorAll('tr:not(.empty-log-row)');
+  const count = rows.length;
+  logCount.textContent = `${count} ${count === 1 ? 'entry' : 'entries'}`;
+}
+
+/**
+ * Setup parsing logs functionality
+ */
+function setupParsingLogs() {
+  const clearLogsBtn = document.getElementById('clearLogsBtn');
+  const exportLogsBtn = document.getElementById('exportLogsBtn');
+  const logBody = document.querySelector("#parsingLogBody");
+  
+  if (clearLogsBtn) {
+    clearLogsBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to clear all logs?')) {
+        if (logBody) {
+          logBody.innerHTML = '<tr class="empty-log-row"><td colspan="4">No resume parsing activity has been logged in this session yet.</td></tr>';
+          updateLogCount();
+        }
+      }
+    });
+  }
+  
+  if (exportLogsBtn) {
+    exportLogsBtn.addEventListener('click', () => {
+      if (!logBody) return;
+      
+      const rows = logBody.querySelectorAll('tr:not(.empty-log-row)');
+      if (rows.length === 0) {
+        alert('No logs to export.');
+        return;
+      }
+      
+      // Create CSV content
+      let csv = 'Timestamp,File Name,Status,Details\n';
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length >= 4) {
+          csv += `"${cells[0].textContent}","${cells[1].textContent}","${cells[2].textContent}","${cells[3].textContent}"\n`;
+        }
+      });
+      
+      // Download CSV
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `parsing-logs-${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    });
+  }
+  
+}
+
 /* Wire up on DOM ready for upload page */
 document.addEventListener("DOMContentLoaded", () => {
   if (!document.body.classList.contains("upload-page")) return;
   setupResumeUpload();
+  initializeTabButtons();
+  setupParsingLogs();
+  updateLogCount();
 });

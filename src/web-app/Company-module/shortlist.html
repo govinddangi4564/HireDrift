@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Resume Intelligence | Candidate Shortlist</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/shortlist.css" />
   <script src="assets/js/data.js" defer></script>
@@ -23,6 +24,11 @@
         <a class="nav-link" href="upload.html">📁 Resume Upload</a>
         <a class="nav-link" href="shortlist.html">✅ Shortlist</a>
         <a class="nav-link" href="candidate.html">👤 Candidate Detail</a>
+        <a class="nav-link Company-Profile" href="Company-Profile.html">👤 Profile</a>
+        <div class="sidebar-footer nav-link User-Section">
+          <a href="../Index.html"><i class="fas fa-arrow-left"></i> Back to User-Section</a>
+        </div>
+      </nav>
       </nav>
       <div class="theme-toggle">
         <span>Theme</span>
@@ -31,6 +37,7 @@
     </aside>
     <main class="content">
       <header class="page-header">
+        <button id="sidebarToggle" class="sidebar-toggle-btn"><i class="fas fa-bars"></i></button>
         <div>
           <h2>Candidate Shortlist</h2>
           <div class="breadcrumbs">Review AI ranked candidates and take actions</div>
@@ -75,20 +82,22 @@
       </section>
 
       <section class="card" style="margin-top: 24px;">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Experience</th>
-              <th>Skill Match %</th>
-              <th>SBERT Score</th>
-              <th>Final Score</th>
-              <th>Actions</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="candidateTableBody"></tbody>
-        </table>
+        <div class="table-responsive-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Experience</th>
+                <th>Skill Match %</th>
+                <th>SBERT Score</th>
+                <th>Final Score</th>
+                <th>Actions</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="candidateTableBody"></tbody>
+          </table>
+        </div>
       </section>
     </main>
   </div>
