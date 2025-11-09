@@ -6,6 +6,29 @@ const selectButtons = document.querySelectorAll('.select-btn');
 const backBtn = document.getElementById('backBtn');
 const registrationForm = document.getElementById('registrationForm');
 
+/**
+ * ============================================================================
+ * COMPANY REGISTRATION - BACKEND INTEGRATION
+ * ============================================================================
+ *
+ * 1. API Endpoint: POST /api/companies/register
+ *
+ * 2. Request Body:
+ *    {
+ *      "firstName": "John",
+ *      "lastName": "Doe",
+ *      "email": "john.doe@company.com",
+ *      "password": "secure_password",
+ *      "plan": "Agency Plan"
+ *    }
+ *
+ * 3. Success Response (201 Created):
+ *    {
+ *      "token": "your_jwt_token_for_auto_login",
+ *      "company": { "id": "new-company-id", "name": "John Doe's Company" }
+ *    }
+ */
+
 function showMessage(text, type) {
     const messageDiv = document.getElementById('message');
     messageDiv.textContent = text;
@@ -53,19 +76,34 @@ registrationForm.addEventListener('submit', function (e) {
     const password = this.elements[3].value;
     const plan = selectedPlanName.textContent;
 
-    // alert(`Registration Successful!\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPlan: ${plan}\n\nWelcome to HaiTalent!`);
+    // TODO: Replace this with a backend API call.
+    // =================================================
+    // const registrationData = { firstName, lastName, email, password, plan };
+    // fetch('/api/companies/register', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(registrationData)
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     sessionStorage.setItem('companyAuthToken', data.token); // Auto-login
+    //     showMessage('Registration successful! Redirecting...', 'success');
+    //     setTimeout(() => window.location.href = './dashboard.html', 1500);
+    // })
+    // .catch(error => showMessage('Registration failed!', 'error'));
+    // =================================================
 
-    // Reset form
-    this.reset();
-});
-
-companyRegister.addEventListener('click', function () {
+    // DEMO: Simulate successful registration and redirect
     showMessage('Redirecting to company registration...', 'success');
+    sessionStorage.setItem('isCompanyLoggedIn', 'true'); // Set session flag
 
     // In a real application, redirect to registration page
     setTimeout(() => {
         window.location.href = './dashboard.html';
     }, 1500);
+
+    // Reset form
+    this.reset();
 });
 
 // Add hover effect to pricing cards

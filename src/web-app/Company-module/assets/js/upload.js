@@ -2,36 +2,36 @@
  * ============================================================================
  * UPLOAD PAGE - Resume Parsing & Candidate Creation
  * ============================================================================
+ * BACKEND INTEGRATION:
+ * This file should be updated to communicate with a backend API for resume
+ * parsing and candidate storage.
  *
- * This file handles the resume upload functionality, including drag-and-drop,
- * parsing simulation, and persisting new candidate profiles.
+ * 1. API Endpoint for Parsing: POST /api/resumes/parse
+ *    - Headers: { 'Authorization': 'Bearer <token>' }
+ *    - Body: FormData containing the resume file (`multipart/form-data`).
+ *    - Success Response (200 OK): Parsed candidate JSON object.
+ *    - Example:
+ *      const formData = new FormData();
+ *      formData.append('resume', file);
+ *      const response = await fetch('/api/resumes/parse', { method: 'POST', body: formData, headers });
  *
- * BACKEND INTEGRATION (TODO):
- * - Replace `simulateResumeParsing` with an API call to a resume parsing service.
- * - Replace `persistCandidate` with an API call to create a new candidate record.
+ * 2. API Endpoint for Saving Candidate: POST /api/candidates
+ *    - Headers: { 'Authorization': 'Bearer <token>', 'Content-Type': 'application/json' }
+ *    - Body: The JSON object of the parsed candidate.
+ *    - Success Response (201 Created): The saved candidate object with a database ID.
  *
- * API Endpoints:
- * - POST /api/resumes/parse
- *   - Body: FormData with the resume file.
- *   - Response: A structured JSON object with the parsed candidate data.
+ * DATABASE SCHEMA (Example - PostgreSQL):
  *
- * - POST /api/candidates
- *   - Body: The JSON object of the new candidate.
- *   - Response: The created candidate object with its new database ID.
- *
- * DATABASE SCHEMA (candidates table):
- * - id (UUID, PK)
- * - name (VARCHAR)
- * - email (VARCHAR, UNIQUE)
- * - resume_file_path (VARCHAR) - Path to the stored resume file (e.g., in S3).
- * - resume_text (TEXT) - Full text extracted from the resume.
- * - skills (JSON/ARRAY)
- * - experience (INTEGER)
- * - education (TEXT)
- * - summary (TEXT)
- * - projects (JSON/ARRAY)
- * - uploaded_at (TIMESTAMP)
- * - parsed_at (TIMESTAMP)
+ * CREATE TABLE candidates (
+ *   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+ *   company_id UUID REFERENCES companies(id),
+ *   name VARCHAR(255) NOT NULL,
+ *   email VARCHAR(255) UNIQUE,
+ *   resume_text TEXT,
+ *   skills JSONB,
+ *   experience_years INT,
+ *   uploaded_at TIMESTAMPTZ DEFAULT NOW()
+ * );
  * ============================================================================
  */
 
@@ -127,7 +127,7 @@ function generateProjects(extractedSkills, exp) {
  *   const response = await fetch('/api/resumes/parse', {
  *     method: 'POST',
  *     body: formData,
- *     headers: { 'Authorization': `Bearer ${getAuthToken()}` }
+ *     headers: { 'Authorization': `Bearer ${sessionStorage.getItem('companyAuthToken')}` }
  *   });
  *   if (!response.ok) throw new Error('Parsing failed');
  *   return await response.json();
@@ -200,7 +200,7 @@ function simulateResumeParsing(file) {
  * async function createCandidateAPI(candidateData) {
  *   const response = await fetch('/api/candidates', {
  *     method: 'POST',
- *     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getAuthToken()}` },
+ *     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionStorage.getItem('companyAuthToken')}` },
  *     body: JSON.stringify(candidateData)
  *   });
  *   return await response.json();
@@ -337,7 +337,7 @@ function appendToLog(fileName, status, details) {
     <td>${details}</td>
   `;
   logBody.prepend(newRow); // Add new logs to the top
-  
+
   // Update log count if the function exists
   if (typeof updateLogCount === 'function') {
     updateLogCount();
@@ -346,6 +346,16 @@ function appendToLog(fileName, status, details) {
 /* --------------------------- Main Setup Function --------------------------- */
 
 function setupResumeUpload() {
+  /**
+   * ============================================================================
+   * AUTHENTICATION CHECK
+   * ============================================================================
+   */
+  if (sessionStorage.getItem('isCompanyLoggedIn') !== 'true') {
+    window.location.href = 'Company-login.htm';
+    return;
+  }
+
   const dropZone = document.querySelector("#resumeDropZone");
   const fileInput = document.querySelector("#resumeInput");
   const progressBar = document.querySelector("#uploadProgressBar");
@@ -434,33 +444,33 @@ function setupResumeUpload() {
 function initializeTabButtons() {
   const tabButtons = document.querySelectorAll('.tabs button');
   const tabContents = document.querySelectorAll('.tab-content');
-  
+
   if (!tabButtons.length) return;
-  
+
   tabButtons.forEach((button) => {
     button.addEventListener('click', () => {
       // Get the tab name from data-tab attribute
       const tabName = button.getAttribute('data-tab');
-      
+
       // Remove active class from all buttons
       tabButtons.forEach((btn) => btn.classList.remove('active'));
-      
+
       // Add active class to clicked button
       button.classList.add('active');
-      
+
       // Hide all tab contents
       tabContents.forEach((content) => {
         content.classList.remove('active');
       });
-      
+
       // Show the selected tab content
       const targetContent = document.getElementById(`tab-${tabName}`);
       if (targetContent) {
         targetContent.classList.add('active');
       }
-      
+
       console.log(`Switched to ${tabName} tab`);
-      
+
       // Load content for specific tabs if needed
       if (tabName === 'job-descriptions') {
         loadRecentJDs();
@@ -477,14 +487,14 @@ function initializeTabButtons() {
 function loadRecentJDs() {
   const recentJDsContainer = document.getElementById('recentJDs');
   if (!recentJDsContainer) return;
-  
+
   const jds = getStoredData(STORAGE_KEYS.jds) || [];
-  
+
   if (jds.length === 0) {
     recentJDsContainer.innerHTML = '<p class="breadcrumbs">No job descriptions found. <a href="jd.html">Create your first JD</a></p>';
     return;
   }
-  
+
   // Show last 5 JDs
   const recentJDs = jds.slice(-5).reverse();
   recentJDsContainer.innerHTML = recentJDs.map(jd => `
@@ -502,9 +512,9 @@ function loadRecentJDs() {
 function updateLogCount() {
   const logBody = document.querySelector("#parsingLogBody");
   const logCount = document.querySelector("#logCount");
-  
+
   if (!logBody || !logCount) return;
-  
+
   const rows = logBody.querySelectorAll('tr:not(.empty-log-row)');
   const count = rows.length;
   logCount.textContent = `${count} ${count === 1 ? 'entry' : 'entries'}`;
@@ -517,7 +527,7 @@ function setupParsingLogs() {
   const clearLogsBtn = document.getElementById('clearLogsBtn');
   const exportLogsBtn = document.getElementById('exportLogsBtn');
   const logBody = document.querySelector("#parsingLogBody");
-  
+
   if (clearLogsBtn) {
     clearLogsBtn.addEventListener('click', () => {
       if (confirm('Are you sure you want to clear all logs?')) {
@@ -528,17 +538,17 @@ function setupParsingLogs() {
       }
     });
   }
-  
+
   if (exportLogsBtn) {
     exportLogsBtn.addEventListener('click', () => {
       if (!logBody) return;
-      
+
       const rows = logBody.querySelectorAll('tr:not(.empty-log-row)');
       if (rows.length === 0) {
         alert('No logs to export.');
         return;
       }
-      
+
       // Create CSV content
       let csv = 'Timestamp,File Name,Status,Details\n';
       rows.forEach(row => {
@@ -547,7 +557,7 @@ function setupParsingLogs() {
           csv += `"${cells[0].textContent}","${cells[1].textContent}","${cells[2].textContent}","${cells[3].textContent}"\n`;
         }
       });
-      
+
       // Download CSV
       const blob = new Blob([csv], { type: 'text/csv' });
       const url = window.URL.createObjectURL(blob);
@@ -560,7 +570,7 @@ function setupParsingLogs() {
       window.URL.revokeObjectURL(url);
     });
   }
-  
+
 }
 
 /* Wire up on DOM ready for upload page */

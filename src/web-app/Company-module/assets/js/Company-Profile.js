@@ -1,4 +1,31 @@
 document.addEventListener('DOMContentLoaded', function () {
+    /**
+     * ============================================================================
+     * AUTHENTICATION CHECK
+     * ============================================================================
+     * This check runs on every protected page. It ensures the user is logged in.
+     */
+    if (sessionStorage.getItem('isCompanyLoggedIn') !== 'true') {
+        // If not logged in, redirect to the login page
+        window.location.href = 'Company-login.htm';
+        return; // Stop executing the rest of the script
+    }
+
+    /**
+     * ============================================================================
+     * COMPANY PROFILE - BACKEND INTEGRATION
+     * ============================================================================
+     *
+     * 1. GET /api/company/profile
+     *    - Fetches the current company's data to populate the form.
+     *
+     * 2. PUT /api/company/profile
+     *    - Updates the company's profile data.
+     *
+     * 3. POST /api/company/change-password
+     *    - Handles password changes.
+     *
+     */
     const form = document.getElementById('companyProfileForm');
     const securityForm = document.getElementById('securityForm');
     const inviteForm = document.getElementById('inviteForm');
@@ -81,6 +108,20 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        // TODO: Backend Integration - Update Profile
+        // const profileData = { companyName, companyEmail, companyWebsite /*, etc. */ };
+        // fetch('/api/company/profile', {
+        //     method: 'PUT',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${sessionStorage.getItem('companyAuthToken')}`
+        //     },
+        //     body: JSON.stringify(profileData)
+        // })
+        // .then(response => response.json())
+        // .then(data => showMessage('Profile updated successfully!'))
+        // .catch(err => showMessage('Update failed!', 'error'));
+
         // Simulate saving profile
         showMessage('Profile updated successfully!');
     });
@@ -111,6 +152,19 @@ document.addEventListener('DOMContentLoaded', function () {
             showMessage('Passwords do not match.', 'error');
             return;
         }
+
+        // TODO: Backend Integration - Change Password
+        // const passwordData = { newPassword, confirmPassword, currentPassword: '...' };
+        // fetch('/api/company/change-password', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${sessionStorage.getItem('companyAuthToken')}`
+        //     },
+        //     body: JSON.stringify(passwordData)
+        // })
+        // .then(() => { showMessage('Password changed successfully!'); securityForm.reset(); })
+        // .catch(err => showMessage('Password change failed.', 'error'));
 
         showMessage('Password changed successfully!');
         securityForm.reset();
@@ -226,11 +280,11 @@ function handleLogout() {
     const confirmLogout = confirm('Are you sure you want to logout?');
 
     if (confirmLogout) {
-        // Clear all stored data
-        clearStoredData();
-
-        // Redirect to index page
-        window.location.href = '../Index.html';
+        // Clear session data
+        sessionStorage.removeItem('isCompanyLoggedIn');
+        sessionStorage.removeItem('companyAuthToken'); // Also remove the token
+        // Redirect to login page
+        window.location.href = 'Company-login.htm';
     }
 }
 
@@ -239,77 +293,6 @@ function clearStoredData() {
     // Preserve user-created application data (JDs, candidates, shortlist, reports, theme)
     // Remove only authentication/session related keys so user's saved data remains intact.
 
-    try {
-        // Common app storage keys that we want to preserve (defined in data.js)
-        const preserveKeys = [
-            'ats_hr_jds',
-            'ats_hr_candidates',
-            'ats_hr_shortlist',
-            'ats_hr_theme',
-            'ats_hr_reports'
-        ];
-
-        // Known auth/session keys to remove (examples used across the codebase)
-        const authKeys = ['googleUser', 'user', 'authToken', 'session', 'sessionId'];
-
-        // Remove auth keys from localStorage and sessionStorage
-        authKeys.forEach(k => {
-            try { localStorage.removeItem(k); } catch (e) { }
-            try { sessionStorage.removeItem(k); } catch (e) { }
-        });
-
-        // Optionally clear any other session-scoped items (but keep persistent app data)
-        // We'll clear sessionStorage entirely (it typically holds only session data like googleUser)
-        try { sessionStorage.clear(); } catch (e) { }
-
-        // Do NOT call localStorage.clear() - that would remove user-created data.
-
-        // Clean up auth-like cookies only (avoid deleting unrelated cookies)
-        const cookies = document.cookie ? document.cookie.split(';') : [];
-        cookies.forEach(cookie => {
-            const eqPos = cookie.indexOf('=');
-            const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
-            if (/session|token|auth|google/i.test(name)) {
-                document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
-            }
-        });
-
-        // Avoid aggressively clearing caches since they may contain persisted user data.
-        // If you still want to clear caches for logout, uncomment the following block.
-        // if (window.caches) {
-        //   caches.keys().then(names => names.forEach(name => caches.delete(name)));
-        // }
-    } catch (err) {
-        console.warn('clearStoredData encountered an issue:', err);
-    }
-}
-
-function clearCookies() {
-    // Get all cookies and delete them
-    const cookies = document.cookie.split(";");
-
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i];
-        const eqPos = cookie.indexOf("=");
-        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-    }
-}
-
-function clearCache() {
-    // Clear application cache if supported
-    if (window.caches) {
-        caches.keys().then((names) => {
-            names.forEach(name => {
-                caches.delete(name);
-            });
-        });
-    }
-
-    // Clear browser cache for the domain (limited by browser security)
-    if (window.location.reload) {
-        window.location.reload(true);
-    }
 }
 
 // Prevent going back after logout

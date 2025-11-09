@@ -104,15 +104,17 @@ function renderDashboardCards() {
   if (!dashboardEl) return;
 
   // TODO: Replace with API call
-  // const stats = await fetch('/api/dashboard/stats', {
-  //   headers: { 'Authorization': `Bearer ${getAuthToken()}` }
+  // const stats = await fetch('/api/company/dashboard/stats', {
+  //   headers: { 'Authorization': `Bearer ${sessionStorage.getItem('companyAuthToken')}` }
   // }).then(r => r.json());
   // 
   // dashboardEl.innerHTML = `
   //   <div class="card">
   //     <h3>Resumes Scanned</h3>
   //     <div class="metric">${stats.resumes_scanned}</div>
-  //     <div class="trend">▲ ${stats.trends.weekly_growth}% vs last week</div>
+  //     <div class="trend positive">
+  //        ▲ ${stats.trends.weekly_growth} new this week
+  //     </div>
   //   </div>
   //   ...
   // `;
@@ -197,9 +199,10 @@ function renderDashboardCharts() {
   if (!skillsCtx || !matchCtx) return;
 
   // TODO: Replace with API call
-  // const skillsData = await fetch('/api/dashboard/skills-distribution')
+  // const headers = { 'Authorization': `Bearer ${sessionStorage.getItem('companyAuthToken')}` };
+  // const skillsData = await fetch('/api/company/dashboard/skills-distribution', { headers })
   //   .then(r => r.json());
-  // const trendsData = await fetch('/api/dashboard/match-trends')
+  // const trendsData = await fetch('/api/company/dashboard/match-trends', { headers })
   //   .then(r => r.json());
 
   const candidates = getStoredData(STORAGE_KEYS.candidates) || [];
@@ -250,7 +253,7 @@ function renderDashboardCharts() {
   const today = new Date();
   const dayLabels = [];
   const dayDates = [];
-  
+
   for (let i = 6; i >= 0; i--) {
     const date = new Date(today);
     date.setDate(date.getDate() - i);
@@ -278,13 +281,13 @@ function renderDashboardCharts() {
 
   // Process candidates by upload date
   const totalCandidatesPerDay = new Array(7).fill(0);
-  
+
   candidates.forEach((candidate) => {
     if (!candidate.uploadedAt) return;
-    
+
     const uploadDate = new Date(candidate.uploadedAt);
     const uploadDateStr = uploadDate.toISOString().split('T')[0];
-    
+
     // Find which day index this candidate belongs to
     const dayIndex = dayDates.findIndex((date) => date === uploadDateStr);
     if (dayIndex === -1) return; // Not in last 7 days
@@ -312,12 +315,12 @@ function renderDashboardCharts() {
   });
 
   // Calculate shortlisted percentage (normalized to 0-100 scale)
-  const shortlistedPercentages = shortlistedCounts.map((count, idx) => 
+  const shortlistedPercentages = shortlistedCounts.map((count, idx) =>
     totalCandidatesPerDay[idx] > 0 ? Math.round((count / totalCandidatesPerDay[idx]) * 100) : 0
   );
 
   // Calculate averages
-  const avgMatchScores = matchScoreData.map((sum, idx) => 
+  const avgMatchScores = matchScoreData.map((sum, idx) =>
     matchScoreCounts[idx] > 0 ? Math.round(sum / matchScoreCounts[idx]) : 0
   );
 
@@ -357,7 +360,7 @@ function renderDashboardCharts() {
         const jdAverages = jdData.scores.map((sum, dayIdx) =>
           jdData.counts[dayIdx] > 0 ? Math.round(sum / jdData.counts[dayIdx]) : 0
         );
-        
+
         // Only add if there's meaningful data
         if (jdAverages.some(score => score > 0)) {
           const colors = [
@@ -468,7 +471,8 @@ function populateQuickFilters() {
   if (!filterRole || !filterDept || !filterDate || !pill) return;
 
   // TODO: Replace with API call
-  // const jds = await fetch('/api/jds').then(r => r.json());
+  // const headers = { 'Authorization': `Bearer ${sessionStorage.getItem('companyAuthToken')}` };
+  // const jds = await fetch('/api/jds', { headers }).then(r => r.json());
   const jds = getStoredData(STORAGE_KEYS.jds) || [];
 
   const uniqueRoles = [...new Set(jds.map((jd) => jd.title))];
@@ -495,7 +499,7 @@ function populateQuickFilters() {
     //   department: filterDept.value,
     //   days: filterDate.value
     // });
-    // const candidates = await fetch(`/api/candidates?${params}`)
+    // const candidates = await fetch(`/api/candidates?${params}`, { headers })
     //   .then(r => r.json());
 
     const candidates = getStoredData(STORAGE_KEYS.candidates) || [];
@@ -558,12 +562,12 @@ function populateQuickFilters() {
 let refreshTimeout = null;
 function refreshDashboard() {
   if (!document.body.classList.contains("dashboard-page")) return;
-  
+
   // Clear existing timeout
   if (refreshTimeout) {
     clearTimeout(refreshTimeout);
   }
-  
+
   // Debounce: wait 100ms before refreshing (in case multiple updates happen quickly)
   refreshTimeout = setTimeout(() => {
     console.log("Refreshing dashboard...");
@@ -601,7 +605,7 @@ document.addEventListener("visibilitychange", () => {
 });
 
 // Helper function to dispatch data update event (make it globally available)
-window.notifyDataUpdate = function() {
+window.notifyDataUpdate = function () {
   document.dispatchEvent(new CustomEvent("dataUpdated"));
 };
 
@@ -613,31 +617,31 @@ window.notifyDataUpdate = function() {
 function initializeTabButtons() {
   const tabButtons = document.querySelectorAll('.tabs button');
   const tabContents = document.querySelectorAll('.tab-content');
-  
+
   if (!tabButtons.length) return;
-  
+
   tabButtons.forEach((button) => {
     button.addEventListener('click', () => {
       // Get the tab name from data-tab attribute
       const tabName = button.getAttribute('data-tab');
-      
+
       // Remove active class from all buttons
       tabButtons.forEach((btn) => btn.classList.remove('active'));
-      
+
       // Add active class to clicked button
       button.classList.add('active');
-      
+
       // Hide all tab contents
       tabContents.forEach((content) => {
         content.classList.remove('active');
       });
-      
+
       // Show the selected tab content
       const targetContent = document.getElementById(`tab-${tabName}`);
       if (targetContent) {
         targetContent.classList.add('active');
       }
-      
+
       console.log(`Switched to ${tabName} tab`);
     });
   });
@@ -650,4 +654,3 @@ document.addEventListener("DOMContentLoaded", () => {
   populateQuickFilters();
   initializeTabButtons();
 });
-
