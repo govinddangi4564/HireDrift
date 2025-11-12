@@ -90,7 +90,7 @@ registrationForm.addEventListener('submit', function (e) {
     // =================================================
 
     // DEMO: Simulate successful registration and redirect
-    showMessage('Redirecting to company registration...', 'success');
+    showMessage('Registration success redirect to dashboard...', 'success');
     sessionStorage.setItem('isCompanyLoggedIn', 'true'); // Set session flag
 
     // In a real application, redirect to registration page

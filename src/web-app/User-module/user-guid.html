@@ -6,36 +6,146 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>User Guide — Intelligent Resume Screening (SBERT)</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/Header-Footer.css">
 </head>
 
 <body class="font-sans flex flex-col bg-gray-50">
 
-    <header class="fixed top-0 left-0 w-full h-auto md:h-[70px] bg-[#46465f] text-white z-50 shadow-md">
-        <nav
-            class="container mx-auto flex flex-col md:flex-row justify-between md:items-center p-4 md:p-0 md:px-5 md:h-full">
-            <div class="flex items-center gap-3">
-                <div class="logo">
-                    <img src="../images/Logo.png" alt="AI Resume Screening" class="rounded-full w-10">
-                </div>
-                <h2 class="name text-2xl font-bold">AI Resume Screening</h2>
+    <!-- Overlay with Blur Background - Add this to your page -->
+    <div id="overlay" class="overlay">
+
+        <!-- Popup Form -->
+        <div class="popup-form">
+
+            <!-- Close Button -->
+            <button onclick="closePopup()" class="close-btn">×</button>
+
+            <!-- Header -->
+            <h2>Log in</h2>
+            <p class="register-link">
+                New user? <a href="Registeration-Form.html">Register Now</a>
+            </p>
+
+
+            <!-- Google Sign In Button -->
+            <button class="google-btn" id="googleSignInBtn">
+                <svg class="google-icon" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 
+        1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 
+        3.28-4.74 3.28-8.09z" />
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 
+        1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 
+        20.53 7.7 23 12 23z" />
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 
+        8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 
+        14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 
+        2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                </svg>
+                <span class="button-text">Continue with Google</span>
+                <div class="spinner"></div>
+            </button>
+
+            <div id="user-info"></div>
+
+            <!-- Social Buttons -->
+            <!-- <div class="social-buttons">
+                <button class="social-btn facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                <button class="social-btn linkedin">
+                    <i class="fab fa-linkedin-in"></i>
+                </button>
+                <button class="social-btn github">
+                    <i class="fab fa-github"></i>
+                </button>
+                <button class="social-btn other">
+                    <i class="fas fa-circle"></i>
+                </button>
+            </div> -->
+
+            <!-- Divider -->
+            <div class="divider">
+                <span>or</span>
             </div>
-            <div class="nav-links flex flex-wrap items-center mt-4 md:mt-0 gap-x-2">
-                <a href="../Index.html"
-                    class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">Home</a>
-                <a href="#features"
-                    class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">Features</a>
-                <a href="#upload"
-                    class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">Upload</a>
-                <a href="#About" class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">About</a>
-                <a href="#contact"
-                    class="font-medium p-2 transition-colors duration-300 hover:text-yellow-400">Contact</a>
-                <div class="Mode">
-                    <button id="toggle"
-                        class="flex items-center gap-2 h-[35px] px-3 rounded-full cursor-pointer text-sm bg-black text-white transition-colors duration-1000">
-                        <span class="icon text-lg">🌙</span>
-                        <span class="Mode_text">Dark Mode</span>
-                    </button>
+
+            <!-- Form -->
+            <form id="loginForm" novalidate>
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="Email" required>
                 </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter Password" required>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" checked>
+                        Remember me
+                    </label>
+                    <a href="forgot-password.html" class="forgot-password">Forgot Password</a>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Sign In</button>
+            </form>
+
+            <!-- Footer Text -->
+            <p class="footer-text">
+                By creating this account, you agree to our
+                <a href="privacy.html">Privacy Policy</a> &
+                <a href="Cookie-Policy.html">Cookie Policy</a>.
+            </p>
+        </div>
+    </div>
+
+    <!-- Profile Overlay -->
+    <div id="profileOverlay" class="overlay">
+        <div class="popup-form profile-popup">
+            <button onclick="closeProfilePopup()" class="close-btn">×</button>
+            <div id="profileContent">
+                <!-- Profile content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="name-logo">
+                <div class="logo"><img src="../images/Logo.png" alt="AI Resume Screening"></div>
+                <h2 class="name">AI Resume Screening</h2>
+            </div>
+
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+            </label>
+
+            <div class="nav-menu">
+                <a href="../Index.html#home">Home</a>
+                <a href="../index.html#features">Features</a>
+                <a href="../index.html#upload">Upload</a>
+                <a href="../index.html#About">About</a>
+                <a href="../index.html#contact">Contact</a>
+                <!-- Sign In Button (Top Right) - Add this to your page -->
+                <button onclick="openPopup()" class="sign-in-btn" id="sign-in">
+                    <i class="fa-solid fa-user"></i>
+                    Sign In
+                </button>
+                <button class="sign-in-btn" id="hr-login-btn">
+                    <a href="../Company-module/Company-login.htm" id="Company-login"
+                        class="flex items-center gap-2"><i class="fa-solid fa-briefcase"></i>HR Login</a>
+                </button>
             </div>
         </nav>
     </header>
@@ -138,100 +248,77 @@
         </div>
     </main>
 
-    <div
-        class="footer_main bg-white flex flex-col gap-8 px-5 py-10 md:px-16 md:py-12 lg:flex-row lg:justify-between lg:px-32 lg:py-16">
+    <!-- Footer Contact us -->
+
+    <div class="footer_main">
         <div class="footer_contact">
-            <div class="footer_container grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Customer Support</h3>
-                    <ul class="space-y-2">
-                        <li><a href="help-centre.html"
-                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">Help
-                                Center</a></li>
-                        <li><a href="user-guid.html"
-                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">User
-                                Guide</a></li>
+            <div class="footer_container">
+
+
+                <!-- Customer Service -->
+                <div class="C_customer">
+                    <h3>Customer Support</h3>
+                    <ul>
+                        <li><a href="help-centre.html">Help Center</a></li>
+                        <li><a href="user-guid.html">User Guide</a></li>
                     </ul>
                 </div>
 
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Trust and Transparency</h3>
-                    <ul class="space-y-2">
-                        <li><a href="about-us.html"
-                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">About
-                                Us</a></li>
-                        <li><a href="/src/web-app/Index.html"
-                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">Contact
-                                Us</a></li>
-                        <li><a href="companies-hiring.html"
-                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">Companies
-                                Hiring</a></li>
-                        <li><a href="privacy.html"
-                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">Privacy
-                                Policy</a></li>
-                        <li><a href="Cookie-Policy.html"
-                                class="text-[#5b6779] font-medium no-underline block mb-2.5 transition-colors hover:text-[#4f46e5]">Cookies
-                                Policy</a></li>
-                        <li><a href="terms.html"
-                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">Terms
-                                of Service</a></li>
+                <!-- Quick Links -->
+                <div class="C_QuickLinks">
+                    <h3>Trust and Transparency</h3>
+                    <ul>
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="../Index.html#contact">Contact Us</a></li>
+                        <li><a href="companies-hiring.html">Companies Hiring</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="Cookie-Policy.html">Cookies Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
                     </ul>
                 </div>
 
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Connect With Us</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center gap-3 text-gray-600">
+                <!-- Connect With Us -->
+                <div class="C_connect">
+                    <h3>Connect With Us</h3>
+                    <ul class="footer_contact">
+                        <li>
                             <span>📧</span>
-                            <a href="#"
-                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">resumesupport@gmail.com</a>
+                            <a href="">resumesupport@gmail.com</a>
                         </li>
-                        <li class="flex items-center gap-3 text-gray-600">
+                        <li>
                             <span>📞</span>
-                            <a href="#"
-                                class="font-medium text-gray-600 transition-colors duration-300 hover:text-indigo-600">+91
-                                123 456 7890</a>
+                            <a href="">+91 123 456 7890</a>
                         </li>
-                        <li class="flex items-center gap-3 text-gray-600">
+                        <li>
                             <span>📍</span>
-                            <span class="font-medium">Indore, Madhya Pradesh</span>
+                            <span>Indore, Madhya Pradesh</span>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </div>
 
+            </div>
+
+        </div>
         <div class="Social-Media-main">
             <div class="Social-Media">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Social-Media Connections</h3>
-                <div class="social-media-container flex flex-col gap-3 md:flex-row md:flex-wrap lg:flex-col">
+                <h3>Social-Media Connections</h3>
+
+                <div class="social-media-container">
                     <div class="social-media-tag">
-                        <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
-                                <circle cx="12" cy="12" r="10" fill="#FF4500" />
-                                <circle cx="8.5" cy="12" r="1.5" fill="#FFFFFF" />
-                                <circle cx="15.5" cy="12" r="1.5" fill="#FFFFFF" />
-                                <path d="M8 15c1.5 1 6.5 1 8 0" stroke="#FFFFFF" stroke-width="1.5" fill="none"
-                                    stroke-linecap="round" />
+                        <a href="https://github.com/govinddangi4564/Minor-Project-A08.git" target="_blank"
+                            rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8">
+                                </path>
                             </svg>
-                            <span>Reddit</span>
+                            <span>GitHub</span>
                         </a>
                     </div>
+
                     <div class="social-media-tag">
-                        <a href="https://x.com/" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
-                                <rect width="24" height="24" fill="#000000" />
-                                <path fill="#FFFFFF" d="M6 6h2l4 5 4-5h2l-5 6 5 6h-2l-4-5-4 5H6l5-6z" />
-                            </svg>
-                            <span>X</span>
-                        </a>
-                    </div>
-                    <div class="social-media-tag">
-                        <a href="https://in.linkedin.com/" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
+                        <a href="https://in.linkedin.com/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <rect width="24" height="24" rx="4" fill="#0A66C2" />
                                 <rect x="5" y="9" width="2.5" height="8" fill="#FFFFFF" />
                                 <circle cx="6.25" cy="6.5" r="1.25" fill="#FFFFFF" />
@@ -242,57 +329,46 @@
                         </a>
                     </div>
                     <div class="social-media-tag">
-                        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
+                        <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" fill="#FF4500" />
+                                <circle cx="8.5" cy="12" r="1.5" fill="#FFFFFF" />
+                                <circle cx="15.5" cy="12" r="1.5" fill="#FFFFFF" />
+                                <path d="M8 15c1.5 1 6.5 1 8 0" stroke="#FFFFFF" stroke-width="1.5" fill="none"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span>Reddit</span>
+                        </a>
+                    </div>
+                    <div class="social-media-tag">
+                        <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <rect width="24" height="24" fill="#000000" />
+                                <path fill="#FFFFFF" d="M6 6h2l4 5 4-5h2l-5 6 5 6h-2l-4-5-4 5H6l5-6z" />
+                            </svg>
+                            <span>X</span>
+                        </a>
+                    </div>
+
+                    <div class="social-media-tag">
+                        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <rect x="1" y="5" width="22" height="14" rx="4" ry="4" fill="#FF0000" />
                                 <polygon points="10,8 16,12 10,16" fill="#FFFFFF" />
                             </svg>
                             <span>YouTube</span>
                         </a>
                     </div>
-                    <div class="social-media-tag">
-                        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
-                                <rect width="24" height="24" rx="4" fill="#1877F2" />
-                                <path fill="#FFFFFF" d="M13 8h2V5h-2c-1.7 0-3 1.3-3 3v2H8v3h2v6h3v-6h2.2l.3-3H13V8z" />
-                            </svg>
-                            <span>Facebook</span>
-                        </a>
-                    </div>
-                    <div class="social-media-tag">
-                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 text-gray-700 font-semibold transition-transform duration-200 ease-in-out hover:scale-105 hover:text-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-8 h-8">
-                                <defs>
-                                    <radialGradient id="igGradient" cx="33%" cy="100%" r="100%" fx="33%" fy="100%">
-                                        <stop offset="0%" stop-color="#fdf497" />
-                                        <stop offset="25%" stop-color="#fdf497" />
-                                        <stop offset="50%" stop-color="#fd5949" />
-                                        <stop offset="75%" stop-color="#d6249f" />
-                                        <stop offset="100%" stop-color="#285AEB" />
-                                    </radialGradient>
-                                </defs>
-                                <rect width="512" height="512" rx="120" fill="url(#igGradient)" />
-                                <path fill="none" stroke="#fff" stroke-width="40"
-                                    d="M256 160c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96z" />
-                                <circle cx="370" cy="142" r="30" fill="#fff" />
-                                <rect x="92" y="92" width="328" height="328" rx="100" fill="none" stroke="#fff"
-                                    stroke-width="40" />
-                            </svg>
-                            <span>Instagram</span>
-                        </a>
-                    </div>
+
                 </div>
+
             </div>
         </div>
     </div>
 
-    <footer class="w-full bg-[#004aad] text-white text-sm text-center p-3 border-t border-white/10">
-        <p>Last Updated: <strong>October 9, 2025</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-            © 2025 Intelligent Resume Screening System — All Rights Reserved.</p>
-    </footer>
+    <footer>© 2025 Intelligent Resume Screening | Guided by Prof. Atul Barve</footer>
+
+    <script src="js/User-login.js"></script>
 
 </body>
 
