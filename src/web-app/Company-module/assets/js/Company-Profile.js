@@ -33,10 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const navItems = document.querySelectorAll('.nav-item');
     const tabContents = document.querySelectorAll('.tab-content');
 
-    // --- Modal Elements ---
     const modalOverlay = document.getElementById('modal-overlay');
-    const upgradePlanBtn = document.getElementById('upgradePlanBtn');
-    const upgradePlanModal = document.getElementById('upgradePlanModal');
     const enable2faBtn = document.getElementById('enable2faBtn');
     const twoFactorModal = document.getElementById('twoFactorModal');
 
@@ -185,8 +182,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- Cancel Subscription ---
     cancelSubscriptionBtn.addEventListener('click', function () {
         if (confirm('Are you sure you want to cancel your subscription? This action cannot be undone.')) {
-            showMessage('Your subscription has been cancelled.', 'error');
-            // Add backend logic here
+            // In a real app, you'd call a backend endpoint to cancel the subscription.
+            // For now, we'll just clear the plan from localStorage and redirect.
+            localStorage.removeItem('companyPlan');
+            showMessage('Your subscription has been cancelled.', 'success');
+            // Redirect to the plan selection page
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 1000); // Wait a moment for the user to see the message
         }
     });
 
@@ -207,6 +210,47 @@ document.addEventListener('DOMContentLoaded', function () {
         showMessage('New API key generated successfully!');
     });
 
+    // --- Populate Plan Information from localStorage ---
+    function populatePlanDetails() {
+        const planData = JSON.parse(localStorage.getItem('companyPlan'));
+        const planContainer = document.getElementById('plan-card');
+
+        if (planData && planContainer) {
+            // Default values if planData is missing some fields
+            const planName = planData.name || 'N/A';
+            const planPrice = planData.price || '₹ 0';
+            const resumeCount = planData.resumes || '0 resumes';
+            const renewalDate = planData.renewalDate || 'N/A';
+            const features = planData.features || [];
+
+            planContainer.querySelector('.plan-name').textContent = planName;
+            planContainer.querySelector('.price').innerHTML = `${planPrice}<span>/month</span>`;
+            planContainer.querySelector('.resume-count').textContent = resumeCount;
+            planContainer.querySelector('.plan-expiry').textContent = `Your plan renews on ${renewalDate}.`;
+
+            const featuresList = planContainer.querySelector('.features');
+            featuresList.innerHTML = ''; // Clear existing features
+            features.forEach(featureText => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-check-circle"></i> ${featureText}`;
+                featuresList.appendChild(li);
+            });
+        } else if (planContainer) {
+            // Handle case where there is no plan
+            planContainer.querySelector('.plan-name').textContent = 'No Active Plan';
+            planContainer.querySelector('.price').innerHTML = `₹ 0<span>/month</span>`;
+            planContainer.querySelector('.resume-count').textContent = 'Please select a plan to start.';
+            planContainer.querySelector('.plan-expiry').textContent = '';
+            planContainer.querySelector('.features').innerHTML = '';
+            // Maybe hide the cancel button if there's no plan
+            const cancelBtn = document.getElementById('cancelSubscriptionBtn');
+            if(cancelBtn) cancelBtn.style.display = 'none';
+        }
+    }
+
+    // Call it once on page load
+    populatePlanDetails();
+
     // --- Modal Handling ---
     function openModal(modal) {
         modalOverlay.classList.add('active');
@@ -218,8 +262,6 @@ document.addEventListener('DOMContentLoaded', function () {
             el.classList.remove('active');
         });
     }
-
-    upgradePlanBtn.addEventListener('click', () => openModal(upgradePlanModal));
 
     enable2faBtn.addEventListener('click', () => {
         twoFactorModal.innerHTML = `

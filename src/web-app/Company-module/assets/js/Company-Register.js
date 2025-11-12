@@ -1,10 +1,28 @@
-// Get all elements
-const pricingPage = document.getElementById('pricingPage');
+// Registration elements only
 const registrationPage = document.getElementById('registrationPage');
 const selectedPlanName = document.getElementById('selectedPlanName');
-const selectButtons = document.querySelectorAll('.select-btn');
 const backBtn = document.getElementById('backBtn');
 const registrationForm = document.getElementById('registrationForm');
+
+// Ensure a plan is selected; otherwise, go to plans page
+(function initRegistrationFromPlan() {
+    try {
+        const savedPlanRaw = localStorage.getItem('companyPlan');
+        if (!savedPlanRaw) {
+            window.location.href = './plans.html';
+            return;
+        }
+        const plan = JSON.parse(savedPlanRaw);
+        if (!plan || !plan.name) {
+            window.location.href = './plans.html';
+            return;
+        }
+        selectedPlanName.textContent = plan.name + ' Plan';
+        window.scrollTo(0, 0);
+    } catch (_) {
+        window.location.href = './plans.html';
+    }
+})();
 
 /**
  * ============================================================================
@@ -39,31 +57,9 @@ function showMessage(text, type) {
     }, 3000);
 }
 
-// Add click event to all plan buttons
-selectButtons.forEach(button => {
-    button.addEventListener('click', function () {
-        const card = this.closest('.pricing-card');
-        const planName = card.getAttribute('data-plan');
-
-        // Update selected plan name
-        selectedPlanName.textContent = planName + ' Plan';
-
-        // Show registration page
-        pricingPage.classList.add('hidden');
-        registrationPage.classList.add('active');
-
-        // Scroll to top
-        window.scrollTo(0, 0);
-    });
-});
-
-// Back button functionality
+// Back button: go to plans page
 backBtn.addEventListener('click', function () {
-    registrationPage.classList.remove('active');
-    pricingPage.classList.remove('hidden');
-
-    // Scroll to top
-    window.scrollTo(0, 0);
+    window.location.href = './plans.html';
 });
 
 // Form submission
@@ -104,16 +100,4 @@ registrationForm.addEventListener('submit', function (e) {
 
     // Reset form
     this.reset();
-});
-
-// Add hover effect to pricing cards
-const pricingCards = document.querySelectorAll('.pricing-card');
-pricingCards.forEach(card => {
-    card.addEventListener('mouseenter', function () {
-        this.style.transform = 'translateY(-5px)';
-    });
-
-    card.addEventListener('mouseleave', function () {
-        this.style.transform = 'translateY(0)';
-    });
 });

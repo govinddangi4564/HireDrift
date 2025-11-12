@@ -80,9 +80,9 @@ loginForm.addEventListener('submit', function (e) {
 });
 
 registerBtn.addEventListener('click', function () {
-    showMessage('Redirecting to company registration...', 'success');
-    // Redirect to registration page
+    showMessage('Redirecting to plans...', 'success');
+    // Redirect to plans page
     setTimeout(() => {
-        window.location.href = 'Company-Register.html';
+        window.location.href = 'plans.html';
     }, 1500);
 });

@@ -49,27 +49,28 @@
                     <div class="form-group">
                         <label for="companyName">Company Name</label>
                         <input type="text" id="companyName" name="companyName" required placeholder="Enter company name"
-                            value="Innovate Inc.">
+                            value="HCL Technologies Ltd.">
                     </div>
                     <div class="form-group">
                         <label for="companyEmail">Email</label>
                         <input type="email" id="companyEmail" name="companyEmail" required
-                            placeholder="Enter company email" value="contact@innovate.com">
+                            placeholder="Enter company email" value="contact@hcl.com">
                     </div>
                     <div class="form-group">
                         <label for="companyAddress">Address</label>
                         <input type="text" id="companyAddress" name="companyAddress" required
-                            placeholder="Enter company address" value="123 Tech Street, Silicon Valley, CA">
+                            placeholder="Enter company address" value="HCL Technologies Ltd. | Technology Hub, SEZ
+Plot No. 3A, Sector 126 | Noida – 201304, India">
                     </div>
                     <div class="form-group">
                         <label for="companyWebsite">Website</label>
                         <input type="url" id="companyWebsite" name="companyWebsite"
-                            placeholder="https://yourcompany.com" value="https://innovate.com">
+                            placeholder="https://yourcompany.com" value="https://hcl.com">
                     </div>
                     <div class="form-group">
                         <label for="companyDescription">Description</label>
                         <textarea id="companyDescription" name="companyDescription" rows="4"
-                            placeholder="Describe your company">Innovate Inc. is a leading provider of AI-driven recruitment solutions.</textarea>
+                            placeholder="Describe your company">HCL Technologies Ltd. is a leading provider of AI-driven recruitment solutions.</textarea>
                     </div>
                     <div class="form-group logo-upload">
                         <label>Logo</label>
@@ -90,21 +91,19 @@
                     <h1>Plan & Billing</h1>
                     <p>Manage your subscription, view invoices, and update payment details.</p>
                 </header>
-                <div class="plan-card popular">
-                    <div class="popular-badge">Current Plan</div>
-                    <div class="plan-name">Agency</div>
-                    <div class="price">₹ 2499<span>/month</span></div>
-                    <div class="resume-count">2000 resumes included</div>
-                    <p class="plan-expiry">Your plan renews on December 8, 2025.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Unlimited job descriptions</li>
-                        <li><i class="fas fa-check-circle"></i> Unlimited candidate exports</li>
-                        <li><i class="fas fa-check-circle"></i> AI screening questions</li>
-                        <li><i class="fas fa-check-circle"></i> Priority email & chat support</li>
-                    </ul>
-                    <div class="form-actions">
-                        <button class="btn btn-primary" id="upgradePlanBtn">Upgrade Plan</button>
-                        <button class="btn btn-outline" id="cancelSubscriptionBtn">Cancel Subscription</button>
+                <div id="plan-card" class="plan-card">
+                    <div class="plan-header">
+                        <h3 class="plan-name"></h3>
+                        <p class="price"></p>
+                    </div>
+                    <div class="plan-body">
+                        <p class="resume-count"></p>
+                        <p class="plan-expiry"></p>
+                        <ul class="features"></ul>
+                    </div>
+                    <div class="plan-actions">
+                        <button id="upgradePlanBtn" class="btn btn-primary">Upgrade Plan</button>
+                        <button id="cancelSubscriptionBtn" class="btn btn-outline">Cancel Subscription</button>
                     </div>
                 </div>
 
@@ -125,7 +124,7 @@
                                 <tr>
                                     <td>Nov 8, 2025</td>
                                     <td>Monthly Subscription - Agency Plan</td>
-                                    <td>₹ 2499.00</td>
+                                    <td>₹ <strike>2499.00</strike></td>
                                     <td><span class="status-paid">Paid</span></td>
                                     <td><a href="#" class="btn-link">Download</a></td>
                                 </tr>
@@ -150,10 +149,10 @@
                     <div class="team-list">
                         <div class="team-member">
                             <div class="member-info">
-                                <img src="https://i.pravatar.cc/40?u=jane" alt="Jane Doe">
+                                <i class="fa-solid fa-user"></i>
                                 <div>
-                                    <span class="member-name">Jane Doe (You)</span>
-                                    <span class="member-email">jane.doe@innovate.com</span>
+                                    <span class="member-name">Ramachandran Sundararajan (You)</span>
+                                    <span class="member-email">ramachandran.sundararajan@hcl.com</span>
                                 </div>
                             </div>
                             <div class="member-actions">
@@ -162,10 +161,10 @@
                         </div>
                         <div class="team-member">
                             <div class="member-info">
-                                <img src="https://i.pravatar.cc/40?u=john" alt="John Smith">
+                                <i class="fa-solid fa-user"></i>
                                 <div>
-                                    <span class="member-name">John Smith</span>
-                                    <span class="member-email">john.smith@innovate.com</span>
+                                    <span class="member-name">Amrita Das</span>
+                                    <span class="member-email">amrita.das@hcl.com</span>
                                 </div>
                             </div>
                             <div class="member-actions">
@@ -286,29 +285,6 @@
 
     <!-- Modals -->
     <div id="modal-overlay" class="modal-overlay"></div>
-
-    <div id="upgradePlanModal" class="modal">
-        <div class="modal-header">
-            <h2>Upgrade Your Plan</h2>
-            <button class="close-modal-btn">&times;</button>
-        </div>
-        <div class="modal-body">
-            <p>Select a new plan to unlock more features and increase your resume screening limit.</p>
-            <!-- Pricing cards can be dynamically inserted here -->
-            <div class.diff-block="pricing-grid-modal">
-                <!-- Example Plan -->
-                <div class="pricing-card">
-                    <div class="plan-name">Hiring Sprint</div>
-                    <div class="price">₹ 5999<span>/quarter</span></div>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> 6000 resumes included</li>
-                        <li><i class="fas fa-check-circle"></i> Everything in Agency</li>
-                    </ul>
-                    <button class="btn btn-primary select-plan-btn">Select Sprint</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="twoFactorModal" class="modal">
         <!-- 2FA Modal Content will be generated by JS -->
