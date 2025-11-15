@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
             planContainer.querySelector('.features').innerHTML = '';
             // Maybe hide the cancel button if there's no plan
             const cancelBtn = document.getElementById('cancelSubscriptionBtn');
-            if(cancelBtn) cancelBtn.style.display = 'none';
+            if (cancelBtn) cancelBtn.style.display = 'none';
         }
     }
 
@@ -287,6 +287,9 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
         openModal(twoFactorModal);
 
+        // Add event listener for the new close button
+        twoFactorModal.querySelector('.close-modal-btn').addEventListener('click', closeModal);
+
         // Add form submission logic for 2FA
         document.getElementById('2faForm').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -300,10 +303,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Add event listeners to all close buttons and the overlay
-    document.querySelectorAll('.close-modal-btn, .modal-overlay').forEach(el => {
-        el.addEventListener('click', closeModal);
-    });
+    // Add event listener for the overlay to close modals
+    modalOverlay.addEventListener('click', closeModal);
 
     // Prevent modal clicks from closing the modal
     document.querySelectorAll('.modal').forEach(modal => {

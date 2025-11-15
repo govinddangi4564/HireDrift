@@ -1,10 +1,4 @@
-// Auto open popup after 5 seconds
-setTimeout(() => {
-    // Only open the popup if no user is currently logged in
-    if (!googleUser) {
-        openPopup();
-    }
-}, 5000);
+
 
 // Function to open popup
 function openPopup() {
@@ -277,8 +271,24 @@ function updateSignInButtonToProfile(user) {
         `;
         userSignInBtn.onclick = (e) => {
             e.preventDefault();
-            // Redirect to the dedicated profile page (connected to actual file)
-            window.location.href = '../User-module/profile-section.html';
+
+            // Try first location
+            const url1 = '../User-module/profile-section.html';
+            const url2 = './User-module/profile-section.html';
+
+            // Check if the file exists using fetch
+            fetch(url1, { method: 'HEAD' })
+                .then((response) => {
+                    if (response.ok) {
+                        window.location.href = url1;
+                    } else {
+                        window.location.href = url2;
+                    }
+                })
+                .catch(() => {
+                    // If fetch fails, go to second path
+                    window.location.href = url2;
+                });
         };
 
         // Store user data in sessionStorage for persistence within the current session

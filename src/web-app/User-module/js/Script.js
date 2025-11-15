@@ -20,6 +20,14 @@ function handleFiles(files) {
     simulateUpload(file);
 }
 
+// Auto open popup after 5 seconds
+setTimeout(() => {
+    // Only open the popup if no user is currently logged in
+    if (!googleUser) {
+        openPopup();
+    }
+}, 5000);
+
 // Foating button
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
