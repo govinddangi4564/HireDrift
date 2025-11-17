@@ -1,0 +1,255 @@
+/**
+ * ============================================================================
+ * DASHBOARD PAGE - Analytics & Metrics
+ * ============================================================================
+ * 
+ * BACKEND INTEGRATION:
+ * Replace getStoredData() calls with API endpoints for real-time analytics
+ * 
+ * API ENDPOINTS:
+ * 
+ * 1. GET /api/dashboard/stats
+ *    Headers: { 'Authorization': 'Bearer <token>' }
+ *    Response: {
+ *      resumes_scanned: 150,
+ *      shortlisted: 25,
+ *      avg_match_score: 78,
+ *      active_jds: 5,
+ *      trends: { 
+ *        weekly_growth: 12, 
+ *        conversion_rate: 8,
+ *        top_department: "Engineering",
+ *        top_skill: "Python"
+ *      }
+ *    }
+ * 
+ * 2. GET /api/dashboard/skills-distribution?days=7
+ *    Response: { 
+ *      skills: [
+ *        { name: "Python", count: 45, percentage: 30 },
+ *        { name: "React", count: 32, percentage: 21 },
+ *        ...
+ *      ] 
+ *    }
+ * 
+ * 3. GET /api/dashboard/match-trends?days=7&jd_id=xxx
+ *    Response: { 
+ *      trends: [
+ *        { date: "2025-01-15", avg_score: 85, shortlisted_count: 5, total_candidates: 12 },
+ *        { date: "2025-01-16", avg_score: 82, shortlisted_count: 3, total_candidates: 8 },
+ *        ...
+ *      ],
+ *      jd_breakdown: [
+ *        { jd_id: "jd-1", jd_title: "Full Stack Developer", daily_scores: [...] },
+ *        ...
+ *      ]
+ *    }
+ * 
+ * DATABASE QUERIES (Backend Implementation):
+ * 
+ * 1. Dashboard Stats:
+ *    SELECT 
+ *      COUNT(DISTINCT c.id) as resumes_scanned,
+ *      COUNT(DISTINCT CASE WHEN s.shortlisted = true THEN s.candidate_id END) as shortlisted,
+ *      AVG(cm.final_score) as avg_match_score,
+ *      COUNT(DISTINCT jd.id) as active_jds
+ *    FROM candidates c
+ *    LEFT JOIN candidate_matches cm ON c.id = cm.candidate_id
+ *    LEFT JOIN shortlist s ON c.id = s.candidate_id
+ *    LEFT JOIN job_descriptions jd ON jd.status = 'active'
+ *    WHERE c.uploaded_at >= NOW() - INTERVAL '7 days';
+ * 
+ * 2. Skills Distribution:
+ *    SELECT 
+ *      skill_name as name,
+ *      COUNT(*) as count,
+ *      ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM candidates), 2) as percentage
+ *    FROM (
+ *      SELECT UNNEST(c.skills) as skill_name
+ *      FROM candidates c
+ *      WHERE c.uploaded_at >= NOW() - INTERVAL :days DAY
+ *    ) skills
+ *    GROUP BY skill_name
+ *    ORDER BY count DESC
+ *    LIMIT 10;
+ * 
+ * 3. Match Trends (Last 7 days):
+ *    SELECT 
+ *      DATE(c.uploaded_at) as date,
+ *      AVG(cm.final_score) as avg_score,
+ *      COUNT(DISTINCT CASE WHEN s.shortlisted = true THEN c.id END) as shortlisted_count,
+ *      COUNT(DISTINCT c.id) as total_candidates
+ *    FROM candidates c
+ *    LEFT JOIN candidate_matches cm ON c.id = cm.candidate_id
+ *    LEFT JOIN shortlist s ON c.id = s.candidate_id
+ *    WHERE c.uploaded_at >= NOW() - INTERVAL '7 days'
+ *      AND (:jd_id IS NULL OR cm.jd_id = :jd_id)
+ *    GROUP BY DATE(c.uploaded_at)
+ *    ORDER BY date ASC;
+ * 
+ * PERFORMANCE OPTIMIZATION:
+ * - Cache dashboard stats for 5 minutes
+ * - Use materialized views for complex aggregations
+ * - Index on: candidates.uploaded_at, shortlist.shortlisted, candidate_matches.calculated_at
+ * 
+ * REAL-TIME UPDATES:
+ * - Use WebSocket or Server-Sent Events for live updates
+ * - Push notifications when new candidates are uploaded
+ * - Auto-refresh every 30 seconds if tab is active
+ * ============================================================================
+
+
+
+
+ /**
+ * ============================================================================
+ * DATA LAYER - Backend & Database Integration Guide
+ * ============================================================================
+ * 
+ * BACKEND API ENDPOINTS (Replace localStorage with these):
+ * 
+ * 1. Job Descriptions (JD) API:
+ *    - GET    /api/jds              → Fetch all JDs
+ *    - GET    /api/jds/:id          → Fetch single JD
+ *    - POST   /api/jds              → Create new JD
+ *    - PUT    /api/jds/:id          → Update JD
+ *    - DELETE /api/jds/:id           → Delete JD
+ * 
+ * 2. Candidates API:
+ *    - GET    /api/candidates       → Fetch all candidates (with pagination)
+ *    - GET    /api/candidates/:id   → Fetch single candidate
+ *    - POST   /api/candidates       → Upload & parse resume
+ *    - PUT    /api/candidates/:id    → Update candidate data
+ * 
+ * 3. Shortlist API:
+ *    - GET    /api/shortlist        → Get shortlisted candidates
+ *    - POST   /api/shortlist        → Add to shortlist
+ *    - DELETE /api/shortlist/:id     → Remove from shortlist
+ * 
+ * 4. Matching/AI API:
+ *    - POST   /api/matching/run     → Run SBERT matching for all candidates
+ *    - POST   /api/matching/candidate/:id → Match single candidate
+ * 
+ * DATABASE SCHEMA SUGGESTIONS:
+ * 
+ * Table: job_descriptions
+ *   - id (UUID, PK)
+ *   - title (VARCHAR)
+ *   - department (VARCHAR)
+ *   - location (VARCHAR)
+ *   - description (TEXT)
+ *   - keywords (JSON/ARRAY)
+ *   - created_at (TIMESTAMP)
+ *   - updated_at (TIMESTAMP)
+ *   - created_by (FK → users)
+ * 
+ * Table: candidates
+ *   - id (UUID, PK)
+ *   - name (VARCHAR)
+ *   - email (VARCHAR, UNIQUE)
+ *   - resume_file_path (VARCHAR)
+ *   - resume_text (TEXT) - Extracted text from NLP parsing
+ *   - skills (JSON/ARRAY)
+ *   - experience (INTEGER)
+ *   - education (TEXT)
+ *   - summary (TEXT)
+ *   - projects (JSON/ARRAY)
+ *   - uploaded_at (TIMESTAMP)
+ *   - parsed_at (TIMESTAMP)
+ * 
+ * Table: candidate_matches
+ *   - id (UUID, PK)
+ *   - candidate_id (FK → candidates)
+ *   - jd_id (FK → job_descriptions)
+ *   - skill_match_percent (INTEGER)
+ *   - sbert_score (FLOAT) - Semantic similarity score
+ *   - final_score (INTEGER)
+ *   - matched_skills (JSON/ARRAY)
+ *   - calculated_at (TIMESTAMP)
+ * 
+ * Table: shortlist
+ *   - id (UUID, PK)
+ *   - candidate_id (FK → candidates)
+ *   - jd_id (FK → job_descriptions)
+ *   - shortlisted (BOOLEAN)
+ *   - shortlisted_at (TIMESTAMP)
+ *   - shortlisted_by (FK → users)
+ * 
+ * ============================================================================
+ */
+
+
+
+/**
+ * ============================================================================
+ * SHORTLIST PAGE - Candidate Filtering, Sorting, and Actions
+ * ============================================================================
+ *
+ * This file manages the interactive candidate shortlist table, including search,
+ * filtering, sorting, comparison, and exporting functionalities.
+ *
+ * BACKEND INTEGRATION (TODO):
+ * - Replace `getStoredData` with API calls to fetch candidates based on filters.
+ * - The `applyFilters` function should construct a query and call the backend.
+ * - Shortlisting a candidate should send a POST/DELETE request to the shortlist API.
+ * - Exporting should trigger a backend job to generate and email a CSV.
+ *
+ * API Endpoints:
+ * - GET /api/candidates?search=...&minScore=...&sortBy=...
+ *   - Query Params: search (string), minScore (int), sortBy (string: 'score' | 'experience').
+ *   - Response: A paginated list of candidate objects.
+ *
+ * - POST /api/shortlist
+ *   - Body: { candidateId: 'uuid', jdId: 'uuid', shortlisted: true }
+ *   - Response: Success message.
+ *
+ * DATABASE QUERIES (for GET /api/candidates):
+ * - A flexible SQL query would be built on the backend:
+ *   SELECT c.*, cm.final_score, cm.skill_match_percent
+ *   FROM candidates c
+ *   LEFT JOIN candidate_matches cm ON c.id = cm.candidate_id
+ *   WHERE (c.name ILIKE '%<search>%' OR c.skills::text ILIKE '%<search>%')
+ *   AND cm.final_score >= <minScore>
+ *   ORDER BY cm.final_score DESC;
+ * ============================================================================
+ */
+
+
+
+ /**
+ * ============================================================================
+ * UPLOAD PAGE - Resume Parsing & Candidate Creation
+ * ============================================================================
+ * BACKEND INTEGRATION:
+ * This file should be updated to communicate with a backend API for resume
+ * parsing and candidate storage.
+ *
+ * 1. API Endpoint for Parsing: POST /api/resumes/parse
+ *    - Headers: { 'Authorization': 'Bearer <token>' }
+ *    - Body: FormData containing the resume file (`multipart/form-data`).
+ *    - Success Response (200 OK): Parsed candidate JSON object.
+ *    - Example:
+ *      const formData = new FormData();
+ *      formData.append('resume', file);
+ *      const response = await fetch('/api/resumes/parse', { method: 'POST', body: formData, headers });
+ *
+ * 2. API Endpoint for Saving Candidate: POST /api/candidates
+ *    - Headers: { 'Authorization': 'Bearer <token>', 'Content-Type': 'application/json' }
+ *    - Body: The JSON object of the parsed candidate.
+ *    - Success Response (201 Created): The saved candidate object with a database ID.
+ *
+ * DATABASE SCHEMA (Example - PostgreSQL):
+ *
+ * CREATE TABLE candidates (
+ *   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+ *   company_id UUID REFERENCES companies(id),
+ *   name VARCHAR(255) NOT NULL,
+ *   email VARCHAR(255) UNIQUE,
+ *   resume_text TEXT,
+ *   skills JSONB,
+ *   experience_years INT,
+ *   uploaded_at TIMESTAMPTZ DEFAULT NOW()
+ * );
+ * ============================================================================
+ */
+
