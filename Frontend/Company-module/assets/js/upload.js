@@ -352,7 +352,7 @@ function setupResumeUpload() {
    * ============================================================================
    */
   if (sessionStorage.getItem('isCompanyLoggedIn') !== 'true') {
-    window.location.href = 'Company-login.htm';
+    window.location.href = 'company-login.html';
     return;
   }
 

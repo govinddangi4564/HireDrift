@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     if (sessionStorage.getItem('isCompanyLoggedIn') !== 'true') {
         // If not logged in, redirect to the login page
-        window.location.href = 'Company-login.htm';
+        window.location.href = 'company-login.html';
         return; // Stop executing the rest of the script
     }
 
@@ -327,7 +327,7 @@ function handleLogout() {
         sessionStorage.removeItem('isCompanyLoggedIn');
         sessionStorage.removeItem('companyAuthToken'); // Also remove the token
         // Redirect to login page
-        window.location.href = 'Company-login.htm';
+        window.location.href = 'company-login.html';
     }
 }
 

@@ -19,7 +19,7 @@
 
             localStorage.setItem('companyPlan', JSON.stringify(planData));
             setTimeout(() => {
-                window.location.href = './Company-Register.html';
+                window.location.href = './company-Register.html';
             }, 2000);
         });
     });
