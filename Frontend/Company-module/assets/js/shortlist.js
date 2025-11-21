@@ -31,9 +31,29 @@
  *   ORDER BY cm.final_score DESC;
  * ============================================================================
  */
+function populateShortlistFilters() {
+  const deptFilter = document.querySelector("#candidateDept");
+  const roleFilter = document.querySelector("#candidateRole");
+  if (!deptFilter || !roleFilter) return;
+
+  const jds = getStoredData(STORAGE_KEYS.jds) || [];
+
+  const uniqueDepts = [...new Set(jds.map((jd) => jd.department))];
+  const uniqueRoles = [...new Set(jds.map((jd) => jd.title))];
+
+  deptFilter.innerHTML =
+    '<option value="all">Any Department</option>' +
+    uniqueDepts.map((dept) => `<option value="${dept}">${dept}</option>`).join("");
+  roleFilter.innerHTML =
+    '<option value="all">Any Role</option>' +
+    uniqueRoles.map((role) => `<option value="${role}">${role}</option>`).join("");
+}
+
 function setupShortlistTable() {
   const tableBody = document.querySelector("#candidateTableBody");
   if (!tableBody) return;
+
+  populateShortlistFilters();
 
   const searchInput = document.querySelector("#candidateSearch");
   const matchFilter = document.querySelector("#candidateFilter");
@@ -49,6 +69,7 @@ function setupShortlistTable() {
 
   const getCandidates = () => getStoredData(STORAGE_KEYS.candidates) || [];
   const shortlist = () => getStoredData(STORAGE_KEYS.shortlist) || {};
+  const jds = () => getStoredData(STORAGE_KEYS.jds) || [];
 
   /**
    * Applies filters and re-renders the candidate table.
@@ -63,22 +84,30 @@ function setupShortlistTable() {
    * }
    */
   const applyFilters = () => {
-    const candidates = getCandidates();
+    const allCandidates = getCandidates();
+    const allJds = jds();
     const searchTerm = (searchInput?.value || "").toLowerCase();
     const minMatch = matchFilter?.value === "all" ? 0 : parseInt(matchFilter.value, 10);
     const autoMin = autoFilterToggle?.checked ? 80 : 0;
     const effectiveMin = Math.max(minMatch, autoMin);
     const sortMode = sortSelect?.value || "score";
+    const selectedDept = deptFilter?.value;
+    const selectedRole = roleFilter?.value;
 
-    const filtered = candidates
+    const filtered = allCandidates
       .filter((candidate) => {
         const matchesSearch =
           !searchTerm ||
           candidate.name.toLowerCase().includes(searchTerm) ||
           candidate.skills.some((skill) => skill.toLowerCase().includes(searchTerm));
+        
         const finalScore = candidate.matches?.finalScore || 0;
-        const deptOk = !deptFilter || deptFilter.value === 'all' || (candidate.department && candidate.department.toLowerCase() === deptFilter.value);
-        const roleOk = !roleFilter || roleFilter.value === 'all' || (candidate.primaryRole && candidate.primaryRole === roleFilter.value);
+        
+        const jd = allJds.find(j => j.id === candidate.matches?.jdId);
+
+        const deptOk = !selectedDept || selectedDept === 'all' || (jd && jd.department === selectedDept);
+        const roleOk = !selectedRole || selectedRole === 'all' || (jd && jd.title === selectedRole);
+
         return matchesSearch && finalScore >= effectiveMin && deptOk && roleOk;
       })
       .sort((a, b) => {
@@ -285,7 +314,7 @@ function setupShortlistTable() {
     link.click();
   });
 
-  [searchInput, matchFilter, sortSelect, autoFilterToggle]
+  [searchInput, matchFilter, deptFilter, roleFilter, sortSelect, autoFilterToggle]
     .filter(Boolean)
     .forEach((el) => {
       const eventName = el.tagName === "SELECT" || el.type === "checkbox" ? "change" : "input";

@@ -156,11 +156,11 @@
 }
 
 .stat-card {
-  background: linear-gradient(135deg, #667eeab7 0%, #764ba2ba 100%);
+  background-color: #def9e4;
   padding: 2rem;
   border-radius: 20px;
   text-align: center;
-  color: white;
+  color: #333;
   transform: translateY(0);
   transition: all 0.3s ease;
   box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
@@ -174,16 +174,17 @@
 .stat-number {
   font-size: 3rem;
   font-weight: bold;
+  color: #914600;
   margin-bottom: 0.5rem;
 }
 
 .stat-label {
   font-size: 1.1rem;
-  opacity: 0.9;
+  opacity: 1;
+  color: #100063;
 }
 
 .features-section {
-  /* background: #dce1e2ab; */
   padding: 4rem 2rem;
 }
 
@@ -217,7 +218,7 @@
 .feature-icon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #c0f68e8d 0%, #e8d6abcf 100%);
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -317,7 +318,7 @@
   top: 60px;
   bottom: 60px;
   width: 3px;
-  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(180deg, #ea9066 0%, #a24b4b 100%);
   border-radius: 3px;
 }
 
@@ -328,7 +329,7 @@
   left: -8.5px;
   width: 20px;
   height: 20px;
-  background: #667eea;
+  background: #eaaf66;
   border-radius: 50%;
   box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
 }
@@ -387,7 +388,7 @@
 .timeline-dot {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #a6ea66 0%, #a24b4b 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -460,7 +461,7 @@
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #5e6b94 0%, #5c5cb7 100%);
   border-radius: 15px;
   display: flex;
   align-items: center;

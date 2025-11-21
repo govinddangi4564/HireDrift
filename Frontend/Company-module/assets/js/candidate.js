@@ -122,8 +122,8 @@ function renderCandidateDetail() {
             <div class="score-item">
               <label>SBERT Score</label>
               <div class="score-bar">
-                <div class="score-fill" style="width: ${(candidate.matches?.sbertScore || 0) * 100}%">
-                  ${candidate.matches?.sbertScore || 0}
+                <div class="score-fill" style="width: ${candidate.matches?.sbertScore || 0}%">
+                  ${candidate.matches?.sbertScore || 0}%
                 </div>
               </div>
             </div>

@@ -99,7 +99,7 @@
  * ============================================================================
  */
 
-function renderDashboardCards() {
+function renderDashboardCards(filteredCandidates) {
   const dashboardEl = document.querySelector("#dashboardCards");
   if (!dashboardEl) return;
 
@@ -120,7 +120,7 @@ function renderDashboardCards() {
   // `;
 
   const jds = getStoredData(STORAGE_KEYS.jds) || [];
-  const candidates = getStoredData(STORAGE_KEYS.candidates) || [];
+  const candidates = filteredCandidates || getStoredData(STORAGE_KEYS.candidates) || [];
   const shortlist = getStoredData(STORAGE_KEYS.shortlist) || {};
 
   // Calculate key metrics
@@ -192,7 +192,7 @@ function renderDashboardCards() {
   `;
 }
 
-function renderDashboardCharts() {
+function renderDashboardCharts(filteredCandidates) {
   if (typeof Chart === "undefined") return;
   const skillsCtx = document.querySelector("#skillsChart");
   const matchCtx = document.querySelector("#matchChart");
@@ -205,7 +205,7 @@ function renderDashboardCharts() {
   // const trendsData = await fetch('/api/company/dashboard/match-trends', { headers })
   //   .then(r => r.json());
 
-  const candidates = getStoredData(STORAGE_KEYS.candidates) || [];
+  const candidates = filteredCandidates || getStoredData(STORAGE_KEYS.candidates) || [];
   const jds = getStoredData(STORAGE_KEYS.jds) || [];
 
   const skillCounts = {};
@@ -520,6 +520,10 @@ function populateQuickFilters() {
     });
 
     pill.textContent = `${filtered.length} candidates match filters`;
+
+    // Refresh cards and charts with filtered data
+    renderDashboardCards(filtered);
+    renderDashboardCharts(filtered);
   };
 
   [filterRole, filterDept, filterDate].forEach((el) => el.addEventListener("change", applyFilters));
@@ -649,8 +653,6 @@ function initializeTabButtons() {
 
 document.addEventListener("DOMContentLoaded", () => {
   if (!document.body.classList.contains("dashboard-page")) return;
-  renderDashboardCards();
-  renderDashboardCharts();
   populateQuickFilters();
   initializeTabButtons();
 });
