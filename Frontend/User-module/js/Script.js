@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'soft-skills-circle': 100,
         };
         setAllScores(backendScores);
-    }, 1500); // Simulate a 1.5-second delay before scores arrive.
+    }, 10000); // Simulate a 10-second delay before scores arrive.
 });
 
 
