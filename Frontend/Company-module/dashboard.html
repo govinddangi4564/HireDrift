@@ -5,35 +5,34 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard | HireDrift</title>
+  <title>AI Resume Intelligence | Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/dashboard.css" />
   <script>
     // Protect this page - redirect to login if not authenticated
     if (sessionStorage.getItem('isCompanyLoggedIn') !== 'true') {
-      window.location.href = 'company-login.html';
+      window.location.href = 'Company-login.htm';
     }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-  <script src="assets/js/data.js" defer></script>
-  <script src="assets/js/app.js" defer></script>
-  <script src="assets/js/dashboard.js" defer></script>
+  <script type="module" src="assets/js/app.js" defer></script>
+  <script type="module" src="assets/js/dashboard.js" defer></script>
 </head>
 
 <body class="dashboard-page">
   <div class="app-layout">
     <aside class="sidebar">
-      <h1>HireDrift</h1>
+      <h1>Talent Intelligence</h1>
       <nav>
         <a class="nav-link" href="dashboard.html">📊 Dashboard</a>
         <a class="nav-link" href="jd.html">📝 JD Management</a>
         <a class="nav-link" href="upload.html">📁 Resume Upload</a>
         <a class="nav-link" href="shortlist.html">✅ Shortlist</a>
         <a class="nav-link" href="candidate.html">👤 Candidate Detail</a>
-        <a class="nav-link Company-Profile" href="company-profile.html">👤 Profile</a>
+        <a class="nav-link Company-Profile" href="Company-Profile.html">👤 Profile</a>
         <div class="sidebar-footer nav-link User-Section">
-          <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to User-Section</a>
+          <a href="../Index.html"><i class="fas fa-arrow-left"></i> Back to User-Section</a>
         </div>
       </nav>
       <div class="theme-toggle">
@@ -121,32 +120,31 @@
         </section>
       </div>
 
-      <!-- Benchmarks Tab Content -->
       <div id="tab-benchmarks" class="tab-content">
         <section class="card-grid">
           <div class="card">
             <h3>Industry Benchmarks</h3>
-            <div class="metric">78%</div>
-            <div class="trend positive">Your average match score</div>
-            <p class="breadcrumbs">Industry average: 72%</p>
+            <div class="metric" id="benchmarkMatchScore">--</div>
+            <div class="trend positive" id="benchmarkMatchTrend">Your average match score</div>
+            <p class="breadcrumbs" id="benchmarkMatchIndustry">Industry average: --</p>
           </div>
           <div class="card">
             <h3>Time to Hire</h3>
-            <div class="metric">12 days</div>
-            <div class="trend positive">Average processing time</div>
-            <p class="breadcrumbs">Industry average: 18 days</p>
+            <div class="metric" id="benchmarkTimeToHire">--</div>
+            <div class="trend positive" id="benchmarkTimeTrend">Average processing time</div>
+            <p class="breadcrumbs" id="benchmarkTimeIndustry">Industry average: --</p>
           </div>
           <div class="card">
             <h3>Conversion Rate</h3>
-            <div class="metric">16.7%</div>
-            <div class="trend positive">Resume to shortlist</div>
-            <p class="breadcrumbs">Industry average: 12%</p>
+            <div class="metric" id="benchmarkConversionRate">--</div>
+            <div class="trend positive" id="benchmarkConversionTrend">Resume to shortlist</div>
+            <p class="breadcrumbs" id="benchmarkConversionIndustry">Industry average: --</p>
           </div>
           <div class="card">
             <h3>Quality Score</h3>
-            <div class="metric">8.5/10</div>
-            <div class="trend positive">Candidate quality rating</div>
-            <p class="breadcrumbs">Industry average: 7.2/10</p>
+            <div class="metric" id="benchmarkQualityScore">--</div>
+            <div class="trend positive" id="benchmarkQualityTrend">Candidate quality rating</div>
+            <p class="breadcrumbs" id="benchmarkQualityIndustry">Industry average: --</p>
           </div>
         </section>
 
@@ -230,11 +228,11 @@
             </header>
             <div class="card">
               <ul>
-                <li><button class="btn-link">📊 View Analytics Report</button></li>
-                <li><button class="btn-link">📈 View Trends Report</button></li>
-                <li><button class="btn-link">👥 View Department Report</button></li>
-                <li><button class="btn-link">📋 View Candidate Report</button></li>
-                <li><button class="btn-link">💾 Download CSV Export</button></li>
+                <li><button class="btn-link" id="viewAnalyticsReport">📊 View Analytics Report</button></li>
+                <li><button class="btn-link" id="viewTrendsReport">📈 View Trends Report</button></li>
+                <li><button class="btn-link" id="viewDepartmentReport">👥 View Department Report</button></li>
+                <li><button class="btn-link" id="viewCandidateReport">📋 View Candidate Report</button></li>
+                <li><button class="btn-link" id="downloadCSVExport">💾 Download CSV Export</button></li>
               </ul>
             </div>
           </div>
@@ -255,24 +253,9 @@
                   <th style="padding: 12px; text-align: left;">Actions</th>
                 </tr>
               </thead>
-              <tbody id="reportHistory">
+              <tbody id="reportHistoryTableBody">
                 <tr>
-                  <td style="padding: 12px;">Weekly Summary - Week 3</td>
-                  <td style="padding: 12px;">2025-01-20</td>
-                  <td style="padding: 12px;">Weekly</td>
-                  <td style="padding: 12px;">
-                    <button class="btn-link">View</button> |
-                    <button class="btn-link">Download</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px;">Monthly Analytics - January</td>
-                  <td style="padding: 12px;">2025-01-31</td>
-                  <td style="padding: 12px;">Monthly</td>
-                  <td style="padding: 12px;">
-                    <button class="btn-link">View</button> |
-                    <button class="btn-link">Download</button>
-                  </td>
+                  <td colspan="4" style="padding: 12px; text-align: center;">Loading...</td>
                 </tr>
               </tbody>
             </table>
@@ -286,7 +269,7 @@
     data-initial-message="Hi! I can answer HR analytics questions. Try 'Show shortlisted above 85%'">
     <header>
       <strong>AI HR Assistant</strong>
-      <span class="pill">Coming soon</span>
+      <span class="pill">Semantic Search</span>
     </header>
     <div id="assistantBody" class="assistant-body"></div>
     <div class="assistant-input">

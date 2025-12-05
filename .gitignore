@@ -91,3 +91,4 @@ coverage/
 # Custom
 # ----------------------------
 # Add any other project-specific folders you want ignored below
+uploads/
