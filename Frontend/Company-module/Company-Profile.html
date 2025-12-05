@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings | HireDrift</title>
+    <title>Company Settings</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/Company-Profile.css">
     <script>
         // Protect this page - redirect to login if not authenticated
         if (sessionStorage.getItem('isCompanyLoggedIn') !== 'true') {
-            window.location.href = 'company-login.html';
+            window.location.href = 'Company-login.htm';
         }
     </script>
 </head>
@@ -291,7 +291,7 @@ Plot No. 3A, Sector 126 | Noida – 201304, India">
     </div>
 
     <div id="message" class="message"></div>
-    <script src="assets/js/Company-Profile.js"></script>
+    <script type="module" src="./assets/js/Company-Profile.js"></script>
 </body>
 
 </html>
