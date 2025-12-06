@@ -27,4 +27,4 @@ class JDOut(JDBase):
     company_id: UUID4 | None = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True

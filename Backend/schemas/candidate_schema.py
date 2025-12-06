@@ -46,4 +46,4 @@ class CandidateOut(CandidateBase):
     matches: Optional[list] = []  # List of match data from CandidateMatch table
 
     class Config:
-        orm_mode = True
+        from_attributes = True

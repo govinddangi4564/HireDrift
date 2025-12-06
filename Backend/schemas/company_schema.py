@@ -16,10 +16,13 @@ class CompanyProfileResponse(BaseModel):
     companyID: UUID
     companyName: str
     companyEmail: EmailStr
-    companyWebsite: Optional[str]
-    companyAddress: Optional[str]
-    companyDescription: Optional[str]
-    plan: Optional[str]
+    companyWebsite: Optional[str] = None
+    companyAddress: Optional[str] = None
+    companyDescription: Optional[str] = None
+    plan: Optional[str] = None
+
+    class Config:
+        from_attributes = True
 
     @field_validator("companyWebsite", mode="after")
     def convert_url(cls, v):
