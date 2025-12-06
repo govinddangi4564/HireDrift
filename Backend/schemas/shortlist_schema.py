@@ -17,4 +17,4 @@ class ShortlistOut(ShortlistBase):
     shortlisted_by: Optional[UUID]
 
     class Config:
-        orm_mode = True
+        from_attributes = True

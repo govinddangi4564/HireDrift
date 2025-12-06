@@ -47,7 +47,10 @@ def register_company_endpoint(payload: RegisterCompanySchema, db: Session = Depe
         "companyID": company.id,
         "companyName": company.name,
         "companyEmail": company.email,
-        "companyWebsite": company.website
+        "companyWebsite": company.website,
+        "companyAddress": company.location,
+        "companyDescription": company.description,
+        "plan": company.plan
     }
 
 
