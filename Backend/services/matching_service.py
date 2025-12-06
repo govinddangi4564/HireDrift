@@ -7,7 +7,18 @@ import numpy as np
 from datetime import datetime, timezone
 
 # Load SBERT once
-MODEL = SentenceTransformer("all-MiniLM-L6-v2")
+
+# Lazy load SBERT
+_MODEL = None
+
+def get_model():
+    global _MODEL
+    if _MODEL is None:
+        print("Loading SBERT model... (this may take a few seconds)")
+        _MODEL = SentenceTransformer("all-MiniLM-L6-v2")
+        print("SBERT model loaded.")
+    return _MODEL
+
 
 
 def compute_skill_match(candidate_skills: List[str], jd_skills: List[str]):
@@ -27,8 +38,9 @@ def compute_sbert_similarity(text1: str, text2: str) -> float:
     if not text1 or not text2:
         return 0.0
 
-    emb1 = MODEL.encode(text1, convert_to_tensor=True)
-    emb2 = MODEL.encode(text2, convert_to_tensor=True)
+    model = get_model()
+    emb1 = model.encode(text1, convert_to_tensor=True)
+    emb2 = model.encode(text2, convert_to_tensor=True)
     similarity = float(util.cos_sim(emb1, emb2)[0][0])
 
     # convert (-1 to 1) to 0–100
