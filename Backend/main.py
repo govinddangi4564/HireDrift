@@ -42,6 +42,14 @@ async def custom_http_exception_handler(request: Request, exc: HTTPException):
         content={"message": exc.detail}
     )
 
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    print(f"Global exception: {exc}") # Log the error to console
+    return JSONResponse(
+        status_code=500,
+        content={"message": "Internal Server Error", "detail": str(exc)}
+    )
+
 app.include_router(user_router, prefix="/api/user", tags=["User"])
 app.include_router(resume_router, prefix="/api", tags=["Resume"])
 app.include_router(jd_router, prefix="/api", tags=["Job Descriptions"])

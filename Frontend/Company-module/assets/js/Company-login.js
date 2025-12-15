@@ -54,7 +54,18 @@ loginForm.addEventListener('submit', function (e) {
     })
         .then(response => {
             if (!response.ok) {
-                return response.json().then(err => { throw new Error(err.detail || 'Invalid email or password!'); });
+                // Try to parse JSON error body, but gracefully fall back to text/plain
+                return response.text().then(bodyText => {
+                    try {
+                        const err = JSON.parse(bodyText);
+                        const msg = err.detail || err.message || err.error || 'Invalid email or password!';
+                        throw new Error(msg);
+                    } catch (e) {
+                        // Not JSON, use raw text or default
+                        const raw = bodyText && bodyText.length ? bodyText : 'Invalid email or password!';
+                        throw new Error(raw);
+                    }
+                });
             }
             return response.json();
         })
