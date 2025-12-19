@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-dotenv
+sqlalchemy
+psycopg2-binary
+alembic
+passlib[argon2]
+argon2-cffi
+sendgrid
+PyJWT
+python-jose
+pydantic[email]
+email-validator
