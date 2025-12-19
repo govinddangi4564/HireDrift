@@ -5,6 +5,7 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
+    "start": "npm run backend",
     "frontend": "cd Frontend && npm run dev",
     "backend": "cd Backend && python -m uvicorn main:app --reload",
     "dev": "concurrently \"npm run frontend\" \"npm run backend\""
