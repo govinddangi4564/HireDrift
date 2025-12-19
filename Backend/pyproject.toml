@@ -24,4 +24,9 @@ dependencies = [
     "argon2-cffi>=25.1.0",
     "sendgrid>=6.12.5",
     "torch<2.9",
+    "fastapi",
+    "uvicorn",
+    "passlib[argon2]",
+    "argon2-cffi",
+    "sendgrid"
 ]

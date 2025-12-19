@@ -1,0 +1,15 @@
+{
+  "name": "hiredrift",
+  "version": "1.0.0",
+  "description": "AI resume screening and shortlisting",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "frontend": "cd Frontend && npm run dev",
+    "backend": "cd Backend && python -m uvicorn main:app --reload",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

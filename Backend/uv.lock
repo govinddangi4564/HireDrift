@@ -142,11 +142,14 @@ dependencies = [
 requires-dist = [
     { name = "aiofiles", specifier = ">=25.1.0" },
     { name = "alembic", specifier = ">=1.17.2" },
+    { name = "argon2-cffi" },
     { name = "argon2-cffi", specifier = ">=25.1.0" },
+    { name = "fastapi" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.121.2" },
     { name = "fastapi-mail", specifier = ">=1.5.8" },
     { name = "httpx", specifier = ">=0.27.0" },
     { name = "numpy", specifier = ">=2.3.4" },
+    { name = "passlib", extras = ["argon2"] },
     { name = "passlib", extras = ["argon2"], specifier = ">=1.7.4" },
     { name = "psycopg2-binary", specifier = ">=2.9.11" },
     { name = "pyjwt", specifier = ">=2.10.1" },
@@ -154,10 +157,12 @@ requires-dist = [
     { name = "pytest", specifier = ">=8.0.0" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "reportlab", specifier = ">=4.4.5" },
+    { name = "sendgrid" },
     { name = "sendgrid", specifier = ">=6.12.5" },
     { name = "sentence-transformers", specifier = ">=5.1.2" },
     { name = "sqlalchemy", specifier = ">=2.0.44" },
     { name = "torch", specifier = "<2.9" },
+    { name = "uvicorn" },
     { name = "uvicorn", specifier = ">=0.38.0" },
 ]
 

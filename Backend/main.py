@@ -15,6 +15,11 @@ from routes.admin_route import router as admin_router
 
 from models.base import engine, session
 
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
