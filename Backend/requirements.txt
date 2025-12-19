@@ -8,4 +8,4 @@ passlib[argon2]
 argon2-cffi
 sendgrid
 python-jose
-pydantic
+pydantic[email]
